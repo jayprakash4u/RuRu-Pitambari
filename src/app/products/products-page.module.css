@@ -1,0 +1,35 @@
+.page {
+  min-height: 100vh;
+  padding-block: var(--space-7) var(--space-9);
+  background: var(--color-background);
+}
+
+.inner {
+  width: min(100% - (2 * var(--page-gutter)), 90rem);
+  margin-inline: auto;
+}
+
+.intro {
+  max-width: 50rem;
+  margin-bottom: var(--space-5);
+}
+
+.intro h1 {
+  margin: 0;
+  color: var(--color-text);
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-regular);
+  letter-spacing: -0.035em;
+  line-height: var(--leading-tight);
+}
+
+@media (max-width: 40rem) {
+  .page {
+    padding-top: var(--space-7);
+  }
+
+  .intro h1 {
+    font-size: var(--text-2xl);
+  }
+}

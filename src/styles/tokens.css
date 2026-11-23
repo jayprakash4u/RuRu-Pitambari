@@ -1,0 +1,144 @@
+/* Ruru Pitambari Design Tokens — single source of truth */
+:root {
+  /* Brand */
+  --brand-gold-50: #fbf7ed;
+  --brand-gold-100: #f4ead0;
+  --brand-gold-200: #e8d3a1;
+  --brand-gold-300: #d8b96d;
+  --brand-gold-400: #c89d43;
+  --brand-gold-500: #a77b24;
+  --brand-gold-600: #8c611b;
+  --brand-gold-700: #704917;
+  --brand-gold-800: #5c3b18;
+  --brand-gold-900: #4f3318;
+
+  --accent-burgundy-600: #8c3038;
+
+  /* Neutral — warm to harmonize with the seal */
+  --neutral-0: #ffffff;
+  --neutral-50: #fbf9f4;
+  --neutral-100: #f5f1e8;
+  --neutral-200: #e3dccf;
+  --neutral-300: #c8c0b4;
+  --neutral-400: #9e978c;
+  --neutral-500: #706c63;
+  --neutral-600: #56534d;
+  --neutral-700: #3b3934;
+  --neutral-800: #24231f;
+  --neutral-900: #171612;
+
+  /* Supporting / functional */
+  --sage-500: #68735f;
+  --success-500: #3d705b;
+  --warning-500: #a66b16;
+  --error-500: #b54747;
+  --info-500: #416782;
+
+  /* Semantic color aliases — components use these, not raw palette values */
+  --color-brand: var(--brand-gold-500);
+  --color-brand-hover: var(--brand-gold-600);
+  --color-brand-subtle: var(--brand-gold-50);
+  --color-text: var(--neutral-800);
+  --color-text-muted: var(--neutral-500);
+  --color-text-inverse: var(--neutral-0);
+  --color-background: var(--neutral-0);
+  --color-surface: var(--neutral-0);
+  --color-surface-alt: var(--brand-gold-50);
+  --color-border: var(--neutral-200);
+  --color-border-strong: var(--neutral-300);
+  --color-focus: var(--brand-gold-500);
+
+  /* Typography */
+  --font-sans: "Manrope", "Noto Sans Devanagari", system-ui, sans-serif;
+  --font-display: "Newsreader", Georgia, serif;
+  --font-nepali: "Noto Sans Devanagari", var(--font-sans);
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --text-xs: clamp(0.75rem, 0.72rem + 0.08vw, 0.8125rem);
+  --text-sm: clamp(0.875rem, 0.84rem + 0.1vw, 0.9375rem);
+  --text-base: clamp(1rem, 0.96rem + 0.12vw, 1.0625rem);
+  --text-lg: clamp(1.125rem, 1.04rem + 0.25vw, 1.25rem);
+  --text-xl: clamp(1.375rem, 1.2rem + 0.5vw, 1.625rem);
+  --text-2xl: clamp(1.75rem, 1.45rem + 0.9vw, 2.25rem);
+  --text-3xl: clamp(2.25rem, 1.75rem + 1.6vw, 3.25rem);
+  --text-4xl: clamp(3rem, 2.15rem + 2.7vw, 4.75rem);
+  --text-5xl: clamp(3.75rem, 2.5rem + 4vw, 6.5rem);
+  --leading-tight: 1.05;
+  --leading-heading: 1.15;
+  --leading-body: 1.65;
+  --tracking-tight: -0.03em;
+  --tracking-label: 0.12em;
+
+  /* 8px spacing system with half-step for compact UI */
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+
+  /* Layout */
+  --container-sm: 42rem;
+  --container-md: 64rem;
+  --container-lg: 75rem;
+  --container-xl: 80rem;
+  --page-gutter: clamp(1.125rem, 4vw, 2.5rem);
+  --section-space: clamp(4rem, 8vw, 8rem);
+  --measure: 68ch;
+
+  /* Breakpoint reference tokens. Custom properties cannot be used in media queries. */
+  --breakpoint-sm: 30rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 90rem;
+
+  /* Shape & elevation */
+  --radius-none: 0;
+  --radius-xs: 0.125rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 999px;
+  --shadow-none: none;
+  --shadow-xs: 0 1px 2px rgb(36 35 31 / 0.05);
+  --shadow-sm: 0 8px 24px rgb(36 35 31 / 0.07);
+  --shadow-md: 0 20px 50px rgb(36 35 31 / 0.1);
+  --shadow-lg: 0 32px 80px rgb(36 35 31 / 0.14);
+
+  /* Motion */
+  --duration-instant: 80ms;
+  --duration-fast: 120ms;
+  --duration-base: 220ms;
+  --duration-slow: 420ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter: cubic-bezier(0, 0, 0.2, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --focus-ring: 0 0 0 3px rgb(167 123 36 / 0.28);
+
+  /* Layering */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-sticky: 100;
+  --z-overlay: 200;
+  --z-modal: 300;
+  --z-toast: 400;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-instant: 0ms;
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-slow: 0ms;
+  }
+}

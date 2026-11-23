@@ -1,0 +1,137 @@
+.section {
+  padding-block: var(--space-9);
+  border-top: 1px solid var(--color-border);
+  background: var(--brand-gold-50);
+}
+
+.inner {
+  width: min(100% - (2 * var(--page-gutter)), 78rem);
+  margin-inline: auto;
+}
+
+.heading {
+  margin-bottom: var(--space-6);
+}
+
+.heading h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-regular);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-heading);
+}
+
+.slides {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.slide {
+  min-width: 0;
+}
+
+.comparison {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--brand-gold-200);
+  border-radius: var(--radius-md);
+  background: var(--neutral-50);
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.comparison figcaption {
+  position: absolute;
+  inset: var(--space-4) var(--space-5) auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.comparison figcaption span {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid rgb(255 255 255 / 0.72);
+  border-radius: var(--radius-sm);
+  background: rgb(255 255 255 / 0.88);
+  color: var(--neutral-700);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  backdrop-filter: blur(0.5rem);
+}
+
+.comparison figcaption span:last-child {
+  color: var(--brand-gold-800);
+}
+
+.carouselFooter {
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.dots button {
+  width: 0.65rem;
+  height: 0.65rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--brand-gold-200);
+  cursor: pointer;
+}
+
+.dots button[aria-current="true"] {
+  width: 1.75rem;
+  background: var(--accent-burgundy-600);
+}
+
+@media (max-width: 40rem) {
+  .section {
+    padding-block: var(--space-8);
+  }
+
+  .heading {
+    margin-bottom: var(--space-6);
+  }
+
+  .heading h2 {
+    font-size: var(--text-2xl);
+  }
+
+  .slides {
+    grid-template-columns: 1fr;
+  }
+
+  .slides .slide:last-child {
+    display: none;
+  }
+
+  .comparison figcaption {
+    inset: var(--space-3) var(--space-3) auto;
+  }
+
+  .comparison figcaption span {
+    padding: var(--space-1) var(--space-2);
+  }
+
+  .carouselFooter {
+    padding-top: var(--space-2);
+  }
+}

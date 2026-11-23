@@ -1,0 +1,96 @@
+.form {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.passwordField {
+  position: relative;
+}
+
+.passwordField input {
+  padding-right: 3rem;
+}
+
+.passwordField button {
+  width: 2.75rem;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: var(--neutral-500);
+  cursor: pointer;
+}
+
+.passwordField button:hover,
+.passwordField button[aria-pressed="true"] {
+  color: var(--brand-gold-700);
+}
+
+.passwordField button:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: -0.35rem;
+  border-radius: var(--radius-md);
+}
+
+.passwordField svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  fill: none;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.4;
+}
+
+.options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  color: var(--neutral-600);
+  font-size: var(--text-sm);
+}
+
+.options a,
+.switchPage a {
+  color: var(--brand-gold-700);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+}
+
+.options a:hover,
+.switchPage a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.submit {
+  width: 100%;
+}
+
+.status {
+  min-height: 1.25rem;
+  margin: calc(var(--space-2) * -1) 0 0;
+  color: var(--accent-burgundy-600);
+  font-size: var(--text-xs);
+  text-align: center;
+}
+
+.switchPage {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+@media (max-width: 30rem) {
+  .options {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

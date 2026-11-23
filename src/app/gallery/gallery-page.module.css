@@ -1,0 +1,54 @@
+.page {
+  background: var(--neutral-0);
+}
+
+.hero {
+  border-bottom: 1px solid var(--brand-gold-200);
+  background: var(--brand-gold-50);
+}
+
+.heroInner,
+.section {
+  width: min(100% - (2 * var(--page-gutter)), 86rem);
+  margin-inline: auto;
+}
+
+.heroInner {
+  padding-block: var(--space-8);
+}
+
+.hero p {
+  margin: 0 0 var(--space-2);
+  color: var(--accent-burgundy-600);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-regular);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-heading);
+}
+
+.section {
+  padding-block: var(--space-8) var(--space-9);
+}
+
+@media (max-width: 40rem) {
+  .heroInner {
+    padding-block: var(--space-7);
+  }
+
+  .hero h1 {
+    font-size: var(--text-3xl);
+  }
+
+  .section {
+    padding-block: var(--space-6) var(--space-8);
+  }
+}
