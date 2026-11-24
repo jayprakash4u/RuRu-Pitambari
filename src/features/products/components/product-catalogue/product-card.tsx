@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { useCart } from "@/features/cart";
+import { useWishlist } from "@/features/wishlist";
 
 import type { Product } from "../../data/products";
 import styles from "./product-catalogue.module.css";
@@ -22,9 +23,10 @@ const nprFormatter = new Intl.NumberFormat("en-NP", {
 
 export function ProductCard({ product }: ProductCardProps) {
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
-  const [isWishlisted, setIsWishlisted] = useState(false);
   const [added, setAdded] = useState(false);
   const { addItem } = useCart();
+  const { isInWishlist, toggleWishlist: toggleWishlistContext } = useWishlist();
+  const isWishlisted = isInWishlist(product.id);
   const selectedVariant = product.variants[selectedVariantIndex];
 
   const discountPercent = selectedVariant.mrpNpr
@@ -42,7 +44,7 @@ export function ProductCard({ product }: ProductCardProps) {
   function toggleWishlist(e: React.MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
-    setIsWishlisted(!isWishlisted);
+    toggleWishlistContext(product.id);
   }
 
   return (

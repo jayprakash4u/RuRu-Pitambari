@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
 import { CartProvider } from "@/features/cart";
+import { WishlistProvider } from "@/features/wishlist";
 import { MobileBottomNav } from "../mobile-bottom-nav";
 import { SiteFooter } from "../site-footer";
 import { SiteHeader } from "../site-header";
@@ -22,10 +23,12 @@ export function StoreShell({ children }: StoreShellProps) {
 
   return (
     <CartProvider>
-      <SiteHeader />
-      <main className="site-main">{children}</main>
-      <SiteFooter />
-      <MobileBottomNav />
+      <WishlistProvider>
+        <SiteHeader />
+        <main className="site-main">{children}</main>
+        <SiteFooter />
+        <MobileBottomNav />
+      </WishlistProvider>
     </CartProvider>
   );
 }

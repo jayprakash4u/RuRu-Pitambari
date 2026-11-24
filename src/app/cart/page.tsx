@@ -5,18 +5,26 @@ import { CartView } from "@/features/cart";
 import styles from "./cart-page.module.css";
 
 export const metadata: Metadata = {
-  title: "Cart",
-  description: "Review products saved in your Ruru Pitambari cart.",
+  title: "Shopping Cart | Ruru Pitambari",
+  description: "Review and manage products saved in your Ruru Pitambari cart.",
 };
 
 export default function CartPage() {
   return (
-    <div className={styles.page}>
-      <header>
-        <p>Your selection</p>
-        <h1>Shopping cart</h1>
-      </header>
-      <CartView />
-    </div>
+    <main className={styles.page}>
+      {/* Top Heritage Red Banner (Matching Product Page & Other Pages) */}
+      <section aria-labelledby="cart-heading" className={styles.banner}>
+        <div className={styles.bannerInner}>
+          <h1 className={styles.bannerTitle} id="cart-heading">
+            Shopping Cart
+          </h1>
+        </div>
+      </section>
+
+      {/* Main Content Area */}
+      <div className={styles.inner}>
+        <CartView />
+      </div>
+    </main>
   );
 }

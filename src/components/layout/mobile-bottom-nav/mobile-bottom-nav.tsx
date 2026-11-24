@@ -4,12 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { useCart } from "@/features/cart";
+import { useWishlist } from "@/features/wishlist";
 
 import styles from "./mobile-bottom-nav.module.css";
 
 export function MobileBottomNav() {
   const pathname = usePathname();
   const { itemCount } = useCart();
+  const { itemCount: wishlistCount } = useWishlist();
 
   return (
     <nav aria-label="Mobile Bottom Navigation" className={styles.bottomNav}>
@@ -96,7 +98,7 @@ export function MobileBottomNav() {
       <Link
         aria-current={pathname === "/wishlist" ? "page" : undefined}
         className={styles.navItem}
-        href="/cart"
+        href="/wishlist"
       >
         <span className={styles.iconWrap}>
           <svg
@@ -112,7 +114,7 @@ export function MobileBottomNav() {
           >
             <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
           </svg>
-          <span className={styles.badge}>0</span>
+          {wishlistCount > 0 ? <span className={styles.badge}>{wishlistCount}</span> : null}
         </span>
         <span className={styles.label}>Wishlist</span>
       </Link>

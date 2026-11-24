@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 import { useCart } from "@/features/cart";
+import { useWishlist } from "@/features/wishlist";
 
 import type { Combo } from "../../data/combos";
 import styles from "../combo-catalogue/combo-catalogue.module.css";
@@ -20,9 +21,10 @@ interface ComboCardProps {
 }
 
 export function ComboCard({ combo }: ComboCardProps) {
-  const [isWishlisted, setIsWishlisted] = useState(false);
   const [added, setAdded] = useState(false);
   const { addItem } = useCart();
+  const { isInWishlist, toggleWishlist: toggleWishlistContext } = useWishlist();
+  const isWishlisted = isInWishlist(combo.id);
 
   function addToCart() {
     addItem(combo.id, 0);
@@ -33,7 +35,7 @@ export function ComboCard({ combo }: ComboCardProps) {
   function toggleWishlist(e: React.MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
-    setIsWishlisted(!isWishlisted);
+    toggleWishlistContext(combo.id);
   }
 
   return (
