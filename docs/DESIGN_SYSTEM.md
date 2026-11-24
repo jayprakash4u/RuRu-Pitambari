@@ -10,16 +10,17 @@ The seal carries heritage; the interface provides clarity. Gold is an accent, no
 
 ### Color roles
 
-| Role               | Token                 | Value     | Use                                                |
-| ------------------ | --------------------- | --------- | -------------------------------------------------- |
-| Brand              | `--color-brand`       | `#A77B24` | Seal accents, labels, selected badges, special CTA |
-| Main text / action | `--color-text`        | `#24231F` | Headings, body, primary buttons, footer            |
-| Page background    | `--color-background`  | `#FBF9F4` | Default page canvas                                |
-| Surface            | `--color-surface`     | `#FFFFFF` | Cards, forms, menus                                |
-| Alternate surface  | `--color-surface-alt` | `#F5F1E8` | Section contrast, product staging                  |
-| Muted text         | `--color-text-muted`  | `#706C63` | Supporting copy only                               |
-| Border             | `--color-border`      | `#E3DCCF` | Card and section separation                        |
-| Natural support    | `--sage-500`          | `#68735F` | Natural-care messages only                         |
+| Role                | Token                 | Value     | Use                                                |
+| ------------------- | --------------------- | --------- | -------------------------------------------------- |
+| Brand (Pure Yellow) | `--color-brand`       | `#F5BE18` | Iconic Pitambari pure yellow (matches packet body) |
+| Heritage Crimson    | `--brand-crimson-600` | `#991B1B` | Red banner accents, active pills, cart badges      |
+| Main text / action  | `--color-text`        | `#24231F` | Headings, body, primary buttons, footer            |
+| Page background     | `--color-background`  | `#FBF9F4` | Default page canvas                                |
+| Surface             | `--color-surface`     | `#FFFFFF` | Cards, forms, menus                                |
+| Alternate surface   | `--color-surface-alt` | `#F5F1E8` | Section contrast, product staging                  |
+| Muted text          | `--color-text-muted`  | `#706C63` | Supporting copy only                               |
+| Border              | `--color-border`      | `#E3DCCF` | Card and section separation                        |
+| Natural support     | `--sage-500`          | `#68735F` | Natural-care messages only                         |
 
 Target visual ratio: **60% warm ivory, 20% white, 12% charcoal, 6% gold, 2% functional/supporting colors.** Never use gold for large page backgrounds or every button.
 

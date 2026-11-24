@@ -1,18 +1,25 @@
 /* Ruru Pitambari Design Tokens — single source of truth */
 :root {
-  /* Brand */
-  --brand-gold-50: #fbf7ed;
-  --brand-gold-100: #f4ead0;
-  --brand-gold-200: #e8d3a1;
-  --brand-gold-300: #d8b96d;
-  --brand-gold-400: #c89d43;
-  --brand-gold-500: #a77b24;
-  --brand-gold-600: #8c611b;
-  --brand-gold-700: #704917;
-  --brand-gold-800: #5c3b18;
-  --brand-gold-900: #4f3318;
+  /* Brand - Pure Radiant Pitambari Yellow (matching iconic reference packet) */
+  --brand-gold-50: #fffdf0;
+  --brand-gold-100: #fef8c8;
+  --brand-gold-200: #feee8b;
+  --brand-gold-300: #fde047;
+  --brand-gold-400: #fad01e;
+  --brand-gold-500: #f5be18; /* Iconic Pure Yellow from reference packet */
+  --brand-gold-600: #d99b05;
+  --brand-gold-700: #b47802;
+  --brand-gold-800: #8a5704;
+  --brand-gold-900: #4a2c01;
 
-  --accent-burgundy-600: #8c3038;
+  /* Heritage Red - from the iconic red 'रुरु पिताम्बरी' banner */
+  --brand-red-500: #c52227;
+  --brand-red-600: #a51c24; /* Signature Heritage Red */
+  --brand-red-700: #881318;
+  --brand-crimson-500: var(--brand-red-500);
+  --brand-crimson-600: var(--brand-red-600);
+  --brand-crimson-700: var(--brand-red-700);
+  --accent-burgundy-600: var(--brand-red-600);
 
   /* Neutral — warm to harmonize with the seal */
   --neutral-0: #ffffff;
@@ -37,16 +44,18 @@
   /* Semantic color aliases — components use these, not raw palette values */
   --color-brand: var(--brand-gold-500);
   --color-brand-hover: var(--brand-gold-600);
-  --color-brand-subtle: var(--brand-gold-50);
+  --color-brand-subtle: var(--brand-gold-100);
+  --color-brand-contrast: #171612;
+  --color-crimson: var(--brand-crimson-600);
   --color-text: var(--neutral-800);
   --color-text-muted: var(--neutral-500);
   --color-text-inverse: var(--neutral-0);
-  --color-background: var(--neutral-0);
+  --color-background: var(--neutral-50);
   --color-surface: var(--neutral-0);
   --color-surface-alt: var(--brand-gold-50);
   --color-border: var(--neutral-200);
   --color-border-strong: var(--neutral-300);
-  --color-focus: var(--brand-gold-500);
+  --color-focus: var(--brand-gold-600);
 
   /* Typography */
   --font-sans: "Manrope", "Noto Sans Devanagari", system-ui, sans-serif;

@@ -31,5 +31,5 @@ npm run validate
 ## Next phase
 
 After architecture approval: prepare production logo assets and build the shared header/footer before individual pages.
-"# RuRu-Pitambari" 
-"# RuRu-Pitambari" 
+"# RuRu-Pitambari"
+"# RuRu-Pitambari"

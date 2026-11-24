@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { BrandGallery, ProductCatalogue } from "@/features/products";
+
+import { ProductCatalogue } from "@/features/products";
 
 import styles from "./products-page.module.css";
 
@@ -15,8 +16,10 @@ type ProductsPageProps = {
 
 const categoryMap = {
   "floor-care": "Floor care",
+  "household-care": "Household care",
   "kitchen-care": "Kitchen care",
   "metal-care": "Metal care",
+  "pooja-care": "Pooja care",
 } as const;
 
 export default async function ProductsPage({ searchParams }: ProductsPageProps) {
@@ -25,13 +28,17 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
 
   return (
     <main className={styles.page}>
-      <div className={styles.inner}>
-        <header className={styles.intro}>
-          <h1>Our products</h1>
-        </header>
+      {/* Top Heritage Red Banner (Matching Combo Offers Header Style) */}
+      <section aria-labelledby="products-heading" className={styles.banner}>
+        <div className={styles.bannerInner}>
+          <h1 className={styles.bannerTitle} id="products-heading">
+            Our Products
+          </h1>
+        </div>
+      </section>
 
+      <div className={styles.inner}>
         <ProductCatalogue initialCategory={initialCategory} initialQuery={q} />
-        <BrandGallery />
       </div>
     </main>
   );

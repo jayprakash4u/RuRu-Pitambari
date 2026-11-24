@@ -1,5 +1,5 @@
 .section {
-  padding-block: var(--space-9);
+  padding-block: 3rem 3.5rem;
   border-top: 1px solid var(--brand-gold-200);
   background: var(--brand-gold-50);
 }
@@ -69,7 +69,7 @@
 .content h2 {
   margin: 0 0 var(--space-6);
   font-family: var(--font-display);
-  font-size: var(--text-3xl);
+  font-size: clamp(1.625rem, 1.35rem + 0.8vw, 2.125rem);
   font-weight: var(--weight-regular);
   letter-spacing: var(--tracking-tight);
   line-height: var(--leading-heading);
@@ -136,20 +136,28 @@
 
 .actions button {
   min-height: 3rem;
-  padding-inline: var(--space-5);
-  border: 1px solid var(--accent-burgundy-600);
-  border-radius: var(--radius-xs);
-  background: var(--accent-burgundy-600);
-  color: var(--neutral-0);
+  padding-inline: var(--space-6);
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #a51c24 0%, #6e0e14 100%);
+  color: #ffffff;
   font: inherit;
   font-size: var(--text-sm);
   font-weight: var(--weight-bold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: filter var(--duration-fast) var(--ease-standard);
+  box-shadow: 0 4px 14px rgba(140, 29, 36, 0.28);
+  transition:
+    transform var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard),
+    filter var(--duration-fast) var(--ease-standard);
 }
 
 .actions button:hover {
-  filter: brightness(0.92);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(140, 29, 36, 0.38);
+  filter: brightness(1.06);
 }
 
 .actions button:focus-visible {
@@ -177,7 +185,7 @@
 
 @media (max-width: 48rem) {
   .section {
-    padding-block: var(--space-8);
+    padding-block: 2rem 2.5rem;
   }
 
   .inner {
@@ -197,7 +205,7 @@
   }
 
   .content h2 {
-    font-size: var(--text-2xl);
+    font-size: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
   }
 }
 

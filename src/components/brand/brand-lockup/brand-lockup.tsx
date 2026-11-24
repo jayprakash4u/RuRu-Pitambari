@@ -11,6 +11,8 @@ export type BrandLockupProps = {
   compact?: boolean;
   href?: string;
   inverse?: boolean;
+  layout?: "horizontal" | "stacked";
+  size?: "sm" | "md" | "lg";
 };
 
 export function BrandLockup({
@@ -18,15 +20,24 @@ export function BrandLockup({
   compact = false,
   href = "/",
   inverse = false,
+  layout = "horizontal",
+  size = "md",
 }: BrandLockupProps) {
   return (
     <Link
       aria-label="Ruru Pitambari home"
-      className={classNames(styles.lockup, inverse && styles.inverse, className)}
+      className={classNames(
+        styles.lockup,
+        layout === "stacked" && styles.stacked,
+        size === "lg" && styles.sizeLg,
+        size === "sm" && styles.sizeSm,
+        inverse && styles.inverse,
+        className,
+      )}
       href={href}
     >
       <span className={styles.seal}>
-        <Image alt="" className={styles.sealImage} priority sizes="5rem" src={logoSource} />
+        <Image alt="" className={styles.sealImage} priority sizes="6rem" src={logoSource} />
       </span>
       {!compact ? (
         <span className={styles.words}>

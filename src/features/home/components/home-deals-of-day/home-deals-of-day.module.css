@@ -1,0 +1,169 @@
+.section {
+  padding-block: 2.75rem 3.25rem;
+  background: #fdfcf9;
+  border-top: 1px solid var(--color-border);
+}
+
+.inner {
+  width: min(100% - (2 * var(--page-gutter)), 90rem);
+  margin-inline: auto;
+}
+
+.headingRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.titleWrap h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.625rem, 1.35rem + 0.8vw, 2.125rem);
+  font-weight: var(--weight-regular);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-heading);
+  color: var(--color-text);
+}
+
+.navControls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navBtn {
+  width: 2.35rem;
+  height: 2.35rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 1px solid #e3dccf;
+  border-radius: 50%;
+  color: #171612;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.navBtn:hover {
+  background: #8c1d24;
+  border-color: #8c1d24;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.navBtn:active {
+  transform: translateY(0);
+}
+
+.carouselContainer {
+  position: relative;
+  width: 100%;
+}
+
+.track {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.75rem;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.cardItem {
+  flex: 0 0 calc((100% - 4.5rem) / 4);
+  min-width: 260px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardItem > article {
+  height: 100%;
+  flex: 1;
+}
+
+.dotsRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  border: none;
+  border-bottom: none;
+}
+
+.dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  padding: 0;
+  border: none;
+  border-radius: 9999px;
+  background: #e5ded5;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.dot[data-active="true"] {
+  width: 1.6rem;
+  background: #8c1d24;
+}
+
+@media (max-width: 68rem) {
+  .cardItem {
+    flex: 0 0 calc((100% - 1.25rem) / 2);
+    min-width: 240px;
+  }
+
+  .track {
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 40rem) {
+  .section {
+    padding-block: 1.75rem 2.25rem;
+  }
+
+  .headingRow {
+    margin-bottom: 1rem;
+  }
+
+  .titleWrap h2 {
+    font-size: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  }
+
+  .track {
+    gap: 0.75rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .cardItem {
+    flex: 0 0 calc((100% - 0.75rem) / 2);
+    min-width: 155px;
+  }
+
+  .navBtn {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .dotsRow {
+    margin-top: 0.85rem;
+  }
+}

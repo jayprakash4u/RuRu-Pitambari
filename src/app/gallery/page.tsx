@@ -11,17 +11,19 @@ export const metadata: Metadata = {
 
 export default function GalleryPage() {
   return (
-    <div className={styles.page}>
-      <header className={styles.hero}>
-        <div className={styles.heroInner}>
-          <p>Products · Celebrations · Community</p>
-          <h1>Gallery</h1>
+    <main className={styles.page}>
+      {/* Top Heritage Red Banner (Matching Product & Combo Offers Header Style) */}
+      <section aria-labelledby="gallery-heading" className={styles.banner}>
+        <div className={styles.bannerInner}>
+          <h1 className={styles.bannerTitle} id="gallery-heading">
+            Gallery
+          </h1>
         </div>
-      </header>
-
-      <section aria-label="Ruru Pitambari Facebook gallery" className={styles.section}>
-        <GalleryGrid />
       </section>
-    </div>
+
+      <div className={styles.section}>
+        <GalleryGrid />
+      </div>
+    </main>
   );
 }

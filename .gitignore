@@ -1,28 +1,47 @@
-# dependencies
+# Dependencies
 /node_modules
+/.pnp
+.pnp.js
 
-# Next.js outputs
+# Next.js Build Outputs
 /.next
 /out
 
-# production and test outputs
+# Production and test outputs
 /build
+/dist
 /coverage
+.nyc_output
 
-# local environment files (example is intentionally committed)
+# Caches
+.turbo
+.vercel
+
+# Local environment files (keep .env.example tracked)
 .env
+.env*.local
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+!.env.example
 
-# editor / OS
-.DS_Store
-Thumbs.db
+# TypeScript cache
 *.tsbuildinfo
 
-# logs
+# Debug and runtime logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo

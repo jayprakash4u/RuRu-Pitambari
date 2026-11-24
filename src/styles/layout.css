@@ -39,4 +39,7 @@
   .grid {
     --grid-columns: 1;
   }
+  .site-main {
+    padding-bottom: 3.75rem;
+  }
 }

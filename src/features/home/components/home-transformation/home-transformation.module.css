@@ -1,5 +1,5 @@
 .section {
-  padding-block: var(--space-9);
+  padding-block: 2.75rem 3.25rem;
   border-top: 1px solid var(--color-border);
   background: var(--brand-gold-50);
 }
@@ -10,13 +10,13 @@
 }
 
 .heading {
-  margin-bottom: var(--space-6);
+  margin-bottom: 1.5rem;
 }
 
 .heading h2 {
   margin: 0;
   font-family: var(--font-display);
-  font-size: var(--text-3xl);
+  font-size: clamp(1.625rem, 1.35rem + 0.8vw, 2.125rem);
   font-weight: var(--weight-regular);
   letter-spacing: var(--tracking-tight);
   line-height: var(--leading-heading);
@@ -104,15 +104,15 @@
 
 @media (max-width: 40rem) {
   .section {
-    padding-block: var(--space-8);
+    padding-block: 1.75rem 2.25rem;
   }
 
   .heading {
-    margin-bottom: var(--space-6);
+    margin-bottom: 1rem;
   }
 
   .heading h2 {
-    font-size: var(--text-2xl);
+    font-size: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
   }
 
   .slides {

@@ -12,12 +12,14 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <div className={styles.page}>
-      <header className={styles.hero}>
-        <div className={styles.heroInner}>
-          <p>We’re here to help</p>
-          <h1>Contact us</h1>
+      {/* Top Heritage Red Banner (Matching Product, Combo & Gallery Style) */}
+      <section aria-labelledby="contact-page-heading" className={styles.banner}>
+        <div className={styles.bannerInner}>
+          <h1 className={styles.bannerTitle} id="contact-page-heading">
+            Contact Us
+          </h1>
         </div>
-      </header>
+      </section>
 
       <section aria-labelledby="contact-heading" className={styles.section}>
         <div className={styles.inner}>

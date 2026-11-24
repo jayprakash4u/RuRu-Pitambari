@@ -4,10 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { EmptyState } from "@/components/ui";
+import { comboAsProducts } from "@/features/combos/data/combos";
 import { products } from "@/features/products/data/products";
 
 import { useCart } from "./cart-context";
 import styles from "./cart.module.css";
+
+const allCatalogProducts = [...products, ...comboAsProducts];
 
 const nprFormatter = new Intl.NumberFormat("en-NP", {
   currency: "NPR",
@@ -19,7 +22,7 @@ const nprFormatter = new Intl.NumberFormat("en-NP", {
 export function CartView() {
   const { items, removeItem, updateQuantity } = useCart();
   const detailedItems = items.flatMap((item) => {
-    const product = products.find((candidate) => candidate.id === item.productId);
+    const product = allCatalogProducts.find((candidate) => candidate.id === item.productId);
     const variant = product?.variants[item.variantIndex];
     return product && variant ? [{ ...item, product, variant }] : [];
   });

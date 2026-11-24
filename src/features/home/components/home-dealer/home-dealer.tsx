@@ -34,7 +34,7 @@ export function HomeDealer() {
   }
 
   return (
-    <section aria-labelledby="seller-heading" className={styles.section}>
+    <section aria-labelledby="seller-heading" className={styles.section} id="seller">
       <div className={styles.inner}>
         <div className={styles.visual}>
           <Image

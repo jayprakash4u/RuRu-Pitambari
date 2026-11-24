@@ -2,7 +2,9 @@ import {
   HomeBestsellers,
   HomeCategories,
   HomeDealer,
+  HomeDealsOfDay,
   HomeHero,
+  HomePosters,
   HomeTransformation,
 } from "@/features/home";
 
@@ -11,6 +13,8 @@ export default function HomePage() {
     <>
       <HomeHero />
       <HomeCategories />
+      <HomePosters />
+      <HomeDealsOfDay />
       <HomeTransformation />
       <HomeBestsellers />
       <HomeDealer />

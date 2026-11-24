@@ -1,0 +1,95 @@
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.statCard {
+  background-color: #ffffff;
+  border: 1px solid var(--neutral-200);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.statCard:hover {
+  border-color: var(--neutral-300);
+  box-shadow: var(--shadow-xs);
+}
+
+.statHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.statLabel {
+  font-size: 0.8125rem;
+  color: var(--neutral-500);
+  font-weight: 500;
+}
+
+.iconWrapper {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.goldIcon {
+  background-color: var(--brand-gold-50);
+  color: var(--brand-gold-600);
+}
+
+.blueIcon {
+  background-color: #f0f7fb;
+  color: #24587c;
+}
+
+.greenIcon {
+  background-color: #f0f7f3;
+  color: #2b614d;
+}
+
+.amberIcon {
+  background-color: #fef7ed;
+  color: #9a5b13;
+}
+
+.statValue {
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: var(--neutral-900);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.statFooter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--neutral-500);
+}
+
+.pillPositive {
+  color: #2b614d;
+  font-weight: 600;
+}
+
+.pillNeutral {
+  color: var(--neutral-600);
+}
+
+.pillAlert {
+  color: #a33333;
+  font-weight: 600;
+}

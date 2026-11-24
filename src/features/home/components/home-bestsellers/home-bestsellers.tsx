@@ -21,7 +21,7 @@ export function HomeBestsellers() {
         </div>
 
         <div className={styles.grid}>
-          {products.map((product) => {
+          {products.slice(0, 4).map((product) => {
             const variant = product.variants[0];
 
             return (

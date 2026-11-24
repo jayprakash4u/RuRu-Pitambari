@@ -4,10 +4,13 @@ import Link from "next/link";
 import { useState, type FormEvent } from "react";
 
 import { Button, Field, Input, Textarea } from "@/components/ui";
+import { comboAsProducts } from "@/features/combos/data/combos";
 import { products } from "@/features/products/data/products";
 
 import { useCart } from "./cart-context";
 import styles from "./checkout.module.css";
+
+const allCatalogProducts = [...products, ...comboAsProducts];
 
 const nprFormatter = new Intl.NumberFormat("en-NP", {
   currency: "NPR",
@@ -20,7 +23,7 @@ export function CheckoutView() {
   const { clearCart, items } = useCart();
   const [ordered, setOrdered] = useState(false);
   const detailedItems = items.flatMap((item) => {
-    const product = products.find((candidate) => candidate.id === item.productId);
+    const product = allCatalogProducts.find((candidate) => candidate.id === item.productId);
     const variant = product?.variants[item.variantIndex];
     return product && variant ? [{ ...item, product, variant }] : [];
   });

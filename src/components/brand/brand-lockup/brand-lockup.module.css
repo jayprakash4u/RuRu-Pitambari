@@ -1,14 +1,14 @@
 .lockup {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: 0.75rem;
   color: var(--color-text);
   text-decoration: none;
 }
 
 .seal {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3.75rem;
+  height: 3.75rem;
   position: relative;
   flex: 0 0 auto;
   overflow: visible;
@@ -17,7 +17,7 @@
 .sealImage {
   width: 100%;
   height: 100%;
-  filter: saturate(1.18) contrast(1.32) brightness(0.86);
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
   object-fit: contain;
 }
 
@@ -28,16 +28,68 @@
 }
 
 .words strong {
-  font-size: var(--text-sm);
-  font-weight: var(--weight-bold);
-  letter-spacing: 0.08em;
+  font-size: 1.0625rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
+  color: #171612;
 }
 
 .words small {
-  margin-top: var(--space-1);
-  color: var(--color-text-muted);
-  font-size: var(--text-xs);
+  margin-top: 0.15rem;
+  color: #8c1d24;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Stacked layout (Seal on top, brand name below) */
+.stacked {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.35rem;
+}
+
+.stacked .seal {
+  width: 5rem;
+  height: 5rem;
+}
+
+.stacked .words {
+  align-items: center;
+  text-align: center;
+}
+
+.stacked .words strong {
+  font-size: 0.9375rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.stacked .words small {
+  margin-top: 0.15rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+/* Small size (Compact/Footer) */
+.sizeSm .seal {
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+.sizeSm .words strong {
+  font-size: 0.8125rem;
+}
+
+.sizeSm .words small {
+  font-size: 0.6875rem;
 }
 
 .inverse,
@@ -49,17 +101,89 @@
   opacity: 0.58;
 }
 
-@media (max-width: 30rem) {
+@media (max-width: 48rem) {
+  .stacked {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    gap: 0.75rem;
+  }
+
+  .stacked .seal {
+    width: 3.25rem;
+    height: 3.25rem;
+  }
+
+  .stacked .words {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .stacked .words strong {
+    font-size: 1.0625rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    line-height: 1.15;
+    color: #171612;
+  }
+
+  .stacked .words small {
+    display: block;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-top: 0.1rem;
+    color: #8c1d24;
+    text-transform: uppercase;
+  }
+
   .seal {
-    width: 3rem;
-    height: 3rem;
+    width: 3.25rem;
+    height: 3.25rem;
   }
 
   .words strong {
-    font-size: 0.75rem;
+    font-size: 1.0625rem;
+    font-weight: 800;
   }
 
   .words small {
-    display: none;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: #8c1d24;
+  }
+}
+
+@media (max-width: 26rem) {
+  .stacked {
+    gap: 0.5rem;
+  }
+
+  .stacked .seal {
+    width: 2.85rem;
+    height: 2.85rem;
+  }
+
+  .stacked .words strong {
+    font-size: 0.9375rem;
+  }
+
+  .stacked .words small {
+    display: block;
+    font-size: 0.625rem;
+  }
+
+  .seal {
+    width: 2.85rem;
+    height: 2.85rem;
+  }
+
+  .words strong {
+    font-size: 0.9375rem;
+  }
+
+  .words small {
+    display: block;
+    font-size: 0.625rem;
   }
 }

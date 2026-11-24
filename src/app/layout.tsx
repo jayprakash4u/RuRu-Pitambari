@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
-import { SiteFooter, SiteHeader } from "@/components/layout";
-import { CartProvider } from "@/features/cart";
+import { StoreShell } from "@/components/layout";
 import "@/styles/index.css";
 
 export const metadata: Metadata = {
@@ -19,11 +18,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body>
-        <CartProvider>
-          <SiteHeader />
-          <main className="site-main">{children}</main>
-          <SiteFooter />
-        </CartProvider>
+        <StoreShell>{children}</StoreShell>
       </body>
     </html>
   );

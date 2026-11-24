@@ -1,5 +1,5 @@
 .section {
-  padding-block: var(--section-space);
+  padding-block: 2.75rem 3.25rem;
   border-top: 1px solid var(--color-border);
   background: var(--neutral-0);
 }
@@ -10,14 +10,14 @@
 }
 
 .heading {
-  margin-bottom: var(--space-6);
-  padding-top: var(--space-4);
+  margin-bottom: 1.5rem;
+  padding-top: 0;
 }
 
 .heading h2 {
   margin: 0;
   font-family: var(--font-display);
-  font-size: var(--text-3xl);
+  font-size: clamp(1.625rem, 1.35rem + 0.8vw, 2.125rem);
   font-weight: var(--weight-regular);
   letter-spacing: var(--tracking-tight);
   line-height: var(--leading-heading);
@@ -123,20 +123,30 @@
 }
 
 .action {
-  min-height: 2.5rem;
+  min-height: 2.35rem;
   padding-inline: var(--space-4);
   display: inline-flex;
   align-items: center;
-  border: 1px solid var(--brand-gold-400);
-  border-radius: var(--radius-xs);
-  color: var(--brand-gold-800);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-semibold);
+  justify-content: center;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #f5be18 0%, #e69d00 100%);
+  color: #171612;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   text-decoration: none;
+  box-shadow: 0 2px 8px rgba(245, 190, 24, 0.3);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
 }
 
 .action:hover {
-  background: var(--brand-gold-50);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 190, 24, 0.42);
+  filter: brightness(1.04);
 }
 
 @media (max-width: 64rem) {
@@ -148,16 +158,16 @@
 
 @media (max-width: 40rem) {
   .section {
-    padding-block: var(--space-9);
+    padding-block: 1.75rem 2.25rem;
   }
 
   .heading {
-    margin-bottom: var(--space-5);
+    margin-bottom: 1rem;
     padding-top: 0;
   }
 
   .heading h2 {
-    font-size: var(--text-2xl);
+    font-size: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
   }
 
   .grid {
@@ -183,12 +193,14 @@
   }
 
   .purchaseRow {
-    align-items: flex-start;
+    align-items: stretch;
     flex-direction: column;
+    gap: var(--space-2);
   }
 
   .action {
-    min-height: 2.75rem;
+    width: 100%;
+    min-height: 2.35rem;
     padding-inline: var(--space-3);
   }
 }

@@ -11,31 +11,26 @@ import styles from "./home-categories.module.css";
 
 const categories = [
   {
-    description: "Restore the natural shine of copper, brass, silver and more.",
     href: "/products?category=metal-care",
     image: metalCareImage,
     label: "Metal care",
   },
   {
-    description: "Cut through grease and keep everyday kitchen surfaces fresh.",
     href: "/products?category=kitchen-care",
     image: kitchenCareImage,
     label: "Kitchen care",
   },
   {
-    description: "Dependable daily cleaning for bright, fresh floors.",
     href: "/products?category=floor-care",
     image: floorCareImage,
     label: "Floor care",
   },
   {
-    description: "Thoughtful care for lamps, vessels and sacred metalware.",
     href: "/products?category=metal-care",
     image: poojaCareImage,
     label: "Pooja care",
   },
   {
-    description: "Simple essentials for a cleaner and happier home.",
     href: "/products",
     image: householdCareImage,
     label: "Household care",
@@ -63,7 +58,6 @@ export function HomeCategories() {
               </span>
               <span className={styles.cardCopy}>
                 <strong>{category.label}</strong>
-                <span>{category.description}</span>
               </span>
             </Link>
           ))}

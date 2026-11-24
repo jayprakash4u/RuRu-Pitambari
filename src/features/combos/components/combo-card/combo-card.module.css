@@ -1,0 +1,521 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid #e8e2d8;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(140, 29, 36, 0.1);
+  border-color: #d6ccbe;
+}
+
+/* Header & Image Banner */
+.imageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #f7f4ee;
+  overflow: hidden;
+}
+
+.bannerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.card:hover .bannerImage {
+  transform: scale(1.03);
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
+  pointer-events: none;
+}
+
+.topBadges {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  right: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  z-index: 2;
+}
+
+.primaryBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.75rem;
+  background: #8c1d24;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.savingsBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.75rem;
+  background: #f5be18;
+  color: #523a00;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Card Body */
+.body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.35rem;
+  gap: 1.15rem;
+}
+
+.titleGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.nepaliTitle {
+  font-size: 0.85rem;
+  color: #8c1d24;
+  font-weight: 600;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #171612;
+  line-height: 1.25;
+}
+
+.tagline {
+  font-size: 0.9rem;
+  color: #635d52;
+  line-height: 1.4;
+}
+
+/* Items Included Section - Clean Breakdown */
+.itemsBox {
+  background: #fbf9f5;
+  border: 1px solid #eee8de;
+  border-radius: 8px;
+  padding: 0.95rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.itemsBoxHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #4a453e;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid #eee8de;
+  padding-bottom: 0.45rem;
+}
+
+.itemList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.itemRow {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.itemThumb {
+  width: 2.25rem;
+  height: 2.25rem;
+  background: #ffffff;
+  border: 1px solid #e3dccf;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  padding: 2px;
+}
+
+.itemThumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.itemInfo {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.itemName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #24221d;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.itemSize {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #8c1d24;
+  background: #fceeed;
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.itemRole {
+  font-size: 0.775rem;
+  color: #706a5e;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Bonus Box */
+.bonusRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #fff8e6;
+  border: 1px dashed #f5be18;
+  border-radius: 6px;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #704f00;
+}
+
+.bonusIcon {
+  font-size: 1rem;
+}
+
+/* Ideal For Callout */
+.idealFor {
+  font-size: 0.8125rem;
+  color: #635d52;
+  line-height: 1.45;
+  background: #faf8f5;
+  padding: 0.55rem 0.75rem;
+  border-left: 3px solid #8c1d24;
+  border-radius: 0 6px 6px 0;
+}
+
+.idealFor strong {
+  color: #24221d;
+}
+
+/* Pricing Section */
+.priceSection {
+  margin-top: auto;
+  padding-top: 0.85rem;
+  border-top: 1px solid #eee8de;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.priceCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.regularPriceRow {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8125rem;
+  color: #7d776b;
+}
+
+.strikePrice {
+  text-decoration: line-through;
+  color: #9c9486;
+}
+
+.comboPrice {
+  font-family: var(--font-display);
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #8c1d24;
+  line-height: 1;
+}
+
+.saveTag {
+  font-size: 0.775rem;
+  font-weight: 700;
+  color: #1b7340;
+  background: #e6f6ec;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  display: inline-block;
+  align-self: flex-start;
+}
+
+/* Action Buttons (Segmented Design Matching Media Attachment) */
+.actionGroup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+  margin-top: 0.5rem;
+}
+
+/* Add to Cart Button (Pure Gold Gradient) */
+.btnCart {
+  display: inline-flex;
+  align-items: center;
+  height: 2.75rem;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #f5be18 0%, #e69d00 100%);
+  color: #3d2a00;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(245, 190, 24, 0.28);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+  padding: 0;
+}
+
+.btnCart:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 190, 24, 0.38);
+  filter: brightness(1.04);
+}
+
+.btnCart:active {
+  transform: translateY(0);
+}
+
+.btnIconBoxGold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding-left: 0.65rem;
+  padding-right: 0.55rem;
+  background: #ffffff;
+  color: #b37400;
+  position: relative;
+  z-index: 2;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.btnIconBoxGold::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -8px;
+  width: 16px;
+  background: #ffffff;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.btnIconBoxGold::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  right: -14px;
+  width: 16px;
+  border-radius: 50%;
+  box-shadow:
+    -3px 0 0 0 rgba(255, 255, 255, 0.4),
+    -7px 0 0 0 rgba(255, 255, 255, 0.2);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.btnIconBoxGold svg {
+  position: relative;
+  z-index: 3;
+}
+
+.btnLabelGold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding-left: 0.65rem;
+  padding-right: 0.65rem;
+  font-size: 0.775rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #3b2800;
+  white-space: nowrap;
+}
+
+/* Buy Now Button (Heritage Red Gradient) */
+.btnBuy {
+  display: inline-flex;
+  align-items: center;
+  height: 2.75rem;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #a51c24 0%, #6e0e14 100%);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(140, 29, 36, 0.28);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+  padding: 0;
+}
+
+.btnBuy:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(140, 29, 36, 0.38);
+  filter: brightness(1.06);
+}
+
+.btnBuy:active {
+  transform: translateY(0);
+}
+
+.btnIconBoxRed {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding-left: 0.65rem;
+  padding-right: 0.55rem;
+  background: #ffffff;
+  color: #8c1d24;
+  position: relative;
+  z-index: 2;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.btnIconBoxRed::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -8px;
+  width: 16px;
+  background: #ffffff;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.btnIconBoxRed::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  right: -14px;
+  width: 16px;
+  border-radius: 50%;
+  box-shadow:
+    -3px 0 0 0 rgba(255, 255, 255, 0.4),
+    -7px 0 0 0 rgba(255, 255, 255, 0.2);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.btnIconBoxRed svg {
+  position: relative;
+  z-index: 3;
+}
+
+.btnLabelRed {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding-left: 0.65rem;
+  padding-right: 0.65rem;
+  font-size: 0.775rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+/* Success notification pill */
+.addedNotice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 0.775rem;
+  font-weight: 700;
+  color: #1b7340;
+  background: #eef9f2;
+  border: 1px solid #b7e4c7;
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  animation: fadeIn 0.2s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 32rem) {
+  .actionGroup {
+    grid-template-columns: 1fr;
+  }
+}
