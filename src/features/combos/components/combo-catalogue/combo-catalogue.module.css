@@ -101,23 +101,28 @@
   gap: 2rem 1.5rem;
 }
 
-/* Ultra-Clean Card - Borderless & Airy */
+/* Ultra-Clean Card - Clean Border & Airy */
 .card {
   min-width: 0;
   display: flex;
   flex-direction: column;
   background: #ffffff;
+  border: 1px solid #ede8df;
   border-radius: 8px;
   overflow: hidden;
   transition:
     transform 0.2s ease,
-    box-shadow 0.2s ease;
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
   position: relative;
   padding-bottom: 0.5rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
 .card:hover {
   transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  border-color: #d6ccbe;
 }
 
 /* Pure White Showcase Stage */
@@ -357,6 +362,13 @@
   }
 }
 
+@media (max-width: 48rem) {
+  .imageActionButtons {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @media (max-width: 40rem) {
   .toolbar {
     flex-direction: row;
@@ -367,17 +379,65 @@
 
   .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem 0.65rem;
+    gap: 0.85rem 0.65rem;
+  }
+
+  .card {
+    border-radius: 6px;
+  }
+
+  .cardBody {
+    padding: 0.65rem 0.5rem 0.5rem;
+  }
+
+  .card h2 {
+    font-size: 0.8125rem;
+    min-height: 2.2rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .discountBadge {
+    width: 1.85rem;
+    height: 1.85rem;
+    font-size: 0.625rem;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .circleActionBtn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .actionIcon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .ratingRow {
+    margin-bottom: 0.25rem;
+  }
+
+  .ratingStars {
+    font-size: 0.6875rem;
+  }
+
+  .pricing {
+    margin-bottom: 0.65rem;
+    gap: 0.35rem;
+  }
+
+  .strikePrice {
+    font-size: 0.75rem;
+  }
+
+  .offerPrice {
+    font-size: 0.9375rem;
   }
 
   .actionBtn {
     min-height: 2.15rem;
     font-size: 0.6875rem;
-  }
-}
-
-@media (max-width: 25rem) {
-  .grid {
-    grid-template-columns: 1fr;
+    padding-inline: 0.5rem;
   }
 }
