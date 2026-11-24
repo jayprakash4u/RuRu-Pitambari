@@ -1,1 +1,4 @@
+# Ensure Node.js and npx are in PATH for GUI tools like GitHub Desktop
+export PATH="/d/Node js:/d/Node\ js:/c/Program Files/nodejs:$PATH"
+
 npx lint-staged
