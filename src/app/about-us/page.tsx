@@ -2,17 +2,29 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 import communityImage from "@/assets/gallery/facebook-08.jpg";
+import { BrandGuidance } from "@/features/about";
 
 import styles from "./about-page.module.css";
 
 export const metadata: Metadata = {
-  title: "About us",
-  description: "Meet Ruru Pitambari, a trusted Nepali home-care brand established in 2009.",
+  title: "Our Story | Ruru Pitambari",
+  description:
+    "Meet Ruru Pitambari, a trusted Nepali home-care brand established in 2009 in Lalitpur, Nepal.",
 };
 
 export default function AboutPage() {
   return (
-    <div className={styles.page}>
+    <main className={styles.page}>
+      {/* Top Heritage Red Banner (Matching Product Page & Other Pages) */}
+      <section aria-labelledby="about-banner-heading" className={styles.banner}>
+        <div className={styles.bannerInner}>
+          <h1 className={styles.bannerTitle} id="about-banner-heading">
+            Our Story
+          </h1>
+        </div>
+      </section>
+
+      {/* Built Through Trust - Introduction Section */}
       <section aria-labelledby="about-heading" className={styles.introduction}>
         <div className={styles.imageWrap}>
           <Image
@@ -27,7 +39,7 @@ export default function AboutPage() {
 
         <div className={styles.content}>
           <p>About Ruru Pitambari</p>
-          <h1 id="about-heading">Built through trust.</h1>
+          <h2 id="about-heading">Built through trust.</h2>
           <span>Home-care products from P Three Products · Lalitpur, Nepal</span>
 
           <div className={styles.copy}>
@@ -59,6 +71,9 @@ export default function AboutPage() {
           </dl>
         </div>
       </section>
-    </div>
+
+      {/* What Guides Us - Brand Guidance Section (Mission, Vision, Goals) */}
+      <BrandGuidance />
+    </main>
   );
 }
