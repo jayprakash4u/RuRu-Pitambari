@@ -1,27 +1,106 @@
 import Image from "next/image";
 
-import plateImage from "@/assets/brand/story-brass-plate.jpg";
+import brassImage from "@/assets/home/brass-before-after.png";
 
 import styles from "./brand-guidance.module.css";
 
-const guidanceItems = [
+const pillars = [
   {
-    number: "01",
-    title: "MISSION",
+    badge: "01",
     description:
       "Make effective, dependable metal care accessible to every household, bringing back the natural shine of brass, copper and silver.",
+    icon: (
+      <svg
+        aria-hidden="true"
+        className={styles.pillarIcon}
+        fill="none"
+        height="22"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.8"
+        viewBox="0 0 24 24"
+        width="22"
+      >
+        <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+      </svg>
+    ),
+    subtitle: "Heritage & Accessibility",
+    title: "Our Mission",
   },
   {
-    number: "02",
-    title: "VISION",
+    badge: "02",
     description:
       "Become Nepal’s most trusted metal-care brand, known for quality, thoughtful innovation and care for the things families value.",
+    featured: true,
+    icon: (
+      <svg
+        aria-hidden="true"
+        className={styles.pillarIcon}
+        fill="none"
+        height="22"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.8"
+        viewBox="0 0 24 24"
+        width="22"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <circle cx="12" cy="12" r="4" />
+        <line x1="12" x2="12" y1="2" y2="4" />
+        <line x1="12" x2="12" y1="20" y2="22" />
+        <line x1="2" x2="4" y1="12" y2="12" />
+        <line x1="20" x2="22" y1="12" y2="12" />
+      </svg>
+    ),
+    subtitle: "Trust & Leadership",
+    title: "Our Vision",
   },
   {
-    number: "03",
-    title: "GOALS",
+    badge: "03",
     description:
       "Deliver consistent quality, develop practical products for everyday use, and grow responsibly while supporting Nepal’s communities.",
+    icon: (
+      <svg
+        aria-hidden="true"
+        className={styles.pillarIcon}
+        fill="none"
+        height="22"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.8"
+        viewBox="0 0 24 24"
+        width="22"
+      >
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        <path d="m9 12 2 2 4-4" />
+      </svg>
+    ),
+    subtitle: "Quality & Community",
+    title: "Our Goals",
+  },
+];
+
+const metals = [
+  {
+    desc: "Puja thalis, diyas & temple bells",
+    gradient: "linear-gradient(135deg, #f5d77f 0%, #d4af37 50%, #997a15 100%)",
+    name: "Brass",
+    nepali: "पित्तल",
+  },
+  {
+    desc: "Sacred kalash, tamreswar & vessels",
+    gradient: "linear-gradient(135deg, #e5936e 0%, #c87a55 50%, #8c421f 100%)",
+    name: "Copper",
+    nepali: "तामा",
+  },
+  {
+    desc: "Heirloom lamps, idols & coins",
+    gradient: "linear-gradient(135deg, #ffffff 0%, #d1d5db 50%, #9ca3af 100%)",
+    name: "Silver",
+    nepali: "चाँदी",
   },
 ];
 
@@ -29,95 +108,95 @@ export function BrandGuidance() {
   return (
     <section aria-labelledby="guidance-heading" className={styles.section}>
       <div className={styles.inner}>
-        <div className={styles.cardContainer}>
-          {/* Left Column: Visual & Core Philosophy */}
-          <div className={styles.leftCol}>
-            {/* Tagline & Emblem */}
-            <div className={styles.taglineRow}>
-              <div className={styles.labelGroup}>
-                <span className={styles.label}>WHAT GUIDES US</span>
-                <span aria-hidden="true" className={styles.redRule} />
-              </div>
-
-              {/* Heritage Floral Emblem */}
-              <div aria-hidden="true" className={styles.emblemWrap}>
-                <svg
-                  className={styles.emblemSvg}
-                  fill="none"
-                  height="34"
-                  viewBox="0 0 34 34"
-                  width="34"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  {/* Leaves */}
-                  <path d="M12 25 C7 25 5 29 8 31 C12 31 14 27 14 25 Z" fill="#2d6a4f" />
-                  <path d="M22 25 C27 25 29 29 26 31 C22 31 20 27 20 25 Z" fill="#2d6a4f" />
-                  {/* 5 Petals */}
-                  <circle cx="17" cy="9" fill="#8c1d24" r="5.5" />
-                  <circle cx="9.5" cy="14.5" fill="#8c1d24" r="5.5" />
-                  <circle cx="24.5" cy="14.5" fill="#8c1d24" r="5.5" />
-                  <circle cx="12" cy="22" fill="#8c1d24" r="5.5" />
-                  <circle cx="22" cy="22" fill="#8c1d24" r="5.5" />
-                  {/* Center Pistil */}
-                  <circle cx="17" cy="16.5" fill="#f5be18" r="3" />
-                  <circle cx="17" cy="16.5" fill="#ffffff" r="1.2" />
-                </svg>
-              </div>
-            </div>
-
-            {/* Headline */}
-            <h2 className={styles.heading} id="guidance-heading">
-              Care that keeps tradition shining.
-            </h2>
-
-            {/* Subtitle */}
-            <p className={styles.subtext}>
-              We make dependable metal care for the utensils families use, value and pass on.
-            </p>
-
-            {/* Polished Plate Image Stage */}
-            <div className={styles.imageStage}>
-              <Image
-                alt="Traditional brass thali being polished to restore its natural gold luster"
-                className={styles.plateImage}
-                placeholder="blur"
-                sizes="(max-width: 48rem) 100vw, 38vw"
-                src={plateImage}
-              />
-            </div>
+        {/* Section Header */}
+        <div className={styles.header}>
+          <div className={styles.eyebrow}>
+            <span className={styles.eyebrowDot} />
+            <span className={styles.eyebrowText}>WHAT GUIDES US</span>
+            <span className={styles.eyebrowLine} />
           </div>
 
-          {/* Right Column: Mission, Vision, Goals */}
-          <div className={styles.rightCol}>
-            <div className={styles.pillarList}>
-              {guidanceItems.map((item) => (
-                <article className={styles.pillarItem} key={item.number}>
-                  {/* Big Serif Number */}
-                  <span className={styles.number}>{item.number}</span>
+          <h2 className={styles.heading} id="guidance-heading">
+            Care that keeps tradition shining.
+          </h2>
 
-                  <span aria-hidden="true" className={styles.verticalDivider} />
+          <p className={styles.lead}>
+            We make dependable metal care for the utensils families use, value and pass on through
+            generations.
+          </p>
+        </div>
 
-                  {/* Pillar Content */}
-                  <div className={styles.pillarBody}>
-                    <div className={styles.titleRow}>
-                      <h3 className={styles.pillarTitle}>{item.title}</h3>
-                      <span aria-hidden="true" className={styles.titleDot} />
-                      <span aria-hidden="true" className={styles.titleLine} />
-                    </div>
-                    <p className={styles.pillarDescription}>{item.description}</p>
-                  </div>
-                </article>
-              ))}
+        {/* 3 Pillars: Mission, Vision, Goals */}
+        <div className={styles.pillarsGrid}>
+          {pillars.map((pillar) => (
+            <article
+              className={`${styles.pillarCard} ${pillar.featured ? styles.pillarCardFeatured : ""}`}
+              key={pillar.badge}
+            >
+              <div className={styles.cardTop}>
+                <span className={styles.pillarBadge}>{pillar.badge}</span>
+                <div className={styles.iconContainer}>{pillar.icon}</div>
+              </div>
+
+              <div className={styles.cardHeader}>
+                <span className={styles.pillarSubtitle}>{pillar.subtitle}</span>
+                <h3 className={styles.pillarTitle}>{pillar.title}</h3>
+              </div>
+
+              <div className={styles.cardDivider} />
+
+              <p className={styles.pillarText}>{pillar.description}</p>
+            </article>
+          ))}
+        </div>
+
+        {/* Heritage Metals Showcase Banner */}
+        <div className={styles.metalsShowcase}>
+          {/* Left: Transformation Visual */}
+          <div className={styles.showcaseVisual}>
+            <div className={styles.imageOverlayBadge}>
+              <span>✨ Visible Transformation</span>
+            </div>
+            <Image
+              alt="Traditional brass plate restored from tarnish to bright gold luster"
+              className={styles.showcaseImage}
+              placeholder="blur"
+              sizes="(max-width: 50rem) 100vw, 45vw"
+              src={brassImage}
+            />
+          </div>
+
+          {/* Right: Metallic Heritage Care */}
+          <div className={styles.showcaseContent}>
+            <div className={styles.showcaseTag}>
+              <span>AUTHENTIC FORMULATION</span>
             </div>
 
-            {/* Bottom Metallic Metals Swatches */}
-            <div className={styles.metalsFooter}>
-              <span className={styles.metalsLabel}>BRASS / COPPER / SILVER</span>
-              <div aria-label="Traditional metals supported" className={styles.swatches}>
-                <span className={styles.swatchBrass} title="Brass" />
-                <span className={styles.swatchCopper} title="Copper" />
-                <span className={styles.swatchSilver} title="Silver" />
-              </div>
+            <h3 className={styles.showcaseTitle}>Formulated for Nepal’s Sacred Metals</h3>
+
+            <p className={styles.showcaseDesc}>
+              Whether restoring antique Newar copper craft, everyday puja metalware, or cherished
+              silver heirlooms, our heritage formula dissolves deep tarnish instantly without
+              scratching precious surfaces.
+            </p>
+
+            <div className={styles.metalsList}>
+              {metals.map((metal) => (
+                <div className={styles.metalItem} key={metal.name}>
+                  <div
+                    aria-hidden="true"
+                    className={styles.metalChip}
+                    style={{ background: metal.gradient }}
+                  />
+                  <div className={styles.metalInfo}>
+                    <div className={styles.metalNameRow}>
+                      <strong>{metal.name}</strong>
+                      <span className={styles.metalNepali}>({metal.nepali})</span>
+                    </div>
+                    <span className={styles.metalDetail}>{metal.desc}</span>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
