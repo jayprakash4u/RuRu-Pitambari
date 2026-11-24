@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 import communityImage from "@/assets/gallery/facebook-08.jpg";
-import { BrandGuidance } from "@/features/about";
 
 import styles from "./about-page.module.css";
 
@@ -71,9 +70,6 @@ export default function AboutPage() {
           </dl>
         </div>
       </section>
-
-      {/* What Guides Us - Brand Guidance Section (Mission, Vision, Goals) */}
-      <BrandGuidance />
     </main>
   );
 }
