@@ -104,3 +104,77 @@ export type StoreSettings = {
   acceptOnlinePayment: boolean;
   autoEmailConfirmation: boolean;
 };
+
+export type HomePageContent = {
+  heroTagline: string;
+  heroVideoUrl: string;
+  heroPosterUrl: string;
+  dealsHeading: string;
+  dealsSubtitle: string;
+  transformationHeading: string;
+  transformationBeforeImage: string;
+  transformationAfterImage: string;
+  transformationDescription: string;
+  dealerHeading: string;
+  dealerSubtitle: string;
+  dealerCtaText: string;
+};
+
+export type OurStoryContent = {
+  bannerTitle: string;
+  storyEyebrow: string;
+  storyHeading: string;
+  storyPhotoUrl: string;
+  storyPhotoCaption: string;
+  storyParagraph1: string;
+  storyParagraph2: string;
+  storyParagraph3: string;
+  missionHeading: string;
+  missionDescription: string;
+  missionImageUrl: string;
+  visionHeading: string;
+  visionDescription: string;
+  visionImageUrl: string;
+  establishedYear: string;
+  yearsOfTrust: string;
+  authenticCare: string;
+  quoteText: string;
+  quoteAuthor: string;
+};
+
+export type GalleryContentItem = {
+  id: string;
+  title: string;
+  category: "Events" | "Products" | "Factory & Workshop" | "Dealers";
+  imageUrl: string;
+  caption: string;
+};
+
+export type GalleryPageContent = {
+  pageTitle: string;
+  pageSubtitle: string;
+  items: GalleryContentItem[];
+};
+
+export type CombosPageContent = {
+  pageTitle: string;
+  pageSubtitle: string;
+  bannerNotice: string;
+};
+
+export type ContactPageContent = {
+  factoryAddress: string;
+  registeredOffice: string;
+  phoneHotline: string;
+  dealershipPhone: string;
+  email: string;
+  businessHours: string;
+};
+
+export type SiteContent = {
+  home: HomePageContent;
+  story: OurStoryContent;
+  gallery: GalleryPageContent;
+  combos: CombosPageContent;
+  contact: ContactPageContent;
+};

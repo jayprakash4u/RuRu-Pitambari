@@ -8,6 +8,7 @@ import {
   initialOrders,
   initialProducts,
   initialSettings,
+  initialSiteContent,
 } from "../data/admin-mock-data";
 import type {
   AdminDealer,
@@ -19,6 +20,7 @@ import type {
   InquiryStatus,
   OrderStatus,
   PaymentStatus,
+  SiteContent,
   StoreSettings,
 } from "../types";
 
@@ -28,6 +30,7 @@ type AdminContextType = {
   dealers: AdminDealer[];
   inquiries: AdminInquiry[];
   settings: StoreSettings;
+  siteContent: SiteContent;
   updateOrderStatus: (orderId: string, status: OrderStatus, paymentStatus?: PaymentStatus) => void;
   updateProductStock: (productId: string, variantId: string, newStock: number) => void;
   updateProduct: (productId: string, updates: Partial<AdminProduct>) => void;
@@ -41,6 +44,10 @@ type AdminContextType = {
   ) => void;
   updateInquiryStatus: (inquiryId: string, status: InquiryStatus, responseNote?: string) => void;
   updateSettings: (newSettings: Partial<StoreSettings>) => void;
+  updateSiteContent: <K extends keyof SiteContent>(
+    section: K,
+    updates: Partial<SiteContent[K]>,
+  ) => void;
   resetToDefaults: () => void;
 };
 
@@ -52,6 +59,7 @@ const STORAGE_KEYS = {
   dealers: "ruru_admin_dealers",
   inquiries: "ruru_admin_inquiries",
   settings: "ruru_admin_settings",
+  content: "ruru_admin_site_content",
 };
 
 function getSavedItem<T>(key: string, fallback: T): T {
@@ -79,6 +87,9 @@ export function AdminProvider({ children }: { children: ReactNode }) {
   );
   const [settings, setSettings] = useState<StoreSettings>(() =>
     getSavedItem(STORAGE_KEYS.settings, initialSettings),
+  );
+  const [siteContent, setSiteContent] = useState<SiteContent>(() =>
+    getSavedItem(STORAGE_KEYS.content, initialSiteContent),
   );
 
   const saveToStorage = useCallback((key: string, data: unknown) => {
@@ -222,18 +233,37 @@ export function AdminProvider({ children }: { children: ReactNode }) {
     [saveToStorage],
   );
 
+  const updateSiteContent = useCallback(
+    <K extends keyof SiteContent>(section: K, updates: Partial<SiteContent[K]>) => {
+      setSiteContent((prev) => {
+        const next = {
+          ...prev,
+          [section]: {
+            ...prev[section],
+            ...updates,
+          },
+        };
+        saveToStorage(STORAGE_KEYS.content, next);
+        return next;
+      });
+    },
+    [saveToStorage],
+  );
+
   const resetToDefaults = useCallback(() => {
     setOrders(initialOrders);
     setProducts(initialProducts);
     setDealers(initialDealers);
     setInquiries(initialInquiries);
     setSettings(initialSettings);
+    setSiteContent(initialSiteContent);
     try {
       localStorage.removeItem(STORAGE_KEYS.orders);
       localStorage.removeItem(STORAGE_KEYS.products);
       localStorage.removeItem(STORAGE_KEYS.dealers);
       localStorage.removeItem(STORAGE_KEYS.inquiries);
       localStorage.removeItem(STORAGE_KEYS.settings);
+      localStorage.removeItem(STORAGE_KEYS.content);
     } catch {
       // Ignore
     }
@@ -247,6 +277,7 @@ export function AdminProvider({ children }: { children: ReactNode }) {
         dealers,
         inquiries,
         settings,
+        siteContent,
         updateOrderStatus,
         updateProductStock,
         updateProduct,
@@ -255,6 +286,7 @@ export function AdminProvider({ children }: { children: ReactNode }) {
         updateDealerStatus,
         updateInquiryStatus,
         updateSettings,
+        updateSiteContent,
         resetToDefaults,
       }}
     >

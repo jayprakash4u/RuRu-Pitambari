@@ -1,4 +1,11 @@
-import type { AdminDealer, AdminInquiry, AdminOrder, AdminProduct, StoreSettings } from "../types";
+import type {
+  AdminDealer,
+  AdminInquiry,
+  AdminOrder,
+  AdminProduct,
+  SiteContent,
+  StoreSettings,
+} from "../types";
 
 export const initialOrders: AdminOrder[] = [
   {
@@ -523,4 +530,93 @@ export const initialSettings: StoreSettings = {
   acceptCod: true,
   acceptOnlinePayment: true,
   autoEmailConfirmation: true,
+};
+
+export const initialSiteContent: SiteContent = {
+  home: {
+    heroTagline: "Authentic Nepali Care for Brass, Copper, and Household Vessels",
+    heroVideoUrl: "/media/hero/ruru-hero-desktop.mp4",
+    heroPosterUrl: "/media/hero/ruru-hero-poster.webp",
+    dealsHeading: "Deals of the Day",
+    dealsSubtitle: "Exclusive bundled savings on essential home & metal care combos.",
+    transformationHeading: "See the Instant Transformation",
+    transformationBeforeImage: "/images/before-after/brass-before.jpg",
+    transformationAfterImage: "/images/before-after/brass-after.jpg",
+    transformationDescription:
+      "Formulated without harsh industrial acids. Gently lifts decades of dark oxidation and puja residue within seconds, restoring natural warmth and brilliance.",
+    dealerHeading: "Partner with Nepal's Leading Metal Care Brand",
+    dealerSubtitle:
+      "Join over 500+ verified retailers and wholesalers across Kathmandu Valley and 45+ districts nationwide.",
+    dealerCtaText: "Apply for Wholesale Dealership",
+  },
+  story: {
+    bannerTitle: "Our Story",
+    storyEyebrow: "P Three Products · Lalitpur, Nepal",
+    storyHeading: "Keeping Nepali Homes and Sacred Vessels Shining Bright",
+    storyPhotoUrl: "/assets/gallery/dealer-meet-01.jpg",
+    storyPhotoCaption:
+      "Meeting our retail partners in Lalitpur — built on 15 years of personal visits, honest dealings, and shared community trust.",
+    storyParagraph1:
+      "In every Nepali home, copper (तामा) and brass (पीत्तल) utensils are more than simple cookware. They hold the holy water for morning prayers, the oil in evening diyos, and the feast dishes shared during Dashain, Tihar, and family gatherings.",
+    storyParagraph2:
+      "Yet for years, keeping them clean meant scrubbing with harsh acids that damaged delicate engravings, left hands dry and irritated, and stripped away the warm golden glow of the metal. Founded in Lalitpur, P Three Products set out to formulate a gentle, effective alternative rooted in traditional care.",
+    storyParagraph3:
+      "From humble beginnings in our Lalitpur workshop to trusted presence in thousands of neighbourhood grocery stores and supermarkets across Nepal, Ruru Pitambari remains dedicated to honest formulation and authentic Nepali quality.",
+    missionHeading: "Preserving Tradition with Gentle, Honest Care",
+    missionDescription:
+      "To make dependable, effective, and gentle metal care accessible to every household — restoring the timeless natural shine of brass, copper, and silver while preserving the sanctity and craftsmanship of family heirlooms.",
+    missionImageUrl: "/assets/brand/story-brilliance.jpg",
+    visionHeading: "A Lasting Presence in Nepali Homes",
+    visionDescription:
+      "To be Nepal’s most trusted household care brand, recognized for genuine quality, thoughtful local innovation, and deep respect for cultural traditions.",
+    visionImageUrl: "/assets/brand/story-future.jpg",
+    establishedYear: "2009",
+    yearsOfTrust: "15+",
+    authenticCare: "100%",
+    quoteText:
+      "When you bring Ruru Pitambari into your home, you trust us with your family's celebrations, morning prayers, and cherished heirlooms. That is a responsibility we honour with every bottle we blend.",
+    quoteAuthor: "The P Three Products Family, Lalitpur, Nepal",
+  },
+  gallery: {
+    pageTitle: "Brand & Factory Gallery",
+    pageSubtitle:
+      "A glimpse into our heritage, manufacturing quality, dealer network, and community events.",
+    items: [
+      {
+        id: "gal-1",
+        title: "Annual Retailers Meet - Lalitpur",
+        category: "Events",
+        imageUrl: "/assets/gallery/dealer-meet-01.jpg",
+        caption: "Celebrating 15 years of partnership with local shopkeepers and distributors.",
+      },
+      {
+        id: "gal-2",
+        title: "Batch Blending & Quality Inspection",
+        category: "Factory & Workshop",
+        imageUrl: "/assets/gallery/production-01.jpg",
+        caption: "Strict micro-filtration and batch consistency checks at our Lalitpur facility.",
+      },
+      {
+        id: "gal-3",
+        title: "Traditional Puja Utensils Restored",
+        category: "Products",
+        imageUrl: "/assets/gallery/metal-care-demo.jpg",
+        caption: "Pure natural shine restored on vintage copper gagri and brass kalash.",
+      },
+    ],
+  },
+  combos: {
+    pageTitle: "Exclusive Combo Packs",
+    pageSubtitle:
+      "Save more when you bundle your everyday cleaning and sacred vessel care essentials.",
+    bannerNotice: "Free delivery across Kathmandu Valley on all combo orders above NPR 1,000.",
+  },
+  contact: {
+    factoryAddress: "Plot 14, Lalitpur Industrial Estate, Ward 4, Lalitpur, Bagmati, Nepal",
+    registeredOffice: "P Three Products, Patan, Lalitpur, Nepal",
+    phoneHotline: "+977 985-1037659",
+    dealershipPhone: "+977 1-5524890",
+    email: "info@rurupitambari.com",
+    businessHours: "Sunday to Friday: 9:00 AM - 6:00 PM (Saturday Closed)",
+  },
 };

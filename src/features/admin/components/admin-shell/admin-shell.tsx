@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { useState, type ReactNode } from "react";
 
 import logoSource from "@/assets/brand/logo-transparent.png";
-import { useAdmin } from "../../context/admin-store";
 import styles from "./admin-shell.module.css";
 
 type AdminShellProps = {
@@ -22,21 +21,11 @@ export function AdminShell({
 }: AdminShellProps) {
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { orders, dealers, inquiries, products } = useAdmin();
 
-  const pendingOrdersCount = orders.filter((o) => o.status === "Pending").length;
-  const pendingDealersCount = dealers.filter((d) => d.status === "Pending Review").length;
-  const newInquiriesCount = inquiries.filter((i) => i.status === "New").length;
-  const lowStockCount = products.reduce((acc, p) => {
-    const lowCount = p.variants.filter((v) => v.stock <= v.lowStockThreshold).length;
-    return acc + (lowCount > 0 ? 1 : 0);
-  }, 0);
-
-  const generalNav = [
+  const overviewNav = [
     {
       href: "/admin",
       label: "Dashboard",
-      count: undefined,
       icon: (
         <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
           <rect height="7" rx="1" width="7" x="3" y="3" />
@@ -49,7 +38,6 @@ export function AdminShell({
     {
       href: "/admin/orders",
       label: "Orders Management",
-      count: pendingOrdersCount > 0 ? pendingOrdersCount : undefined,
       icon: (
         <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
           <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
@@ -61,7 +49,6 @@ export function AdminShell({
     {
       href: "/admin/products",
       label: "Products & Stock",
-      count: lowStockCount > 0 ? lowStockCount : undefined,
       icon: (
         <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
           <path d="m7.5 4.27 9 5.15" />
@@ -72,19 +59,8 @@ export function AdminShell({
       ),
     },
     {
-      href: "/admin/messages",
-      label: "Enquiries & Messages",
-      count: newInquiriesCount > 0 ? newInquiriesCount : undefined,
-      icon: (
-        <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-        </svg>
-      ),
-    },
-    {
       href: "/admin/dealers",
       label: "Wholesale Dealers",
-      count: pendingDealersCount > 0 ? pendingDealersCount : undefined,
       icon: (
         <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
           <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
@@ -94,13 +70,34 @@ export function AdminShell({
         </svg>
       ),
     },
+    {
+      href: "/admin/messages",
+      label: "Enquiries & Messages",
+      icon: (
+        <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        </svg>
+      ),
+    },
+  ];
+
+  const contentNav = [
+    {
+      href: "/admin/content",
+      label: "Pages & Content Editor",
+      icon: (
+        <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+        </svg>
+      ),
+    },
   ];
 
   const configNav = [
     {
       href: "/admin/settings",
-      label: "Store Settings",
-      count: undefined,
+      label: "Store & Delivery Settings",
       icon: (
         <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
           <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
@@ -118,7 +115,7 @@ export function AdminShell({
         onClick={() => setSidebarOpen(false)}
       />
 
-      {/* Deep Navy/Slate Sidebar (Matching Reference UI) */}
+      {/* Clean & Professional Brand Sidebar */}
       <aside className={`${styles.sidebar} ${sidebarOpen ? styles.sidebarOpen : ""}`}>
         {/* Brand Header */}
         <div className={styles.brandHeader}>
@@ -157,10 +154,11 @@ export function AdminShell({
           </button>
         </div>
 
-        {/* Navigation Section */}
+        {/* Navigation Sections */}
         <nav aria-label="Admin navigation" className={styles.nav}>
-          <div className={styles.navSectionLabel}>General</div>
-          {generalNav.map((item) => {
+          {/* Section 1: Store Overview */}
+          <div className={styles.navSectionLabel}>Store Overview</div>
+          {overviewNav.map((item) => {
             const isActive =
               item.href === "/admin" ? pathname === "/admin" : pathname?.startsWith(item.href);
 
@@ -175,13 +173,35 @@ export function AdminShell({
                   <span className={styles.navIcon}>{item.icon}</span>
                   <span className={styles.navLabel}>{item.label}</span>
                 </div>
-                {item.count ? <span className={styles.navCount}>{item.count}</span> : null}
               </Link>
             );
           })}
 
-          <div className={styles.navSectionLabel} style={{ marginTop: "1rem" }}>
-            Store Config
+          {/* Section 2: Website & Page Content */}
+          <div className={styles.navSectionLabel} style={{ marginTop: "1.25rem" }}>
+            Website Content
+          </div>
+          {contentNav.map((item) => {
+            const isActive = pathname?.startsWith(item.href);
+
+            return (
+              <Link
+                className={`${styles.navItem} ${isActive ? styles.navItemActive : ""}`}
+                href={item.href}
+                key={item.href}
+                onClick={() => setSidebarOpen(false)}
+              >
+                <div className={styles.navItemContent}>
+                  <span className={styles.navIcon}>{item.icon}</span>
+                  <span className={styles.navLabel}>{item.label}</span>
+                </div>
+              </Link>
+            );
+          })}
+
+          {/* Section 3: Settings & Configuration */}
+          <div className={styles.navSectionLabel} style={{ marginTop: "1.25rem" }}>
+            Configuration
           </div>
           {configNav.map((item) => {
             const isActive = pathname?.startsWith(item.href);
@@ -202,7 +222,7 @@ export function AdminShell({
           })}
         </nav>
 
-        {/* Sidebar Footer with Sign out and Admin Identity */}
+        {/* Sidebar Footer */}
         <div className={styles.sidebarFooter}>
           <div className={styles.signedInLabel}>Signed in as Site Admin</div>
           <Link className={styles.signOutBtn} href="/">
