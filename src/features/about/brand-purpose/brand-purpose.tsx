@@ -55,16 +55,6 @@ export function BrandPurpose() {
             />
           </div>
         </div>
-
-        {/* Founder Commitment Quote Box */}
-        <div className={styles.promiseBox}>
-          <blockquote className={styles.quoteText}>
-            &ldquo;When you bring Ruru Pitambari into your home, you trust us with your
-            family&apos;s celebrations, morning prayers, and cherished heirlooms. That is a
-            responsibility we honour with every bottle we blend.&rdquo;
-          </blockquote>
-          <cite className={styles.quoteAuthor}>— The P Three Products Family, Lalitpur, Nepal</cite>
-        </div>
       </div>
     </section>
   );

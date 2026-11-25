@@ -71,40 +71,6 @@
   line-height: 1.75;
 }
 
-/* Founder Commitment Promise Box */
-.promiseBox {
-  margin-top: 1.5rem;
-  padding: clamp(2rem, 3.5vw, 3rem) clamp(1.5rem, 3vw, 2.5rem);
-  background-color: #fbf9f6;
-  border: 1px solid #ede8df;
-  border-left: 4px solid #8c1d24;
-  border-radius: 8px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-.quoteText {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
-  font-style: italic;
-  color: #2c2824;
-  line-height: 1.6;
-  max-width: 48rem;
-}
-
-.quoteAuthor {
-  font-style: normal;
-  font-size: 0.8125rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #8c1d24;
-}
-
 /* Responsive */
 @media (max-width: 54rem) {
   .row,
