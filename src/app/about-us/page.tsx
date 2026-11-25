@@ -15,15 +15,12 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main className={styles.page}>
-      {/* Top Banner */}
+      {/* Top Heritage Red Banner (Matching Product and Gallery Style) */}
       <section aria-labelledby="about-banner-heading" className={styles.banner}>
         <div className={styles.bannerInner}>
           <h1 className={styles.bannerTitle} id="about-banner-heading">
             Our Story
           </h1>
-          <p className={styles.bannerSubtitle}>
-            Fifteen years of caring for the vessels that hold our family traditions.
-          </p>
         </div>
       </section>
 
