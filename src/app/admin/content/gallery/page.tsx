@@ -10,44 +10,39 @@ import styles from "./gallery-admin.module.css";
 export default function AdminGalleryPageContent() {
   const { siteContent, updateSiteContent } = useAdmin();
   const [searchQuery, setSearchQuery] = useState("");
-  const [categoryFilter, setCategoryFilter] = useState("All");
 
   // Modals state
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
-  const [previewPhoto, setPreviewPhoto] = useState<GalleryPhoto | null>(null);
+  const [previewData, setPreviewData] = useState<{ photo: GalleryPhoto; index: number } | null>(
+    null,
+  );
 
-  // New photo form state
-  const [newTitle, setNewTitle] = useState("");
-  const [newCategory, setNewCategory] = useState<GalleryPhoto["category"]>("Events");
+  // New photo form state (simple image upload from device, numbered sequentially)
   const [newImage, setNewImage] = useState("");
-  const [newCaption, setNewCaption] = useState("");
 
   const photos = siteContent.gallery.photos;
 
   const filteredPhotos = useMemo(() => {
-    return photos.filter((p) => {
-      const matchesCategory = categoryFilter === "All" ? true : p.category === categoryFilter;
-      const q = searchQuery.toLowerCase().trim();
-      const matchesSearch =
-        !q ||
-        p.title.toLowerCase().includes(q) ||
-        (p.caption && p.caption.toLowerCase().includes(q)) ||
-        p.category.toLowerCase().includes(q);
+    return photos
+      .map((photo, index) => ({ photo, originalIndex: index }))
+      .filter(({ originalIndex }) => {
+        const q = searchQuery.toLowerCase().trim();
+        const numberLabel = `photo #${originalIndex + 1}`;
+        const shortNumber = `#${originalIndex + 1}`;
+        const matchesSearch =
+          !q || numberLabel.includes(q) || shortNumber === q || String(originalIndex + 1) === q;
 
-      return matchesCategory && matchesSearch;
-    });
-  }, [photos, categoryFilter, searchQuery]);
+        return matchesSearch;
+      });
+  }, [photos, searchQuery]);
 
   function handleUploadPhoto(e: React.FormEvent) {
     e.preventDefault();
-    if (!newTitle.trim() || !newImage) return;
+    if (!newImage) return;
 
     const newPhoto: GalleryPhoto = {
       id: `pho-${Date.now()}`,
-      title: newTitle.trim(),
       imageUrl: newImage,
-      category: newCategory,
-      caption: newCaption.trim() || undefined,
       uploadedAt: new Date().toISOString(),
     };
 
@@ -56,9 +51,7 @@ export default function AdminGalleryPageContent() {
       photos: [newPhoto, ...photos],
     });
 
-    setNewTitle("");
     setNewImage("");
-    setNewCaption("");
     setIsUploadModalOpen(false);
   }
 
@@ -69,7 +62,7 @@ export default function AdminGalleryPageContent() {
       ...siteContent.gallery,
       photos: updated,
     });
-    if (previewPhoto?.id === id) setPreviewPhoto(null);
+    if (previewData?.photo.id === id) setPreviewData(null);
   }
 
   function formatDate(iso: string) {
@@ -87,7 +80,7 @@ export default function AdminGalleryPageContent() {
 
   return (
     <AdminShell
-      subtitle="Upload and manage all brand, factory, and community photos shown on the website."
+      subtitle="Upload and manage website gallery photos. Indexed number-wise for admin reference."
       title="Gallery Photos"
     >
       <div className={styles.pageContainer}>
@@ -114,7 +107,7 @@ export default function AdminGalleryPageContent() {
             onClick={() => setIsUploadModalOpen(true)}
             type="button"
           >
-            + Upload new photo
+            + Add photo
           </button>
         </div>
 
@@ -124,63 +117,48 @@ export default function AdminGalleryPageContent() {
             <input
               className={styles.searchInput}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search photos by title, category, or caption..."
+              placeholder="Search photo by number (e.g. 1, #2)..."
               type="search"
               value={searchQuery}
             />
           </div>
 
-          <select
-            className={styles.categorySelect}
-            onChange={(e) => setCategoryFilter(e.target.value)}
-            value={categoryFilter}
-          >
-            <option value="All">All Categories</option>
-            <option value="Events">Events</option>
-            <option value="Factory & Workshop">Factory & Workshop</option>
-            <option value="Products & Demos">Products & Demos</option>
-            <option value="Festivals & Heritage">Festivals & Heritage</option>
-          </select>
+          <div className={styles.resultsCount}>
+            Showing 1-{filteredPhotos.length} of {filteredPhotos.length} photos
+          </div>
         </div>
 
-        {/* Results Count */}
-        <div className={styles.resultsCount}>
-          Showing 1-{filteredPhotos.length} of {filteredPhotos.length} photos
-        </div>
-
-        {/* Clean Photos List (Row-by-Row, Not Cards) */}
+        {/* Numbered Photo List (Row-by-Row) */}
         <div className={styles.photoListCard}>
           {filteredPhotos.length === 0 ? (
-            <div className={styles.emptyState}>No photos match the selected search or filter.</div>
+            <div className={styles.emptyState}>No photos found.</div>
           ) : (
-            filteredPhotos.map((photo) => (
+            filteredPhotos.map(({ photo, originalIndex }) => (
               <div className={styles.photoRow} key={photo.id}>
                 <div className={styles.photoLeft}>
+                  {/* Number identifier for admin view only */}
+                  <span className={styles.photoIndex}>#{originalIndex + 1}</span>
+
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    alt={photo.title}
+                    alt={`Photo #${originalIndex + 1}`}
                     className={styles.photoThumb}
-                    onClick={() => setPreviewPhoto(photo)}
+                    onClick={() => setPreviewData({ photo, index: originalIndex })}
                     src={photo.imageUrl}
                   />
 
                   <div className={styles.photoInfo}>
-                    <div className={styles.photoTitle}>{photo.title}</div>
-                    <div className={styles.photoSubRow}>
-                      <span className={styles.categoryBadge}>{photo.category}</span>
-                      <span className={styles.photoCaption}>
-                        {photo.caption || "No caption provided"}
-                      </span>
+                    <div className={styles.photoTitle}>Photo #{originalIndex + 1}</div>
+                    <div className={styles.photoUploadDate}>
+                      Uploaded on {formatDate(photo.uploadedAt)}
                     </div>
                   </div>
                 </div>
 
                 <div className={styles.photoRight}>
-                  <span className={styles.dateTimestamp}>{formatDate(photo.uploadedAt)}</span>
-
                   <button
                     className={styles.actionPreview}
-                    onClick={() => setPreviewPhoto(photo)}
+                    onClick={() => setPreviewData({ photo, index: originalIndex })}
                     type="button"
                   >
                     Preview
@@ -204,7 +182,7 @@ export default function AdminGalleryPageContent() {
           <div className={styles.modalBackdrop} onClick={() => setIsUploadModalOpen(false)}>
             <div className={styles.modalWindow} onClick={(e) => e.stopPropagation()}>
               <div className={styles.modalHeader}>
-                <h2 className={styles.modalTitle}>Upload Photo to Gallery</h2>
+                <h2 className={styles.modalTitle}>Upload Photo from Device</h2>
                 <button
                   aria-label="Close dialog"
                   className={styles.closeBtn}
@@ -219,56 +197,11 @@ export default function AdminGalleryPageContent() {
                 <div className={styles.modalBody}>
                   <MediaUploader
                     accept="image"
-                    helperText="Upload JPG, PNG, or WebP picture from your device"
-                    label="Choose Photo from Device"
+                    helperText="Upload JPG, PNG, or WebP picture from computer or phone"
+                    label="Select Picture from Device"
                     onChange={(img) => setNewImage(img)}
                     value={newImage}
                   />
-
-                  <div className={styles.field}>
-                    <label className={styles.label} htmlFor="photo-title-input">
-                      Photo Title
-                    </label>
-                    <input
-                      className={styles.searchInput}
-                      id="photo-title-input"
-                      onChange={(e) => setNewTitle(e.target.value)}
-                      placeholder="e.g. Annual Dealer Partnership Meet"
-                      required
-                      value={newTitle}
-                    />
-                  </div>
-
-                  <div className={styles.field}>
-                    <label className={styles.label} htmlFor="photo-cat-select">
-                      Category Tag
-                    </label>
-                    <select
-                      className={styles.searchInput}
-                      id="photo-cat-select"
-                      onChange={(e) => setNewCategory(e.target.value as GalleryPhoto["category"])}
-                      value={newCategory}
-                    >
-                      <option value="Events">Events</option>
-                      <option value="Factory & Workshop">Factory & Workshop</option>
-                      <option value="Products & Demos">Products & Demos</option>
-                      <option value="Festivals & Heritage">Festivals & Heritage</option>
-                    </select>
-                  </div>
-
-                  <div className={styles.field}>
-                    <label className={styles.label} htmlFor="photo-caption-input">
-                      Caption / Context (Optional)
-                    </label>
-                    <textarea
-                      className={styles.searchInput}
-                      id="photo-caption-input"
-                      onChange={(e) => setNewCaption(e.target.value)}
-                      placeholder="Add brief details about the event, location, or products shown..."
-                      rows={3}
-                      value={newCaption}
-                    />
-                  </div>
                 </div>
 
                 <div className={styles.modalFooter}>
@@ -279,12 +212,8 @@ export default function AdminGalleryPageContent() {
                   >
                     Cancel
                   </button>
-                  <button
-                    className={styles.primaryActionBtn}
-                    disabled={!newTitle.trim() || !newImage}
-                    type="submit"
-                  >
-                    Upload & Publish Photo
+                  <button className={styles.primaryActionBtn} disabled={!newImage} type="submit">
+                    Upload Photo
                   </button>
                 </div>
               </form>
@@ -293,27 +222,19 @@ export default function AdminGalleryPageContent() {
         ) : null}
 
         {/* MODAL: Large Preview */}
-        {previewPhoto ? (
-          <div className={styles.modalBackdrop} onClick={() => setPreviewPhoto(null)}>
+        {previewData ? (
+          <div className={styles.modalBackdrop} onClick={() => setPreviewData(null)}>
             <div
               className={styles.modalWindow}
               onClick={(e) => e.stopPropagation()}
               style={{ maxWidth: "640px" }}
             >
               <div className={styles.modalHeader}>
-                <div>
-                  <h2 className={styles.modalTitle}>{previewPhoto.title}</h2>
-                  <span
-                    className={styles.categoryBadge}
-                    style={{ marginTop: "0.25rem", display: "inline-block" }}
-                  >
-                    {previewPhoto.category}
-                  </span>
-                </div>
+                <h2 className={styles.modalTitle}>Photo #{previewData.index + 1}</h2>
                 <button
                   aria-label="Close dialog"
                   className={styles.closeBtn}
-                  onClick={() => setPreviewPhoto(null)}
+                  onClick={() => setPreviewData(null)}
                   type="button"
                 >
                   ✕
@@ -323,22 +244,19 @@ export default function AdminGalleryPageContent() {
               <div className={styles.modalBody}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  alt={previewPhoto.title}
+                  alt={`Photo #${previewData.index + 1}`}
                   className={styles.previewImageLarge}
-                  src={previewPhoto.imageUrl}
+                  src={previewData.photo.imageUrl}
                 />
-                <p style={{ margin: 0, fontSize: "0.875rem", color: "#3b3934" }}>
-                  {previewPhoto.caption || "No caption provided"}
-                </p>
-                <div style={{ fontSize: "0.75rem", color: "#706c63" }}>
-                  Uploaded on {formatDate(previewPhoto.uploadedAt)}
+                <div className={styles.photoUploadDate}>
+                  Uploaded on {formatDate(previewData.photo.uploadedAt)}
                 </div>
               </div>
 
               <div className={styles.modalFooter}>
                 <button
                   className={styles.actionDelete}
-                  onClick={() => handleDeletePhoto(previewPhoto.id)}
+                  onClick={() => handleDeletePhoto(previewData.photo.id)}
                   style={{ marginRight: "auto" }}
                   type="button"
                 >
@@ -346,7 +264,7 @@ export default function AdminGalleryPageContent() {
                 </button>
                 <button
                   className={styles.secondaryBtn}
-                  onClick={() => setPreviewPhoto(null)}
+                  onClick={() => setPreviewData(null)}
                   type="button"
                 >
                   Close

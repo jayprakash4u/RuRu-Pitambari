@@ -584,7 +584,6 @@ export const initialSiteContent: SiteContent = {
     photos: [
       {
         id: "pho-1",
-        title: "Annual Retailers Meet - Lalitpur",
         imageUrl: "/assets/gallery/dealer-meet-01.jpg",
         category: "Events",
         caption:
@@ -593,7 +592,6 @@ export const initialSiteContent: SiteContent = {
       },
       {
         id: "pho-2",
-        title: "Dealer Appreciation & Gift Presentation",
         imageUrl: "/assets/gallery/dealer-meet-02.jpg",
         category: "Events",
         caption: "Presenting commemorative wall clock to trusted partner in Lalitpur.",
@@ -601,7 +599,6 @@ export const initialSiteContent: SiteContent = {
       },
       {
         id: "pho-3",
-        title: "Factory Batch Blending & Quality Consistency",
         imageUrl: "/assets/gallery/production-01.jpg",
         category: "Factory & Workshop",
         caption:
@@ -610,7 +607,6 @@ export const initialSiteContent: SiteContent = {
       },
       {
         id: "pho-4",
-        title: "Traditional Brass Kalash & Gagri Polishing",
         imageUrl: "/assets/gallery/metal-care-demo.jpg",
         category: "Products & Demos",
         caption:
@@ -619,7 +615,6 @@ export const initialSiteContent: SiteContent = {
       },
       {
         id: "pho-5",
-        title: "Dashain & Tihar Puja Thali Care",
         imageUrl: "/assets/gallery/metal-care-demo.jpg",
         category: "Festivals & Heritage",
         caption:
@@ -628,7 +623,6 @@ export const initialSiteContent: SiteContent = {
       },
       {
         id: "pho-6",
-        title: "Packaging & Nationwide Logistics Dispatch",
         imageUrl: "/assets/gallery/dealer-meet-02.jpg",
         category: "Factory & Workshop",
         caption:

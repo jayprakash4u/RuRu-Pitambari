@@ -144,9 +144,8 @@ export type OurStoryContent = {
 
 export type GalleryPhoto = {
   id: string;
-  title: string;
   imageUrl: string;
-  category: "Events" | "Factory & Workshop" | "Products & Demos" | "Festivals & Heritage";
+  category?: string;
   caption?: string;
   uploadedAt: string;
 };
