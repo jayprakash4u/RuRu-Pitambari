@@ -1,220 +1,311 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
-import { AdminBadge, AdminShell, useAdmin, type InquiryStatus } from "@/features/admin";
+import { AdminShell, useAdmin, type InquiryStatus } from "@/features/admin";
 
-import styles from "../admin-table.module.css";
+import styles from "./messages.module.css";
 
 export default function AdminMessagesPage() {
   const { inquiries, updateInquiryStatus } = useAdmin();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [typeFilter, setTypeFilter] = useState("All");
   const [statusFilter, setStatusFilter] = useState<"All" | InquiryStatus>("All");
   const [selectedInquiryId, setSelectedInquiryId] = useState<string | null>(null);
   const [responseNote, setResponseNote] = useState("");
 
-  const filterTabs: Array<"All" | InquiryStatus> = ["All", "New", "In Progress", "Resolved"];
+  // Metrics
+  const totalSubmissions = inquiries.length;
+  const newCount = inquiries.filter((i) => i.status === "New").length;
+  const wholesaleCount = inquiries.filter(
+    (i) =>
+      i.subject.toLowerCase().includes("wholesale") || i.subject.toLowerCase().includes("dealer"),
+  ).length;
+  const productOrSupportCount = inquiries.filter(
+    (i) =>
+      !i.subject.toLowerCase().includes("wholesale") && !i.subject.toLowerCase().includes("dealer"),
+  ).length;
 
-  const filtered = inquiries.filter((inq) =>
-    statusFilter === "All" ? true : inq.status === statusFilter,
-  );
+  // Filtered submissions
+  const filtered = useMemo(() => {
+    return inquiries.filter((inq) => {
+      const matchesStatus = statusFilter === "All" ? true : inq.status === statusFilter;
+      const matchesType = typeFilter === "All" ? true : inq.subject === typeFilter;
+      const q = searchQuery.toLowerCase().trim();
+      const matchesSearch =
+        !q ||
+        inq.name.toLowerCase().includes(q) ||
+        inq.email.toLowerCase().includes(q) ||
+        inq.phone.includes(q) ||
+        inq.subject.toLowerCase().includes(q) ||
+        inq.message.toLowerCase().includes(q);
 
-  function getBadgeVariant(st: InquiryStatus) {
-    switch (st) {
-      case "New":
-        return "pending";
-      case "In Progress":
-        return "processing";
-      case "Resolved":
-        return "delivered";
-      default:
-        return "neutral";
+      return matchesStatus && matchesType && matchesSearch;
+    });
+  }, [inquiries, searchQuery, typeFilter, statusFilter]);
+
+  const selectedInquiry = inquiries.find((i) => i.id === selectedInquiryId);
+
+  function getBadgeClass(status: InquiryStatus) {
+    if (status === "New") return `${styles.statusBadge} ${styles.badgeNew}`;
+    if (status === "In Progress") return `${styles.statusBadge} ${styles.badgeInProgress}`;
+    return `${styles.statusBadge} ${styles.badgeResolved}`;
+  }
+
+  function formatDate(iso: string) {
+    try {
+      const d = new Date(iso);
+      return d.toLocaleDateString("en-GB", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    } catch {
+      return iso;
     }
   }
 
-  function handleSaveNote(id: string) {
-    updateInquiryStatus(id, "Resolved", responseNote);
+  function handleSaveResolution(status: InquiryStatus) {
+    if (!selectedInquiryId) return;
+    updateInquiryStatus(selectedInquiryId, status, responseNote);
     setSelectedInquiryId(null);
     setResponseNote("");
   }
 
   return (
     <AdminShell
-      subtitle="Customer support requests, wholesale enquiries, and general questions from the contact page."
-      title="Customer Inquiries"
+      subtitle="Review customer enquiries and Contact Us messages. Times shown in Nepal time."
+      title="Enquiries & Messages"
     >
       <div className={styles.pageContainer}>
-        {/* Filter Bar */}
-        <div className={styles.filterBar}>
-          <div className={styles.tabsGroup}>
-            {filterTabs.map((tab) => {
-              const count =
-                tab === "All" ? inquiries.length : inquiries.filter((i) => i.status === tab).length;
-              return (
-                <button
-                  className={`${styles.tabBtn} ${statusFilter === tab ? styles.tabBtnActive : ""}`}
-                  key={tab}
-                  onClick={() => setStatusFilter(tab)}
-                  type="button"
-                >
-                  {tab} ({count})
-                </button>
-              );
-            })}
+        {/* 4 Stat Cards Row */}
+        <div className={styles.statsGrid}>
+          <div className={styles.statCard}>
+            <div className={styles.statValue}>{totalSubmissions}</div>
+            <div className={styles.statLabel}>Total submissions</div>
+          </div>
+          <div className={styles.statCard}>
+            <div className={styles.statValue}>{newCount}</div>
+            <div className={styles.statLabel}>New</div>
+          </div>
+          <div className={styles.statCard}>
+            <div className={styles.statValue}>{wholesaleCount}</div>
+            <div className={styles.statLabel}>Wholesale enquiries</div>
+          </div>
+          <div className={styles.statCard}>
+            <div className={styles.statValue}>{productOrSupportCount}</div>
+            <div className={styles.statLabel}>Contact messages</div>
           </div>
         </div>
 
-        {/* Inquiries Table */}
-        <div className={styles.tablePanel}>
-          <div className={styles.tableWrapper}>
-            {filtered.length === 0 ? (
-              <div className={styles.emptyState}>No inquiries found in this view.</div>
-            ) : (
-              <table className={styles.table}>
-                <thead>
-                  <tr>
-                    <th className={styles.th}>Date & Sender</th>
-                    <th className={styles.th}>Contact</th>
-                    <th className={styles.th}>Subject</th>
-                    <th className={styles.th}>Message</th>
-                    <th className={styles.th}>Status</th>
-                    <th className={styles.th}>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filtered.map((inq) => (
-                    <tr className={styles.tr} key={inq.id}>
-                      <td className={styles.td}>
-                        <strong>{inq.name}</strong>
-                        <div style={{ fontSize: "0.6875rem", color: "var(--neutral-500)" }}>
-                          {new Date(inq.createdAt).toLocaleDateString()}
-                        </div>
-                      </td>
-                      <td className={styles.td}>
-                        <div>{inq.phone}</div>
-                        <span style={{ fontSize: "0.6875rem", color: "var(--neutral-500)" }}>
-                          {inq.email}
-                        </span>
-                      </td>
-                      <td className={styles.td}>
-                        <AdminBadge size="sm" variant="gold">
-                          {inq.subject}
-                        </AdminBadge>
-                      </td>
-                      <td className={styles.td} style={{ maxWidth: "340px" }}>
-                        <p
-                          style={{ margin: 0, fontSize: "0.8125rem", color: "var(--neutral-800)" }}
-                        >
-                          {inq.message}
-                        </p>
-                        {inq.responseNote ? (
-                          <div
-                            style={{
-                              marginTop: "0.375rem",
-                              fontSize: "0.6875rem",
-                              color: "#2b614d",
-                              backgroundColor: "#f0f7f3",
-                              padding: "0.25rem 0.5rem",
-                              borderRadius: "var(--radius-xs)",
-                            }}
-                          >
-                            Staff note: {inq.responseNote}
-                          </div>
-                        ) : null}
-                      </td>
-                      <td className={styles.td}>
-                        <AdminBadge size="sm" variant={getBadgeVariant(inq.status)}>
-                          {inq.status}
-                        </AdminBadge>
-                      </td>
-                      <td className={styles.td}>
-                        {inq.status !== "Resolved" ? (
-                          <button
-                            className={styles.actionBtn}
-                            onClick={() => {
-                              setSelectedInquiryId(inq.id);
-                              setResponseNote(inq.responseNote ?? "");
-                            }}
-                            type="button"
-                          >
-                            Mark Resolved
-                          </button>
-                        ) : (
-                          <span style={{ fontSize: "0.75rem", color: "#2b614d" }}>✓ Resolved</span>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {selectedInquiryId ? (
-        <div
-          role="dialog"
-          style={{
-            position: "fixed",
-            inset: 0,
-            backgroundColor: "rgba(23, 22, 18, 0.55)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 50,
-            padding: "1rem",
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: "#ffffff",
-              padding: "1.5rem",
-              borderRadius: "var(--radius-sm)",
-              maxWidth: "460px",
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
-              gap: "1rem",
-            }}
-          >
-            <h3 style={{ margin: 0, fontSize: "1rem", fontWeight: 700 }}>
-              Resolve Customer Inquiry
-            </h3>
-            <p style={{ margin: 0, fontSize: "0.8125rem", color: "var(--neutral-600)" }}>
-              Add a staff note recording the action taken (e.g. called customer, sent invoice):
-            </p>
-            <textarea
-              onChange={(e) => setResponseNote(e.target.value)}
-              placeholder="e.g. Contacted customer and confirmed wholesale price quotation."
-              rows={3}
-              style={{
-                width: "100%",
-                padding: "0.5rem",
-                borderRadius: "var(--radius-xs)",
-                border: "1px solid var(--neutral-300)",
-                fontSize: "0.8125rem",
-              }}
-              value={responseNote}
+        {/* Search & Filter Row */}
+        <div className={styles.filterRow}>
+          <div className={styles.searchGroup}>
+            <label className={styles.filterLabel} htmlFor="msg-search">
+              Search
+            </label>
+            <input
+              className={styles.searchInput}
+              id="msg-search"
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Name, email, phone, reference or message"
+              type="search"
+              value={searchQuery}
             />
-            <div style={{ display: "flex", justifyContent: "flex-end", gap: "0.5rem" }}>
-              <button
-                className={styles.actionBtn}
-                onClick={() => setSelectedInquiryId(null)}
-                type="button"
+          </div>
+
+          <div className={styles.dropdownsGroup}>
+            <div className={styles.selectGroup}>
+              <label className={styles.filterLabel} htmlFor="msg-type-select">
+                Submission type
+              </label>
+              <select
+                className={styles.selectInput}
+                id="msg-type-select"
+                onChange={(e) => setTypeFilter(e.target.value)}
+                value={typeFilter}
               >
-                Cancel
-              </button>
-              <button
-                className={styles.primaryActionBtn}
-                onClick={() => handleSaveNote(selectedInquiryId)}
-                type="button"
+                <option value="All">All submissions</option>
+                <option value="Wholesale / Dealership">Wholesale / Dealership</option>
+                <option value="Product enquiry">Product enquiry</option>
+                <option value="Order assistance">Order assistance</option>
+              </select>
+            </div>
+
+            <div className={styles.selectGroup}>
+              <label className={styles.filterLabel} htmlFor="msg-status-select">
+                Status
+              </label>
+              <select
+                className={styles.selectInput}
+                id="msg-status-select"
+                onChange={(e) => setStatusFilter(e.target.value as "All" | InquiryStatus)}
+                value={statusFilter}
               >
-                Save & Mark Resolved
-              </button>
+                <option value="All">All statuses</option>
+                <option value="New">New</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Resolved">Resolved</option>
+              </select>
             </div>
           </div>
         </div>
-      ) : null}
+
+        {/* Counter Display */}
+        <div className={styles.resultsCount}>
+          Showing 1-{filtered.length} of {filtered.length} submissions
+        </div>
+
+        {/* List of Submission Cards */}
+        {filtered.length === 0 ? (
+          <div className={styles.emptyState}>No submissions match the selected filters.</div>
+        ) : (
+          <div className={styles.cardsList}>
+            {filtered.map((item) => (
+              <div className={styles.submissionCard} key={item.id}>
+                <div className={styles.cardLeft}>
+                  <div className={styles.senderName}>{item.name}</div>
+                  <div className={styles.submissionSubtext}>
+                    {item.subject} · {item.phone || item.email}
+                  </div>
+                </div>
+
+                <div className={styles.cardRight}>
+                  <span className={getBadgeClass(item.status)}>{item.status}</span>
+
+                  <span className={styles.dateTimestamp}>{formatDate(item.createdAt)}</span>
+
+                  <button
+                    className={styles.viewDetailsBtn}
+                    onClick={() => {
+                      setSelectedInquiryId(item.id);
+                      setResponseNote(item.responseNote ?? "");
+                    }}
+                    type="button"
+                  >
+                    View details →
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* View Details Modal */}
+        {selectedInquiry ? (
+          <div className={styles.modalOverlay} onClick={() => setSelectedInquiryId(null)}>
+            <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+              <div className={styles.modalHeader}>
+                <h2 className={styles.modalTitle}>Submission Details</h2>
+                <button
+                  aria-label="Close dialog"
+                  className={styles.closeModalBtn}
+                  onClick={() => setSelectedInquiryId(null)}
+                  type="button"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div className={styles.modalBody}>
+                <div className={styles.detailRow}>
+                  <div className={styles.detailItem}>
+                    <span className={styles.detailLabel}>Sender Name</span>
+                    <span className={styles.detailValue}>{selectedInquiry.name}</span>
+                  </div>
+                  <div className={styles.detailItem}>
+                    <span className={styles.detailLabel}>Date & Time</span>
+                    <span className={styles.detailValue}>
+                      {formatDate(selectedInquiry.createdAt)}
+                    </span>
+                  </div>
+                </div>
+
+                <div className={styles.detailRow}>
+                  <div className={styles.detailItem}>
+                    <span className={styles.detailLabel}>Phone Number</span>
+                    <span className={styles.detailValue}>
+                      <a
+                        href={`tel:${selectedInquiry.phone}`}
+                        style={{ color: "#8c1d24", textDecoration: "none" }}
+                      >
+                        {selectedInquiry.phone}
+                      </a>
+                    </span>
+                  </div>
+                  <div className={styles.detailItem}>
+                    <span className={styles.detailLabel}>Email Address</span>
+                    <span className={styles.detailValue}>
+                      <a
+                        href={`mailto:${selectedInquiry.email}`}
+                        style={{ color: "#8c1d24", textDecoration: "none" }}
+                      >
+                        {selectedInquiry.email}
+                      </a>
+                    </span>
+                  </div>
+                </div>
+
+                <div className={styles.detailItem}>
+                  <span className={styles.detailLabel}>Subject / Category</span>
+                  <span className={styles.detailValue} style={{ fontWeight: 600 }}>
+                    {selectedInquiry.subject}
+                  </span>
+                </div>
+
+                <div className={styles.detailItem}>
+                  <span className={styles.detailLabel}>Message Content</span>
+                  <div className={styles.messageBox}>{selectedInquiry.message}</div>
+                </div>
+
+                <div className={styles.responseArea}>
+                  <label className={styles.detailLabel} htmlFor="response-note">
+                    Staff Follow-up Note
+                  </label>
+                  <textarea
+                    className={styles.responseInput}
+                    id="response-note"
+                    onChange={(e) => setResponseNote(e.target.value)}
+                    placeholder="Enter any follow-up actions, call notes, or resolution remarks..."
+                    value={responseNote}
+                  />
+                </div>
+              </div>
+
+              <div className={styles.modalFooter}>
+                <button
+                  className={styles.secondaryBtn}
+                  onClick={() => setSelectedInquiryId(null)}
+                  type="button"
+                >
+                  Close
+                </button>
+                {selectedInquiry.status !== "In Progress" &&
+                selectedInquiry.status !== "Resolved" ? (
+                  <button
+                    className={styles.secondaryBtn}
+                    onClick={() => handleSaveResolution("In Progress")}
+                    type="button"
+                  >
+                    Mark In Progress
+                  </button>
+                ) : null}
+                {selectedInquiry.status !== "Resolved" ? (
+                  <button
+                    className={styles.primaryBtn}
+                    onClick={() => handleSaveResolution("Resolved")}
+                    type="button"
+                  >
+                    Mark as Resolved
+                  </button>
+                ) : null}
+              </div>
+            </div>
+          </div>
+        ) : null}
+      </div>
     </AdminShell>
   );
 }

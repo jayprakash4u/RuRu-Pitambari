@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { useState, type ReactNode } from "react";
 
 import logoSource from "@/assets/brand/logo-transparent.png";
-
 import { useAdmin } from "../../context/admin-store";
 import styles from "./admin-shell.module.css";
 
@@ -19,7 +18,7 @@ type AdminShellProps = {
 export function AdminShell({
   children,
   title = "Overview",
-  subtitle = "Ruru Pitambari Operations & Store Management",
+  subtitle = "Review store orders, inventory, and dealer messages. Times shown in Nepal time.",
 }: AdminShellProps) {
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -33,12 +32,11 @@ export function AdminShell({
     return acc + (lowCount > 0 ? 1 : 0);
   }, 0);
 
-  const navItems = [
+  const generalNav = [
     {
       href: "/admin",
-      label: "Overview",
+      label: "Dashboard",
       count: undefined,
-      isAlert: false,
       icon: (
         <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
           <rect height="7" rx="1" width="7" x="3" y="3" />
@@ -50,9 +48,8 @@ export function AdminShell({
     },
     {
       href: "/admin/orders",
-      label: "Orders",
+      label: "Orders Management",
       count: pendingOrdersCount > 0 ? pendingOrdersCount : undefined,
-      isAlert: pendingOrdersCount > 0,
       icon: (
         <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
           <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
@@ -64,8 +61,7 @@ export function AdminShell({
     {
       href: "/admin/products",
       label: "Products & Stock",
-      count: lowStockCount > 0 ? `${lowStockCount} low` : undefined,
-      isAlert: lowStockCount > 0,
+      count: lowStockCount > 0 ? lowStockCount : undefined,
       icon: (
         <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
           <path d="m7.5 4.27 9 5.15" />
@@ -76,10 +72,19 @@ export function AdminShell({
       ),
     },
     {
+      href: "/admin/messages",
+      label: "Enquiries & Messages",
+      count: newInquiriesCount > 0 ? newInquiriesCount : undefined,
+      icon: (
+        <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        </svg>
+      ),
+    },
+    {
       href: "/admin/dealers",
       label: "Wholesale Dealers",
       count: pendingDealersCount > 0 ? pendingDealersCount : undefined,
-      isAlert: pendingDealersCount > 0,
       icon: (
         <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
           <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
@@ -89,22 +94,13 @@ export function AdminShell({
         </svg>
       ),
     },
-    {
-      href: "/admin/messages",
-      label: "Customer Inquiries",
-      count: newInquiriesCount > 0 ? newInquiriesCount : undefined,
-      isAlert: newInquiriesCount > 0,
-      icon: (
-        <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-        </svg>
-      ),
-    },
+  ];
+
+  const configNav = [
     {
       href: "/admin/settings",
-      label: "Settings",
+      label: "Store Settings",
       count: undefined,
-      isAlert: false,
       icon: (
         <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
           <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
@@ -122,23 +118,24 @@ export function AdminShell({
         onClick={() => setSidebarOpen(false)}
       />
 
-      {/* Sidebar */}
+      {/* Deep Navy/Slate Sidebar (Matching Reference UI) */}
       <aside className={`${styles.sidebar} ${sidebarOpen ? styles.sidebarOpen : ""}`}>
+        {/* Brand Header */}
         <div className={styles.brandHeader}>
           <Link className={styles.brandTitleGroup} href="/admin">
             <div className={styles.logoWrap}>
               <Image
-                alt="Ruru Pitambari"
+                alt="Ruru Pitambari Logo"
                 className={styles.brandLogo}
-                height={36}
+                height={32}
                 priority
                 src={logoSource}
-                width={36}
+                width={32}
               />
             </div>
-            <div>
+            <div className={styles.brandInfo}>
               <div className={styles.brandName}>Ruru Pitambari</div>
-              <div className={styles.brandBadge}>Admin Portal</div>
+              <div className={styles.brandConsoleLabel}>Admin Console</div>
             </div>
           </Link>
           <button
@@ -160,9 +157,10 @@ export function AdminShell({
           </button>
         </div>
 
+        {/* Navigation Section */}
         <nav aria-label="Admin navigation" className={styles.nav}>
-          <div className={styles.navSectionLabel}>Core Management</div>
-          {navItems.map((item) => {
+          <div className={styles.navSectionLabel}>General</div>
+          {generalNav.map((item) => {
             const isActive =
               item.href === "/admin" ? pathname === "/admin" : pathname?.startsWith(item.href);
 
@@ -175,49 +173,60 @@ export function AdminShell({
               >
                 <div className={styles.navItemContent}>
                   <span className={styles.navIcon}>{item.icon}</span>
-                  <span>{item.label}</span>
+                  <span className={styles.navLabel}>{item.label}</span>
                 </div>
-                {item.count ? (
-                  <span
-                    className={`${styles.navCount} ${item.isAlert ? styles.navCountAlert : ""}`}
-                  >
-                    {item.count}
-                  </span>
-                ) : null}
+                {item.count ? <span className={styles.navCount}>{item.count}</span> : null}
+              </Link>
+            );
+          })}
+
+          <div className={styles.navSectionLabel} style={{ marginTop: "1rem" }}>
+            Store Config
+          </div>
+          {configNav.map((item) => {
+            const isActive = pathname?.startsWith(item.href);
+
+            return (
+              <Link
+                className={`${styles.navItem} ${isActive ? styles.navItemActive : ""}`}
+                href={item.href}
+                key={item.href}
+                onClick={() => setSidebarOpen(false)}
+              >
+                <div className={styles.navItemContent}>
+                  <span className={styles.navIcon}>{item.icon}</span>
+                  <span className={styles.navLabel}>{item.label}</span>
+                </div>
               </Link>
             );
           })}
         </nav>
 
+        {/* Sidebar Footer with Sign out and Admin Identity */}
         <div className={styles.sidebarFooter}>
-          <Link className={styles.storeLink} href="/" target="_blank">
+          <div className={styles.signedInLabel}>Signed in as Site Admin</div>
+          <Link className={styles.signOutBtn} href="/">
             <svg
               fill="none"
-              height="16"
+              height="15"
               stroke="currentColor"
               strokeWidth="2"
               viewBox="0 0 24 24"
-              width="16"
+              width="15"
             >
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-              <polyline points="15 3 21 3 21 9" />
-              <line x1="10" x2="21" y1="14" y2="3" />
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" x2="9" y1="12" y2="12" />
             </svg>
-            <span>View Customer Store</span>
+            <span>Exit to Store</span>
           </Link>
-
-          <div className={styles.adminProfile}>
-            <div className={styles.avatar}>OP</div>
-            <div className={styles.profileDetails}>
-              <span className={styles.profileName}>Operations Admin</span>
-              <span className={styles.profileRole}>Lalitpur HQ · Nepal</span>
-            </div>
-          </div>
+          <div className={styles.copyrightText}>Ruru Pitambari · Website Administration</div>
         </div>
       </aside>
 
-      {/* Main Area */}
+      {/* Main Content Area */}
       <div className={styles.mainWrapper}>
+        {/* Crisp White Top Bar */}
         <header className={styles.topBar}>
           <div className={styles.topBarLeft}>
             <button
@@ -239,21 +248,69 @@ export function AdminShell({
                 <line x1="3" x2="21" y1="18" y2="18" />
               </svg>
             </button>
-            <div className={styles.pageHeader}>
-              <h1 className={styles.pageTitle}>{title}</h1>
-              <p className={styles.pageSubtitle}>{subtitle}</p>
+            <div className={styles.workspaceHeader}>
+              <span className={styles.workspaceTag}>STORE WORKSPACE</span>
+              <div className={styles.workspaceTitle}>Website Administration</div>
             </div>
           </div>
 
           <div className={styles.topBarRight}>
-            <div className={styles.systemBadge}>
-              <span className={styles.systemIndicator} />
-              <span>Catalog Live</span>
+            <Link className={styles.viewSiteBtn} href="/" target="_blank">
+              <svg
+                fill="none"
+                height="15"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                width="15"
+              >
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" x2="21" y1="14" y2="3" />
+              </svg>
+              <span>View site</span>
+            </Link>
+
+            <div className={styles.userProfilePill}>
+              <div className={styles.userAvatar}>S</div>
+              <div className={styles.userInfo}>
+                <span className={styles.userName}>Site Admin</span>
+                <span className={styles.userRole}>Administrator</span>
+              </div>
             </div>
           </div>
         </header>
 
-        <main className={styles.contentCanvas}>{children}</main>
+        {/* Page Content Canvas */}
+        <main className={styles.contentCanvas}>
+          {/* Page Title & Refresh Area */}
+          <div className={styles.pageHeader}>
+            <div>
+              <h1 className={styles.pageTitle}>{title}</h1>
+              <p className={styles.pageSubtitle}>{subtitle}</p>
+            </div>
+            <button
+              className={styles.refreshBtn}
+              onClick={() => window.location.reload()}
+              type="button"
+            >
+              <svg
+                fill="none"
+                height="14"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                width="14"
+              >
+                <path d="M23 4v6h-6" />
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+              </svg>
+              <span>Refresh</span>
+            </button>
+          </div>
+
+          {children}
+        </main>
       </div>
     </div>
   );
