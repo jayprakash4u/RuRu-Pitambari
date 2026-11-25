@@ -4,7 +4,7 @@ import { AuthenticationError, apiFailure } from "@/lib/api";
 import { SESSION_COOKIE } from "@/lib/auth/constants";
 
 const API_PROTECTED_PREFIX = "/api/v1/private";
-const PAGE_PROTECTED_PREFIXES = ["/account", "/admin", "/checkout", "/orders"];
+const PAGE_PROTECTED_PREFIXES = ["/account", "/checkout", "/orders"];
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -28,11 +28,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/account/:path*",
-    "/admin/:path*",
-    "/checkout/:path*",
-    "/orders/:path*",
-    "/api/v1/private/:path*",
-  ],
+  matcher: ["/account/:path*", "/checkout/:path*", "/orders/:path*", "/api/v1/private/:path*"],
 };

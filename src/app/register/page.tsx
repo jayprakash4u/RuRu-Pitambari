@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 import { AccountForm } from "@/features/account";
 
@@ -17,7 +18,9 @@ export default function RegisterPage() {
           <p>Join Ruru Pitambari</p>
           <h1 id="register-heading">Create account</h1>
         </header>
-        <AccountForm mode="register" />
+        <Suspense fallback={null}>
+          <AccountForm mode="register" />
+        </Suspense>
       </section>
     </div>
   );

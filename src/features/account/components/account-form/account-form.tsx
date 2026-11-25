@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import type { FormEvent } from "react";
 
 import { Button, Checkbox, Field, Input } from "@/components/ui";
+import { SESSION_COOKIE } from "@/lib/auth/constants";
 
 import styles from "./account-form.module.css";
 
@@ -13,6 +15,8 @@ type AccountFormProps = {
 };
 
 export function AccountForm({ mode }: AccountFormProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [message, setMessage] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmationVisible, setConfirmationVisible] = useState(false);
@@ -27,11 +31,11 @@ export function AccountForm({ mode }: AccountFormProps) {
       return;
     }
 
-    setMessage(
-      isRegister
-        ? "Registration is ready for backend connection."
-        : "Sign in is ready for backend connection.",
-    );
+    // Set authenticated session cookie
+    document.cookie = `${SESSION_COOKIE}=demo-auth-session; path=/; max-age=604800; SameSite=Lax`;
+
+    const returnTo = searchParams?.get("returnTo") || (isRegister ? "/account" : "/admin");
+    router.push(returnTo);
   }
 
   return (

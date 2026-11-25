@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 import { AccountForm } from "@/features/account";
 
@@ -17,7 +18,9 @@ export default function SignInPage() {
           <p>Welcome back</p>
           <h1 id="sign-in-heading">Sign in</h1>
         </header>
-        <AccountForm mode="sign-in" />
+        <Suspense fallback={null}>
+          <AccountForm mode="sign-in" />
+        </Suspense>
       </section>
     </div>
   );
