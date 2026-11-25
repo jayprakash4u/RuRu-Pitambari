@@ -7,3 +7,4 @@ export * from "./components/admin-stats";
 export * from "./components/order-modal";
 export * from "./components/product-modal";
 export * from "./components/dealer-modal";
+export * from "./components/media-uploader";

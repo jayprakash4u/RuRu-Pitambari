@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { AdminShell, useAdmin } from "@/features/admin";
+import { AdminShell, MediaUploader, useAdmin } from "@/features/admin";
 
 import styles from "../content-page.module.css";
 
@@ -26,13 +26,13 @@ export default function AdminStoryPageContent() {
 
   return (
     <AdminShell
-      subtitle="Edit documentary story paragraphs, founder partner photo, mission & vision statements, and family commitment quote."
+      subtitle="Upload documentary partner pictures, mission/vision imagery, and edit brand narrative text."
       title="Our Story / About Us"
     >
       <div className={styles.pageContainer}>
         {savedToast ? (
           <div className={styles.toast}>
-            <span>✓ Our Story content and milestones updated successfully!</span>
+            <span>✓ Our Story content and pictures updated successfully!</span>
             <button
               aria-label="Close notification"
               onClick={() => setSavedToast(false)}
@@ -51,7 +51,7 @@ export default function AdminStoryPageContent() {
               <div>
                 <h2 className={styles.cardTitle}>Main Narrative & Documentary Partner Photo</h2>
                 <p className={styles.cardSubtitle}>
-                  Documentary story of P Three Products and Ruru Pitambari from Lalitpur since 2009.
+                  Upload genuine meeting photos with shopkeepers and edit the brand founding story.
                 </p>
               </div>
               <span className={styles.sectionBadge}>Top Narrative</span>
@@ -95,23 +95,20 @@ export default function AdminStoryPageContent() {
             </div>
 
             <div className={styles.gridTwo}>
-              <div className={styles.field}>
-                <label className={styles.label} htmlFor="story-photo">
-                  Documentary Photo URL
-                </label>
-                <input
-                  className={styles.input}
-                  id="story-photo"
-                  onChange={(e) => setStoryDraft({ ...storyDraft, storyPhotoUrl: e.target.value })}
-                  value={storyDraft.storyPhotoUrl}
-                />
-              </div>
+              <MediaUploader
+                accept="image"
+                helperText="Upload shopkeeper visit photo from device"
+                label="Documentary Partner Photo (Upload from Device)"
+                onChange={(newPhoto) => setStoryDraft({ ...storyDraft, storyPhotoUrl: newPhoto })}
+                value={storyDraft.storyPhotoUrl}
+              />
+
               <div className={styles.field}>
                 <label className={styles.label} htmlFor="story-caption">
                   Photo Caption
                 </label>
-                <input
-                  className={styles.input}
+                <textarea
+                  className={styles.textarea}
                   id="story-caption"
                   onChange={(e) =>
                     setStoryDraft({ ...storyDraft, storyPhotoCaption: e.target.value })
@@ -164,7 +161,7 @@ export default function AdminStoryPageContent() {
               <div>
                 <h2 className={styles.cardTitle}>Mission & Vision Statements</h2>
                 <p className={styles.cardSubtitle}>
-                  Brand mission and vision for Nepali homes and traditional crafts.
+                  Upload mission and vision illustrations directly from your phone or computer.
                 </p>
               </div>
               <span className={styles.sectionBadge}>Brand Purpose</span>
@@ -181,37 +178,31 @@ export default function AdminStoryPageContent() {
                   onChange={(e) => setStoryDraft({ ...storyDraft, missionHeading: e.target.value })}
                   value={storyDraft.missionHeading}
                 />
+                <div style={{ marginTop: "0.75rem" }}>
+                  <label className={styles.label} htmlFor="mission-desc">
+                    Mission Description
+                  </label>
+                  <textarea
+                    className={styles.textarea}
+                    id="mission-desc"
+                    onChange={(e) =>
+                      setStoryDraft({ ...storyDraft, missionDescription: e.target.value })
+                    }
+                    value={storyDraft.missionDescription}
+                  />
+                </div>
               </div>
-              <div className={styles.field}>
-                <label className={styles.label} htmlFor="mission-img">
-                  Mission Image URL
-                </label>
-                <input
-                  className={styles.input}
-                  id="mission-img"
-                  onChange={(e) =>
-                    setStoryDraft({ ...storyDraft, missionImageUrl: e.target.value })
-                  }
-                  value={storyDraft.missionImageUrl}
-                />
-              </div>
-            </div>
 
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="mission-desc">
-                Mission Description
-              </label>
-              <textarea
-                className={styles.textarea}
-                id="mission-desc"
-                onChange={(e) =>
-                  setStoryDraft({ ...storyDraft, missionDescription: e.target.value })
-                }
-                value={storyDraft.missionDescription}
+              <MediaUploader
+                accept="image"
+                helperText="Upload mission illustration picture"
+                label="Mission Image (Upload from Device)"
+                onChange={(newImg) => setStoryDraft({ ...storyDraft, missionImageUrl: newImg })}
+                value={storyDraft.missionImageUrl}
               />
             </div>
 
-            <div className={styles.gridTwo}>
+            <div className={styles.gridTwo} style={{ marginTop: "1rem" }}>
               <div className={styles.field}>
                 <label className={styles.label} htmlFor="vision-heading">
                   Vision Heading
@@ -222,31 +213,27 @@ export default function AdminStoryPageContent() {
                   onChange={(e) => setStoryDraft({ ...storyDraft, visionHeading: e.target.value })}
                   value={storyDraft.visionHeading}
                 />
+                <div style={{ marginTop: "0.75rem" }}>
+                  <label className={styles.label} htmlFor="vision-desc">
+                    Vision Description
+                  </label>
+                  <textarea
+                    className={styles.textarea}
+                    id="vision-desc"
+                    onChange={(e) =>
+                      setStoryDraft({ ...storyDraft, visionDescription: e.target.value })
+                    }
+                    value={storyDraft.visionDescription}
+                  />
+                </div>
               </div>
-              <div className={styles.field}>
-                <label className={styles.label} htmlFor="vision-img">
-                  Vision Image URL
-                </label>
-                <input
-                  className={styles.input}
-                  id="vision-img"
-                  onChange={(e) => setStoryDraft({ ...storyDraft, visionImageUrl: e.target.value })}
-                  value={storyDraft.visionImageUrl}
-                />
-              </div>
-            </div>
 
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="vision-desc">
-                Vision Description
-              </label>
-              <textarea
-                className={styles.textarea}
-                id="vision-desc"
-                onChange={(e) =>
-                  setStoryDraft({ ...storyDraft, visionDescription: e.target.value })
-                }
-                value={storyDraft.visionDescription}
+              <MediaUploader
+                accept="image"
+                helperText="Upload vision illustration picture"
+                label="Vision Image (Upload from Device)"
+                onChange={(newImg) => setStoryDraft({ ...storyDraft, visionImageUrl: newImg })}
+                value={storyDraft.visionImageUrl}
               />
             </div>
           </div>

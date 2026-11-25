@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { AdminShell, useAdmin } from "@/features/admin";
+import { AdminShell, MediaUploader, useAdmin } from "@/features/admin";
 
 import styles from "../content-page.module.css";
 
@@ -26,7 +26,7 @@ export default function AdminHomePageContent() {
 
   return (
     <AdminShell
-      subtitle="Manage Hero video banner, Deals of the Day, Before/After transformation comparison, and dealer callout."
+      subtitle="Upload hero film, before/after comparison pictures, and edit promotional section copy."
       title="Home Page Sections"
     >
       <div className={styles.pageContainer}>
@@ -51,7 +51,7 @@ export default function AdminHomePageContent() {
               <div>
                 <h2 className={styles.cardTitle}>Hero Video & Film Banner</h2>
                 <p className={styles.cardSubtitle}>
-                  Top full-width documentary film, fallback poster image, and brand tagline.
+                  Upload full-width brand film and poster picture directly from your device.
                 </p>
               </div>
               <span className={styles.sectionBadge}>Top of Home</span>
@@ -70,28 +70,21 @@ export default function AdminHomePageContent() {
             </div>
 
             <div className={styles.gridTwo}>
-              <div className={styles.field}>
-                <label className={styles.label} htmlFor="hero-video">
-                  Desktop Video Source (MP4)
-                </label>
-                <input
-                  className={styles.input}
-                  id="hero-video"
-                  onChange={(e) => setHomeDraft({ ...homeDraft, heroVideoUrl: e.target.value })}
-                  value={homeDraft.heroVideoUrl}
-                />
-              </div>
-              <div className={styles.field}>
-                <label className={styles.label} htmlFor="hero-poster">
-                  Fallback Poster Image URL
-                </label>
-                <input
-                  className={styles.input}
-                  id="hero-poster"
-                  onChange={(e) => setHomeDraft({ ...homeDraft, heroPosterUrl: e.target.value })}
-                  value={homeDraft.heroPosterUrl}
-                />
-              </div>
+              <MediaUploader
+                accept="video"
+                helperText="MP4 or WebM video file from device"
+                label="Hero Video Film (Upload from Device)"
+                onChange={(newVideo) => setHomeDraft({ ...homeDraft, heroVideoUrl: newVideo })}
+                value={homeDraft.heroVideoUrl}
+              />
+
+              <MediaUploader
+                accept="image"
+                helperText="PNG, JPG, or WebP poster image"
+                label="Fallback Poster Image (Upload from Device)"
+                onChange={(newPoster) => setHomeDraft({ ...homeDraft, heroPosterUrl: newPoster })}
+                value={homeDraft.heroPosterUrl}
+              />
             </div>
           </div>
 
@@ -139,7 +132,7 @@ export default function AdminHomePageContent() {
               <div>
                 <h2 className={styles.cardTitle}>Instant Transformation (Before & After)</h2>
                 <p className={styles.cardSubtitle}>
-                  Showcase visual before/after restoration on traditional brass and copper vessels.
+                  Upload tarnished (before) and restored (after) pictures directly from your device.
                 </p>
               </div>
               <span className={styles.sectionBadge}>Section 3</span>
@@ -160,32 +153,25 @@ export default function AdminHomePageContent() {
             </div>
 
             <div className={styles.gridTwo}>
-              <div className={styles.field}>
-                <label className={styles.label} htmlFor="trans-before">
-                  Before Image URL (Tarnished Metal)
-                </label>
-                <input
-                  className={styles.input}
-                  id="trans-before"
-                  onChange={(e) =>
-                    setHomeDraft({ ...homeDraft, transformationBeforeImage: e.target.value })
-                  }
-                  value={homeDraft.transformationBeforeImage}
-                />
-              </div>
-              <div className={styles.field}>
-                <label className={styles.label} htmlFor="trans-after">
-                  After Image URL (Restored Shine)
-                </label>
-                <input
-                  className={styles.input}
-                  id="trans-after"
-                  onChange={(e) =>
-                    setHomeDraft({ ...homeDraft, transformationAfterImage: e.target.value })
-                  }
-                  value={homeDraft.transformationAfterImage}
-                />
-              </div>
+              <MediaUploader
+                accept="image"
+                helperText="Upload tarnished copper/brass photo"
+                label="Before Image (Upload from Device)"
+                onChange={(newBefore) =>
+                  setHomeDraft({ ...homeDraft, transformationBeforeImage: newBefore })
+                }
+                value={homeDraft.transformationBeforeImage}
+              />
+
+              <MediaUploader
+                accept="image"
+                helperText="Upload bright restored metal photo"
+                label="After Image (Upload from Device)"
+                onChange={(newAfter) =>
+                  setHomeDraft({ ...homeDraft, transformationAfterImage: newAfter })
+                }
+                value={homeDraft.transformationAfterImage}
+              />
             </div>
 
             <div className={styles.field}>

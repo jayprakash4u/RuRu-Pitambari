@@ -1,0 +1,200 @@
+/* ==========================================================================
+   Media Uploader - RuRu Pitambari Brand Upload from Device
+   ========================================================================== */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.labelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #3b3934;
+}
+
+.helperText {
+  font-size: 0.6875rem;
+  color: #706c63;
+}
+
+/* Drop Zone / Empty State */
+.dropZone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 1.5rem 1.25rem;
+  background-color: #fbf9f4;
+  border: 2px dashed #ede8df;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: center;
+}
+
+.dropZone:hover {
+  border-color: #8c1d24;
+  background-color: #fdf8f8;
+}
+
+.dropZoneDragOver {
+  border-color: #8c1d24;
+  background-color: #fdf2f2;
+}
+
+.uploadIcon {
+  width: 2.25rem;
+  height: 2.25rem;
+  color: #8c1d24;
+  opacity: 0.85;
+}
+
+.uploadPrompt {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #171612;
+}
+
+.uploadSub {
+  font-size: 0.6875rem;
+  color: #706c63;
+}
+
+.chooseBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #8c1d24;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(140, 29, 36, 0.2);
+  transition: background-color 0.15s ease;
+}
+
+.chooseBtn:hover {
+  background-color: #741419;
+}
+
+/* Preview Active State */
+.previewBox {
+  background-color: #ffffff;
+  border: 1px solid #ede8df;
+  border-radius: 8px;
+  padding: 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mediaFrame {
+  width: 100%;
+  max-height: 220px;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: #171612;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imagePreview {
+  width: 100%;
+  height: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  display: block;
+}
+
+.videoPreview {
+  width: 100%;
+  max-height: 220px;
+  outline: none;
+}
+
+.previewFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.fileMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: #706c63;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 65%;
+}
+
+.fileBadge {
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  background-color: #fdf2f2;
+  color: #8c1d24;
+  border: 1px solid #fecaca;
+}
+
+.actionsGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.replaceBtn {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #8c1d24;
+  background: transparent;
+  border: 1px solid #ede8df;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.replaceBtn:hover {
+  background-color: #fdf5f5;
+  border-color: #8c1d24;
+}
+
+.removeBtn {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #a33333;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.35rem 0.5rem;
+  border-radius: 4px;
+}
+
+.removeBtn:hover {
+  background-color: #fdf2f2;
+}
+
+.hiddenInput {
+  display: none;
+}
