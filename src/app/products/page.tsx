@@ -38,7 +38,11 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
       </section>
 
       <div className={styles.inner}>
-        <ProductCatalogue initialCategory={initialCategory} initialQuery={q} />
+        <ProductCatalogue
+          initialCategory={initialCategory}
+          initialQuery={q}
+          key={`${initialCategory}-${q}`}
+        />
       </div>
     </main>
   );

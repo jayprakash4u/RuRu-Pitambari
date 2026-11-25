@@ -41,7 +41,8 @@ export function ComboCatalogue() {
     <div className={styles.catalogueWrapper}>
       <div className={styles.toolbar}>
         <span className={styles.resultCount}>
-          Showing <strong>{visibleCombos.length}</strong> value packs
+          Showing <strong>{visibleCombos.length ? startIndex + 1 : 0}</strong>–
+          <strong>{endIndex}</strong> of <strong>{visibleCombos.length}</strong> value packs
         </span>
         <div className={styles.toolbarRight}>
           <div className={styles.sortWrap}>
@@ -60,7 +61,7 @@ export function ComboCatalogue() {
             >
               {comboPageSizes.map((size) => (
                 <option key={size} value={size}>
-                  {size} per page
+                  {size} entries
                 </option>
               ))}
             </select>

@@ -360,6 +360,7 @@
   padding-bottom: 1.25rem;
   margin-bottom: 1.5rem;
   border-bottom: 1px solid #ede8df;
+  flex-wrap: wrap;
 }
 
 .resultsCountWrap {
@@ -388,6 +389,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .mobileFilterToggle {

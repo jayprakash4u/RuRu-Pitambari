@@ -32,7 +32,7 @@ const categoryVisuals = [
   { id: "Household care" as const, label: "Household Care", image: householdCareThumb },
 ];
 
-const productPageSizes = [8, 16, 24] as const;
+const productPageSizes = [6, 12, 18, 24] as const;
 
 export function ProductCatalogue({
   initialCategory = "All",
@@ -243,6 +243,7 @@ export function ProductCatalogue({
                         onClick={() => {
                           setActiveCategory(category);
                           setMobileFiltersOpen(false);
+                          setPage(1);
                         }}
                         type="button"
                       >
@@ -278,6 +279,7 @@ export function ProductCatalogue({
                     onClick={() => {
                       setMinDiscount(opt.value);
                       setMobileFiltersOpen(false);
+                      setPage(1);
                     }}
                     type="button"
                   >
@@ -308,6 +310,7 @@ export function ProductCatalogue({
                     onClick={() => {
                       setPriceFilter(opt.value);
                       setMobileFiltersOpen(false);
+                      setPage(1);
                     }}
                     type="button"
                   >
@@ -337,6 +340,7 @@ export function ProductCatalogue({
                     onClick={() => {
                       setMinRating(opt.value);
                       setMobileFiltersOpen(false);
+                      setPage(1);
                     }}
                     type="button"
                   >
@@ -358,7 +362,8 @@ export function ProductCatalogue({
           <div className={styles.mainControlBar}>
             <div className={styles.resultsCountWrap}>
               <span className={styles.resultsCount}>
-                Showing <strong>{visibleProducts.length}</strong> products
+                Showing <strong>{visibleProducts.length ? startIndex + 1 : 0}</strong>–
+                <strong>{endIndex}</strong> of <strong>{visibleProducts.length}</strong> products
               </span>
               {hasActiveFilters ? (
                 <span className={styles.filteredNotice}>• Filters applied</span>
@@ -405,7 +410,7 @@ export function ProductCatalogue({
                 >
                   {productPageSizes.map((size) => (
                     <option key={size} value={size}>
-                      {size} per page
+                      {size} entries
                     </option>
                   ))}
                 </select>
