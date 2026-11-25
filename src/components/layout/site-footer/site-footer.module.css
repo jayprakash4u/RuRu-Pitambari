@@ -1,7 +1,7 @@
 /* Site Footer Styles */
 
 .footer {
-  border-top: 3px solid #8c1d24;
+  border-top: 1px solid #8c1d24;
   background-color: #fbf9f6;
   color: var(--neutral-800);
   font-family: inherit;
