@@ -304,31 +304,35 @@
   margin-top: -0.15rem;
 }
 
-/* Pill Outline Action Button (Matching reference screenshot) */
+/* Action CTA Button (Matching ProductCard and Home) */
 .actionBtn {
   width: 100%;
-  min-height: 2.35rem;
+  min-height: 2.5rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
-  border: 1.5px solid #d71920;
-  border-radius: var(--radius-pill);
-  background: transparent;
-  color: #d71920;
+  border: 1.5px solid #8c1d24;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #8c1d24;
   font: inherit;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
 }
 
 .actionBtn:hover {
-  background: #d71920;
+  background: #8c1d24;
   color: #ffffff;
-  box-shadow: 0 4px 12px rgba(215, 25, 32, 0.25);
+  box-shadow: 0 4px 12px rgba(140, 29, 36, 0.22);
 }
 
 .actionBtn:active {
@@ -342,8 +346,8 @@
 }
 
 .btnIcon {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   flex-shrink: 0;
 }
 

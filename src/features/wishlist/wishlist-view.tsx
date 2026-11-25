@@ -182,18 +182,17 @@ export function WishlistView() {
                   >
                     <svg
                       aria-hidden="true"
+                      className={styles.btnIcon}
                       fill="none"
-                      height="16"
                       stroke="currentColor"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
                       viewBox="0 0 24 24"
-                      width="16"
                     >
-                      <circle cx="8" cy="21" r="1" />
-                      <circle cx="19" cy="21" r="1" />
-                      <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+                      <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                      <line x1="3" x2="21" y1="6" y2="6" />
+                      <path d="M16 10a4 4 0 0 1-8 0" />
                     </svg>
                     <span>Add to Cart</span>
                   </button>

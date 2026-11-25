@@ -99,7 +99,7 @@ export function ComboCard({ combo }: ComboCardProps) {
           <span className={styles.taxNotice}>Inclusive of all taxes</span>
         </div>
 
-        {/* Clean Outline Pill Action Button */}
+        {/* Clean Outline Action Button (Matching ProductCard and Home) */}
         <button
           aria-label={`Add ${combo.name} to cart`}
           className={styles.actionBtn}
@@ -121,10 +121,26 @@ export function ComboCard({ combo }: ComboCardProps) {
               >
                 <polyline points="20 6 9 17 4 12" />
               </svg>
-              <span>ADDED TO CART</span>
+              <span>Added to Cart</span>
             </>
           ) : (
-            <span>ADD TO CART</span>
+            <>
+              <svg
+                aria-hidden="true"
+                className={styles.btnIcon}
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                <line x1="3" x2="21" y1="6" y2="6" />
+                <path d="M16 10a4 4 0 0 1-8 0" />
+              </svg>
+              <span>Add to Cart</span>
+            </>
           )}
         </button>
       </div>
