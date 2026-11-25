@@ -12,24 +12,6 @@ export const metadata: Metadata = {
     "Meet Ruru Pitambari, a trusted Nepali home-care brand formulated and produced by P Three Products in Lalitpur, Nepal since 2009.",
 };
 
-const pillars = [
-  {
-    title: "Gentle on Hands, Tough on Tarnish",
-    description:
-      "Formulated without harsh industrial acids. Effective on heavy oxidization while remaining safe for everyday contact and delicate engraved metalwork.",
-  },
-  {
-    title: "Rooted in Nepali Traditions",
-    description:
-      "Designed specifically for the brass kalash, copper gagri, and silver puja thalis that sit at the heart of our morning prayers and festival rituals.",
-  },
-  {
-    title: "100% Locally Made in Lalitpur",
-    description:
-      "Every batch is blended, packed, and quality-tested in Lalitpur by our local workforce, supporting Nepali manufacturing and neighbourhood retailers.",
-  },
-] as const;
-
 export default function AboutPage() {
   return (
     <main className={styles.page}>
@@ -100,25 +82,6 @@ export default function AboutPage() {
                 in Nepal, made to serve the families who welcome us into their homes.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Values & Principles Section */}
-      <section aria-label="Our Core Principles" className={styles.valuesSection}>
-        <div className={styles.valuesContainer}>
-          <div className={styles.valuesHeader}>
-            <span className={styles.valuesEyebrow}>What Guides Us</span>
-            <h3 className={styles.valuesTitle}>Our Everyday Commitments</h3>
-          </div>
-
-          <div className={styles.valuesGrid}>
-            {pillars.map((pillar) => (
-              <div className={styles.valueCard} key={pillar.title}>
-                <h4 className={styles.cardTitle}>{pillar.title}</h4>
-                <p className={styles.cardDesc}>{pillar.description}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
