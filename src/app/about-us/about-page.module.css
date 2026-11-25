@@ -3,7 +3,9 @@
   min-height: 100vh;
 }
 
-/* Red Pattern Hero Banner (Matching Product Page & Other Pages Style) */
+/* ----------------------------------------------------
+   1. Hero Banner
+   ---------------------------------------------------- */
 .banner {
   background-color: #8c1d24;
   background-image:
@@ -11,7 +13,7 @@
     url("data:image/svg+xml,%3Csvg width='44' height='44' viewBox='0 0 44 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M22 0 L25 15 L40 12 L29 22 L40 32 L25 29 L22 44 L19 29 L4 32 L15 22 L4 12 L19 15 Z' fill='none' stroke='%23ffffff' stroke-width='1' stroke-opacity='0.09'/%3E%3Ccircle cx='22' cy='22' r='5' fill='none' stroke='%23ffffff' stroke-width='1' stroke-opacity='0.09'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-position: center;
-  padding-block: var(--space-6) var(--space-6);
+  padding-block: clamp(2.5rem, 4vw, 3.5rem);
   text-align: center;
   color: #ffffff;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
@@ -19,219 +21,224 @@
 }
 
 .bannerInner {
-  width: min(100% - (2 * var(--page-gutter)), 90rem);
+  width: min(100% - (2 * var(--page-gutter)), 84rem);
   margin-inline: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 0.5rem;
 }
 
 .bannerTitle {
   margin: 0;
   color: #ffffff;
   font-family: var(--font-display);
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
-  font-weight: 500;
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 600;
   letter-spacing: -0.02em;
-  line-height: var(--leading-tight);
+  line-height: 1.15;
 }
 
-/* Introduction Section (Clean, Architectural, Premium) */
-.introduction {
-  width: min(100% - (2 * var(--page-gutter)), 84rem);
+.bannerSubtitle {
+  margin: 0;
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 400;
+  max-width: 36rem;
+  line-height: 1.5;
+}
+
+/* ----------------------------------------------------
+   2. Main Narrative Section (Editorial Two-Column)
+   ---------------------------------------------------- */
+.narrativeSection {
+  padding-block: clamp(3rem, 5vw, 4.5rem);
+}
+
+.container {
+  width: min(100% - (2 * var(--page-gutter)), 82rem);
   margin-inline: auto;
-  padding-block: clamp(3.5rem, 6vw, 5.5rem);
   display: grid;
-  grid-template-columns: minmax(22rem, 0.95fr) minmax(0, 1.05fr);
-  align-items: center;
-  gap: clamp(2.5rem, 5vw, 5rem);
+  grid-template-columns: minmax(20rem, 0.95fr) minmax(0, 1.15fr);
+  align-items: start;
+  gap: clamp(2.5rem, 5vw, 4.5rem);
 }
 
-.imageWrap {
+/* Photo Figure & Documentary Caption */
+.photoFigure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.imageFrame {
   position: relative;
-  aspect-ratio: 4 / 3.5;
+  aspect-ratio: 4 / 3.4;
   overflow: hidden;
+  border-radius: 10px;
   background: #fbf9f6;
   border: 1px solid #ede8df;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }
 
-.image {
+.photo {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 25%;
-  transition: transform 0.4s ease;
+  display: block;
 }
 
-.imageWrap:hover .image {
-  transform: scale(1.02);
+.photoCaption {
+  font-size: 0.8125rem;
+  color: #6b7280;
+  line-height: 1.5;
+  font-style: italic;
+  padding-inline: 0.25rem;
 }
 
-.imageBadge {
-  position: absolute;
-  bottom: 1rem;
-  left: 1rem;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.45rem 0.85rem;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 20px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #171612;
-  letter-spacing: 0.02em;
-}
-
-.imageBadgeDot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #1b7340;
-}
-
-.content {
+/* Story Narrative Content */
+.storyContent {
   display: flex;
   flex-direction: column;
 }
 
-.tagWrap {
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8c1d24;
   margin-bottom: 0.75rem;
 }
 
-.tag {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.25rem 0.65rem;
-  border-radius: 4px;
-  background: #fcf4f4;
-  border: 1px solid #f2d6d8;
-  color: #8c1d24;
-  font-size: 0.6875rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.heading {
-  margin: 0 0 1rem;
+.storyTitle {
+  margin: 0 0 1.25rem;
   font-family: var(--font-display);
-  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-size: clamp(1.75rem, 2.75vw, 2.25rem);
   font-weight: 700;
   color: #171612;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
 }
 
-.lead {
-  margin: 0 0 1.25rem;
-  font-size: 1.0625rem;
-  line-height: 1.6;
-  color: #374151;
-  font-weight: 500;
-}
-
-.copy {
+.storyBody {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
-  color: #59554d;
-  font-size: 0.9375rem;
-  line-height: 1.65;
+  gap: 1rem;
+  color: #4b5563;
+  font-size: 0.975rem;
+  line-height: 1.7;
 }
 
-.copy p {
+.storyBody p {
   margin: 0;
 }
 
-/* Stats Cards */
-.statsGrid {
-  margin-top: 2rem;
-  padding-top: 1.75rem;
+/* ----------------------------------------------------
+   3. Everyday Commitments (Values Section)
+   ---------------------------------------------------- */
+.valuesSection {
+  background-color: #fbf9f6;
   border-top: 1px solid #ede8df;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+  border-bottom: 1px solid #ede8df;
+  padding-block: clamp(3rem, 4.5vw, 4rem);
 }
 
-.statCard {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem 1.15rem;
-  background: #fdfbf7;
-  border: 1px solid #ede8df;
-  border-radius: 8px;
-  transition:
-    transform 0.15s ease,
-    border-color 0.15s ease;
+.valuesContainer {
+  width: min(100% - (2 * var(--page-gutter)), 82rem);
+  margin-inline: auto;
 }
 
-.statCard:hover {
-  transform: translateY(-2px);
-  border-color: #dcd3c3;
+.valuesHeader {
+  text-align: center;
+  margin-bottom: clamp(2rem, 3vw, 2.75rem);
 }
 
-.statValue {
-  font-family: var(--font-display);
-  font-size: 1.625rem;
-  font-weight: 800;
+.valuesEyebrow {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: #8c1d24;
-  line-height: 1;
   margin-bottom: 0.35rem;
 }
 
-.statLabel {
-  font-size: 0.8125rem;
+.valuesTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.25vw, 1.875rem);
   font-weight: 700;
   color: #171612;
-  margin-bottom: 0.15rem;
+  line-height: 1.3;
 }
 
-.statSub {
-  font-size: 0.725rem;
-  color: #706c63;
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2vw, 2rem);
 }
 
-@media (max-width: 64rem) {
-  .introduction {
+.valueCard {
+  background: #ffffff;
+  border: 1px solid #ede8df;
+  border-radius: 8px;
+  padding: 1.5rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+  border-top: 3px solid #8c1d24;
+}
+
+.cardTitle {
+  margin: 0 0 0.65rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #171612;
+  line-height: 1.35;
+}
+
+.cardDesc {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #59554d;
+  line-height: 1.6;
+}
+
+/* ----------------------------------------------------
+   4. Responsive Adjustments
+   ---------------------------------------------------- */
+@media (max-width: 60rem) {
+  .container {
     grid-template-columns: 1fr;
     gap: 2.5rem;
-    padding-block: 3rem;
   }
 
-  .imageWrap {
+  .photoFigure {
     max-width: 32rem;
     margin-inline: auto;
-  }
-}
-
-@media (max-width: 48rem) {
-  .banner {
-    padding-block: var(--space-5) var(--space-5);
+    width: 100%;
   }
 
-  .bannerTitle {
-    font-size: 1.5rem;
+  .valuesGrid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
 }
 
 @media (max-width: 40rem) {
-  .heading {
-    font-size: 1.75rem;
+  .narrativeSection {
+    padding-block: 2.5rem;
   }
 
-  .lead {
+  .storyTitle {
+    font-size: 1.625rem;
+  }
+
+  .storyBody {
     font-size: 0.9375rem;
-  }
-
-  .statsGrid {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
+    line-height: 1.65;
   }
 }

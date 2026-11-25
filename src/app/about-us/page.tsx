@@ -9,82 +9,116 @@ import styles from "./about-page.module.css";
 export const metadata: Metadata = {
   title: "Our Story | Ruru Pitambari",
   description:
-    "Meet Ruru Pitambari, a trusted Nepali home-care brand established in 2009 in Lalitpur, Nepal.",
+    "Meet Ruru Pitambari, a trusted Nepali home-care brand formulated and produced by P Three Products in Lalitpur, Nepal since 2009.",
 };
+
+const pillars = [
+  {
+    title: "Gentle on Hands, Tough on Tarnish",
+    description:
+      "Formulated without harsh industrial acids. Effective on heavy oxidization while remaining safe for everyday contact and delicate engraved metalwork.",
+  },
+  {
+    title: "Rooted in Nepali Traditions",
+    description:
+      "Designed specifically for the brass kalash, copper gagri, and silver puja thalis that sit at the heart of our morning prayers and festival rituals.",
+  },
+  {
+    title: "100% Locally Made in Lalitpur",
+    description:
+      "Every batch is blended, packed, and quality-tested in Lalitpur by our local workforce, supporting Nepali manufacturing and neighbourhood retailers.",
+  },
+] as const;
 
 export default function AboutPage() {
   return (
     <main className={styles.page}>
-      {/* Top Heritage Red Banner */}
+      {/* Top Banner */}
       <section aria-labelledby="about-banner-heading" className={styles.banner}>
         <div className={styles.bannerInner}>
           <h1 className={styles.bannerTitle} id="about-banner-heading">
             Our Story
           </h1>
+          <p className={styles.bannerSubtitle}>
+            Fifteen years of caring for the vessels that hold our family traditions.
+          </p>
         </div>
       </section>
 
-      {/* Built On Trust - Introduction Section */}
-      <section aria-labelledby="about-heading" className={styles.introduction}>
-        <div className={styles.imageWrap}>
-          <Image
-            alt="Ruru Pitambari team and community partners at Dealer Meet"
-            className={styles.image}
-            placeholder="blur"
-            priority
-            sizes="(max-width: 48rem) 100vw, 46vw"
-            src={heroStoryImage}
-          />
-          <div className={styles.imageBadge}>
-            <span className={styles.imageBadgeDot} />
-            <span>Serving Nepal Since 2009</span>
+      {/* Main Narrative Section */}
+      <section aria-labelledby="about-heading" className={styles.narrativeSection}>
+        <div className={styles.container}>
+          {/* Photo & Documentary Caption */}
+          <figure className={styles.photoFigure}>
+            <div className={styles.imageFrame}>
+              <Image
+                alt="P Three Products founder presenting a commemorative gift to a retail dealer in Lalitpur"
+                className={styles.photo}
+                placeholder="blur"
+                priority
+                sizes="(max-width: 56rem) 100vw, 44vw"
+                src={heroStoryImage}
+              />
+            </div>
+            <figcaption className={styles.photoCaption}>
+              Meeting our retail partners in Lalitpur — built on 15 years of personal visits, honest
+              dealings, and shared community trust.
+            </figcaption>
+          </figure>
+
+          {/* Story Text */}
+          <div className={styles.storyContent}>
+            <span className={styles.eyebrow}>P Three Products · Lalitpur, Nepal</span>
+
+            <h2 className={styles.storyTitle} id="about-heading">
+              Keeping Nepali Homes and Sacred Vessels Shining Bright
+            </h2>
+
+            <div className={styles.storyBody}>
+              <p>
+                In every Nepali home, copper (तामा) and brass (पीत्तल) utensils are more than simple
+                cookware. They hold the holy water for morning prayers, the oil in evening diyos,
+                and the feast dishes shared during Dashain, Tihar, and family gatherings. Yet for
+                generations, keeping them bright meant messy ash pastes or harsh acids that burned
+                fingers and slowly eroded fine metal craft.
+              </p>
+              <p>
+                In 2009 (2066 B.S.), we started P Three Products in Lalitpur with a clear goal: to
+                craft a dedicated cleaning formulation specifically tuned to Nepal&apos;s water and
+                traditional metals. It had to restore an authentic golden shine in minutes, without
+                the chemical burns or unpleasant fumes of industrial cleaners.
+              </p>
+              <p>
+                We grew through simple word of mouth — shop by shop, neighbourhood kirana by bartan
+                pasal. Retailers recommended Ruru Pitambari because it delivered honest results, and
+                homemakers returned because their puja thalis and daily utensils stayed bright
+                longer.
+              </p>
+              <p>
+                Today, our range has expanded to include pooja oils, pure camphor, and household
+                care, but our commitment remains unchanged: honest quality, manufactured right here
+                in Nepal, made to serve the families who welcome us into their homes.
+              </p>
+            </div>
           </div>
         </div>
+      </section>
 
-        <div className={styles.content}>
-          <div className={styles.tagWrap}>
-            <span className={styles.tag}>P Three Products · Lalitpur</span>
+      {/* Values & Principles Section */}
+      <section aria-label="Our Core Principles" className={styles.valuesSection}>
+        <div className={styles.valuesContainer}>
+          <div className={styles.valuesHeader}>
+            <span className={styles.valuesEyebrow}>What Guides Us</span>
+            <h3 className={styles.valuesTitle}>Our Everyday Commitments</h3>
           </div>
 
-          <h2 className={styles.heading} id="about-heading">
-            Built on Trust, Crafted for Nepali Homes
-          </h2>
-
-          <p className={styles.lead}>
-            Rooted in tradition and refined for modern living, Ruru Pitambari makes everyday home
-            and metal care effortless, dependable, and gentle.
-          </p>
-
-          <div className={styles.copy}>
-            <p>
-              Founded in 2009 in Lalitpur, Nepal, our journey began with a simple belief: the
-              utensils and sacred vessels that families cherish deserve care that restores their
-              timeless brilliance without harshness or compromise.
-            </p>
-            <p>
-              Through long-standing partnerships with local retailers, trusted dealers, and
-              thousands of households across the nation, Ruru Pitambari has grown from a humble
-              local workshop into a household staple known for genuine quality and authentic Nepali
-              care.
-            </p>
-          </div>
-
-          <div className={styles.statsGrid}>
-            <div className={styles.statCard}>
-              <span className={styles.statValue}>2009</span>
-              <span className={styles.statLabel}>Established</span>
-              <span className={styles.statSub}>Lalitpur, Nepal</span>
-            </div>
-            <div className={styles.statCard}>
-              <span className={styles.statValue}>15+</span>
-              <span className={styles.statLabel}>Years of Trust</span>
-              <span className={styles.statSub}>Across Communities</span>
-            </div>
-            <div className={styles.statCard}>
-              <span className={styles.statValue}>100%</span>
-              <span className={styles.statLabel}>Authentic Care</span>
-              <span className={styles.statSub}>Made in Nepal</span>
-            </div>
+          <div className={styles.valuesGrid}>
+            {pillars.map((pillar) => (
+              <div className={styles.valueCard} key={pillar.title}>
+                <h4 className={styles.cardTitle}>{pillar.title}</h4>
+                <p className={styles.cardDesc}>{pillar.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

@@ -9,11 +9,11 @@ export function BrandPurpose() {
   return (
     <section aria-label="Brand Mission and Vision" className={styles.section}>
       <div className={styles.container}>
-        {/* Row 1: Mission (Image Left · Line + Badge + Text Right) */}
+        {/* Row 1: Mission (Image Left · Text Right) */}
         <div className={styles.row}>
           <div className={styles.imageCard}>
             <Image
-              alt="Ruru Pitambari - Bring Back the Brilliance"
+              alt="Ruru Pitambari - Preserving the brilliance of traditional brass and copper vessels"
               className={styles.image}
               placeholder="blur"
               priority
@@ -23,41 +23,47 @@ export function BrandPurpose() {
           </div>
 
           <div className={styles.contentCard}>
-            <div className={styles.lineHeader}>
-              <div className={styles.line} />
-              <span className={styles.badge}>Our Mission</span>
-            </div>
+            <span className={styles.cardEyebrow}>Our Mission</span>
+            <h3 className={styles.cardHeading}>Preserving Tradition with Gentle, Honest Care</h3>
             <p className={styles.description}>
               To make dependable, effective, and gentle metal care accessible to every household —
               bringing back the timeless natural shine of brass, copper, and silver while preserving
-              the sanctity and craftsmanship of the utensils families value and use every day.
+              the sanctity and craftsmanship of the utensils families cherish and use every day.
             </p>
           </div>
         </div>
 
-        {/* Row 2: Vision (Badge + Line + Text Left · Image Right) */}
+        {/* Row 2: Vision (Text Left · Image Right) */}
         <div className={`${styles.row} ${styles.rowReverse}`}>
           <div className={styles.contentCard}>
-            <div className={styles.lineHeader}>
-              <span className={`${styles.badge} ${styles.badgeGold}`}>Our Vision</span>
-              <div className={styles.line} />
-            </div>
+            <span className={styles.cardEyebrow}>Our Vision</span>
+            <h3 className={styles.cardHeading}>A Lasting Presence in Nepali Homes</h3>
             <p className={styles.description}>
               To be Nepal’s most trusted household metal-care brand, recognized for genuine quality,
-              thoughtful innovation, and reverence for tradition — keeping sacred heirlooms, puja
-              vessels, and everyday utensils shining bright across generations.
+              thoughtful local innovation, and deep respect for cultural traditions — keeping sacred
+              heirlooms, puja vessels, and everyday utensils shining bright across generations.
             </p>
           </div>
 
           <div className={`${styles.imageCard} ${styles.orderFirstOnMobile}`}>
             <Image
-              alt="Ruru Pitambari - A Future That Shines"
+              alt="Ruru Pitambari - A shining tradition for future generations"
               className={styles.image}
               placeholder="blur"
               sizes="(max-width: 52rem) 100vw, 42vw"
               src={futureImage}
             />
           </div>
+        </div>
+
+        {/* Founder Commitment Quote Box */}
+        <div className={styles.promiseBox}>
+          <blockquote className={styles.quoteText}>
+            &ldquo;When you bring Ruru Pitambari into your home, you trust us with your
+            family&apos;s celebrations, morning prayers, and cherished heirlooms. That is a
+            responsibility we honour with every bottle we blend.&rdquo;
+          </blockquote>
+          <cite className={styles.quoteAuthor}>— The P Three Products Family, Lalitpur, Nepal</cite>
         </div>
       </div>
     </section>
