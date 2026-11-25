@@ -42,6 +42,8 @@ export function ProductCatalogue({
   const [minRating, setMinRating] = useState<number>(0);
   const [sortBy, setSortBy] = useState<SortOption>("featured");
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [page, setPage] = useState(1);
+  const pageSize = 8;
 
   // Calculate category counts
   const categoryCounts = useMemo(() => {
@@ -63,6 +65,7 @@ export function ProductCatalogue({
     setPriceFilter("all");
     setMinRating(0);
     setSortBy("featured");
+    setPage(1);
   }
 
   const visibleProducts = useMemo(() => {
@@ -137,6 +140,14 @@ export function ProductCatalogue({
     return sorted;
   }, [activeCategory, initialQuery, minDiscount, priceFilter, minRating, sortBy]);
 
+  const pageCount = Math.max(1, Math.ceil(visibleProducts.length / pageSize));
+  const startIndex = (page - 1) * pageSize;
+  const endIndex = Math.min(startIndex + pageSize, visibleProducts.length);
+  const paginatedProducts = useMemo(
+    () => visibleProducts.slice(startIndex, endIndex),
+    [endIndex, startIndex, visibleProducts],
+  );
+
   return (
     <div className={styles.catalogueWrapper}>
       {/* Top Visual Category Navigation (Amazon Style) */}
@@ -149,7 +160,10 @@ export function ProductCatalogue({
                 aria-pressed={isSelected}
                 className={styles.visualCategoryItem}
                 key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
+                onClick={() => {
+                  setActiveCategory(cat.id);
+                  setPage(1);
+                }}
                 type="button"
               >
                 <div
@@ -405,11 +419,71 @@ export function ProductCatalogue({
 
           {/* Product Grid */}
           {visibleProducts.length ? (
-            <div className={styles.grid}>
-              {visibleProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
+            <>
+              <div className={styles.grid}>
+                {paginatedProducts.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+
+              {pageCount > 1 ? (
+                <div className={styles.tableFooter}>
+                  <p>
+                    Showing <strong>{startIndex + 1}</strong> to <strong>{endIndex}</strong> of{" "}
+                    <strong>{visibleProducts.length}</strong> products
+                  </p>
+
+                  <nav aria-label="Product pagination" className={styles.pagination}>
+                    <button
+                      disabled={page === 1}
+                      onClick={() => {
+                        setPage((c) => c - 1);
+                        if (typeof window !== "undefined") {
+                          window.scrollTo({ behavior: "smooth", top: 280 });
+                        }
+                      }}
+                      type="button"
+                    >
+                      Previous
+                    </button>
+
+                    <div>
+                      {Array.from({ length: pageCount }, (_, index) => index + 1).map(
+                        (pageNumber) => (
+                          <button
+                            aria-current={pageNumber === page ? "page" : undefined}
+                            aria-label={`Page ${pageNumber}`}
+                            key={pageNumber}
+                            onClick={() => {
+                              setPage(pageNumber);
+                              if (typeof window !== "undefined") {
+                                window.scrollTo({ behavior: "smooth", top: 280 });
+                              }
+                            }}
+                            type="button"
+                          >
+                            {pageNumber}
+                          </button>
+                        ),
+                      )}
+                    </div>
+
+                    <button
+                      disabled={page === pageCount}
+                      onClick={() => {
+                        setPage((c) => c + 1);
+                        if (typeof window !== "undefined") {
+                          window.scrollTo({ behavior: "smooth", top: 280 });
+                        }
+                      }}
+                      type="button"
+                    >
+                      Next
+                    </button>
+                  </nav>
+                </div>
+              ) : null}
+            </>
           ) : (
             <div className={styles.empty}>
               <h2>No products found</h2>

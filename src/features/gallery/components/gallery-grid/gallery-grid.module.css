@@ -28,22 +28,25 @@
 .item {
   aspect-ratio: 1;
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  border: 1px solid var(--neutral-200);
-  border-radius: var(--radius-sm);
-  background: var(--neutral-50);
+  border: 1px solid #e8e2d8;
+  border-radius: 8px;
+  background: #fdfbf7;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform var(--duration-slow) var(--ease-standard);
 }
 
 .item:hover .image {
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
 .tableFooter {
