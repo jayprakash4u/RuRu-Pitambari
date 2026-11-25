@@ -48,13 +48,7 @@ export function GalleryGrid() {
 
       <div className={styles.grid}>
         {visibleImages.map((item, index) => (
-          <a
-            className={styles.item}
-            href={item.href}
-            key={item.href}
-            rel="noreferrer"
-            target="_blank"
-          >
+          <div className={styles.item} key={item.alt}>
             <Image
               alt={item.alt}
               className={styles.image}
@@ -63,8 +57,7 @@ export function GalleryGrid() {
               sizes="(max-width: 40rem) 50vw, (max-width: 64rem) 33vw, 25vw"
               src={item.image}
             />
-            <span>View on Facebook</span>
-          </a>
+          </div>
         ))}
       </div>
 
