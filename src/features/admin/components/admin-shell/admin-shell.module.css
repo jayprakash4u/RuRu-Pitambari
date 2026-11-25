@@ -67,20 +67,22 @@
   width: 2.25rem;
   height: 2.25rem;
   border-radius: 9999px;
-  background: linear-gradient(135deg, var(--brand-gold-400), var(--brand-gold-600));
+  background-color: #8c1d24;
+  border: 1.5px solid #e9d5be;
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 0.875rem;
-  box-shadow: var(--shadow-xs);
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  box-shadow: 0 1px 3px rgba(140, 29, 36, 0.2);
 }
 
 .brandName {
   font-family: var(--font-display);
-  font-size: 1.125rem;
-  font-weight: 600;
+  font-size: 1.0625rem;
+  font-weight: 700;
   line-height: 1.2;
   color: var(--neutral-900);
 }
@@ -89,8 +91,8 @@
   font-size: 0.625rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--brand-gold-600);
-  font-weight: 600;
+  color: #8c1d24;
+  font-weight: 700;
 }
 
 .closeButton {
@@ -132,6 +134,7 @@
   justify-content: space-between;
   padding: 0.5625rem 0.75rem;
   border-radius: var(--radius-sm);
+  border-left: 3px solid transparent;
   color: var(--neutral-600);
   text-decoration: none;
   font-size: 0.875rem;
@@ -145,13 +148,14 @@
 }
 
 .navItemActive {
-  background-color: var(--brand-gold-50);
-  color: var(--brand-gold-700);
+  background-color: #fdf5f5;
+  color: #8c1d24;
+  border-left-color: #8c1d24;
   font-weight: 600;
 }
 
 .navItemActive .navIcon {
-  color: var(--brand-gold-600);
+  color: #8c1d24;
 }
 
 .navItemContent {
@@ -177,9 +181,9 @@
 }
 
 .navCountAlert {
-  background-color: #fef7ed;
-  color: #9a5b13;
-  border: 1px solid #f7dcb7;
+  background-color: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
 }
 
 .sidebarFooter {
@@ -197,17 +201,20 @@
   gap: 0.5rem;
   padding: 0.5rem 0.75rem;
   font-size: 0.8125rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--neutral-700);
-  background-color: var(--neutral-100);
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
   border-radius: var(--radius-sm);
   text-decoration: none;
-  transition: background-color 0.15s ease;
+  transition: all 0.15s ease;
 }
 
 .storeLink:hover {
-  background-color: var(--neutral-200);
-  color: var(--neutral-900);
+  background-color: #ffffff;
+  border-color: #8c1d24;
+  color: #8c1d24;
+  box-shadow: 0 1px 3px rgba(140, 29, 36, 0.08);
 }
 
 .adminProfile {

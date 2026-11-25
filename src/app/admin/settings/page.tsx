@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from "react";
 
 import { AdminShell, useAdmin } from "@/features/admin";
-import styles from "../admin-table.module.css";
+import styles from "./settings-page.module.css";
 
 export default function AdminSettingsPage() {
   const { settings, updateSettings, resetToDefaults } = useAdmin();
@@ -27,289 +27,164 @@ export default function AdminSettingsPage() {
       subtitle="Store contact information, shipping rules, tax identifiers and operational controls."
       title="Store Settings & Configuration"
     >
-      <div className={styles.pageContainer} style={{ maxWidth: "760px" }}>
+      <div className={styles.container}>
         {saved ? (
-          <div
-            style={{
-              padding: "0.75rem 1rem",
-              backgroundColor: "#f0f7f3",
-              border: "1px solid #c5e3d4",
-              borderRadius: "var(--radius-xs)",
-              color: "#2b614d",
-              fontSize: "0.8125rem",
-              fontWeight: 600,
-            }}
-          >
-            ✓ Settings saved successfully to active store state.
+          <div className={styles.successToast}>
+            <span>✓</span>
+            <span>Settings saved successfully to active store state.</span>
           </div>
         ) : null}
 
-        <form
-          onSubmit={handleSubmit}
-          style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
-        >
+        <form className={styles.form} onSubmit={handleSubmit}>
           {/* Section 1: Business Profile */}
-          <div className={styles.tablePanel} style={{ padding: "1.5rem" }}>
-            <h2 style={{ fontSize: "1rem", fontWeight: 700, margin: "0 0 1rem" }}>
-              Business Profile
-            </h2>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
-              <div>
-                <label
-                  htmlFor="store-name-input"
-                  style={{
-                    display: "block",
-                    fontSize: "0.75rem",
-                    fontWeight: 600,
-                    color: "var(--neutral-600)",
-                    marginBottom: "0.25rem",
-                  }}
-                >
+          <section className={styles.card}>
+            <div className={styles.cardHeader}>
+              <h2 className={styles.cardTitle}>Business Profile</h2>
+              <p className={styles.cardSubtitle}>
+                Official brand identifiers used on customer receipts and dealer communications.
+              </p>
+            </div>
+
+            <div className={styles.gridTwo}>
+              <div className={styles.fieldGroup}>
+                <label className={styles.label} htmlFor="store-name-input">
                   Brand / Store Name
                 </label>
                 <input
+                  className={styles.input}
                   id="store-name-input"
                   onChange={(e) => handleChange("storeName", e.target.value)}
-                  style={{
-                    width: "100%",
-                    padding: "0.5rem",
-                    border: "1px solid var(--neutral-300)",
-                    borderRadius: "var(--radius-xs)",
-                    fontSize: "0.8125rem",
-                  }}
                   type="text"
                   value={formState.storeName}
                 />
               </div>
 
-              <div>
-                <label
-                  htmlFor="pan-vat-input"
-                  style={{
-                    display: "block",
-                    fontSize: "0.75rem",
-                    fontWeight: 600,
-                    color: "var(--neutral-600)",
-                    marginBottom: "0.25rem",
-                  }}
-                >
+              <div className={styles.fieldGroup}>
+                <label className={styles.label} htmlFor="pan-vat-input">
                   PAN / VAT Number
                 </label>
                 <input
+                  className={styles.input}
                   id="pan-vat-input"
                   onChange={(e) => handleChange("panVatNumber", e.target.value)}
-                  style={{
-                    width: "100%",
-                    padding: "0.5rem",
-                    border: "1px solid var(--neutral-300)",
-                    borderRadius: "var(--radius-xs)",
-                    fontSize: "0.8125rem",
-                  }}
                   type="text"
                   value={formState.panVatNumber}
                 />
               </div>
 
-              <div>
-                <label
-                  htmlFor="support-phone-input"
-                  style={{
-                    display: "block",
-                    fontSize: "0.75rem",
-                    fontWeight: 600,
-                    color: "var(--neutral-600)",
-                    marginBottom: "0.25rem",
-                  }}
-                >
+              <div className={styles.fieldGroup}>
+                <label className={styles.label} htmlFor="support-phone-input">
                   Customer Care Phone
                 </label>
                 <input
+                  className={styles.input}
                   id="support-phone-input"
                   onChange={(e) => handleChange("supportPhone", e.target.value)}
-                  style={{
-                    width: "100%",
-                    padding: "0.5rem",
-                    border: "1px solid var(--neutral-300)",
-                    borderRadius: "var(--radius-xs)",
-                    fontSize: "0.8125rem",
-                  }}
                   type="text"
                   value={formState.supportPhone}
                 />
               </div>
 
-              <div>
-                <label
-                  htmlFor="support-email-input"
-                  style={{
-                    display: "block",
-                    fontSize: "0.75rem",
-                    fontWeight: 600,
-                    color: "var(--neutral-600)",
-                    marginBottom: "0.25rem",
-                  }}
-                >
+              <div className={styles.fieldGroup}>
+                <label className={styles.label} htmlFor="support-email-input">
                   Official Support Email
                 </label>
                 <input
+                  className={styles.input}
                   id="support-email-input"
                   onChange={(e) => handleChange("supportEmail", e.target.value)}
-                  style={{
-                    width: "100%",
-                    padding: "0.5rem",
-                    border: "1px solid var(--neutral-300)",
-                    borderRadius: "var(--radius-xs)",
-                    fontSize: "0.8125rem",
-                  }}
                   type="email"
                   value={formState.supportEmail}
                 />
               </div>
             </div>
 
-            <div style={{ marginTop: "1rem" }}>
-              <label
-                htmlFor="warehouse-addr-input"
-                style={{
-                  display: "block",
-                  fontSize: "0.75rem",
-                  fontWeight: 600,
-                  color: "var(--neutral-600)",
-                  marginBottom: "0.25rem",
-                }}
-              >
-                Dispatch Hub & Central Warehouse Address
+            <div className={`${styles.fieldGroup} ${styles.fullWidth}`}>
+              <label className={styles.label} htmlFor="warehouse-addr-input">
+                Dispatch Hub &amp; Central Warehouse Address
               </label>
               <input
+                className={styles.input}
                 id="warehouse-addr-input"
                 onChange={(e) => handleChange("warehouseAddress", e.target.value)}
-                style={{
-                  width: "100%",
-                  padding: "0.5rem",
-                  border: "1px solid var(--neutral-300)",
-                  borderRadius: "var(--radius-xs)",
-                  fontSize: "0.8125rem",
-                }}
                 type="text"
                 value={formState.warehouseAddress}
               />
             </div>
-          </div>
+          </section>
 
           {/* Section 2: Shipping & Delivery Rates */}
-          <div className={styles.tablePanel} style={{ padding: "1.5rem" }}>
-            <h2 style={{ fontSize: "1rem", fontWeight: 700, margin: "0 0 1rem" }}>
-              Delivery Rates (NPR)
-            </h2>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1rem" }}>
-              <div>
-                <label
-                  htmlFor="inside-valley-input"
-                  style={{
-                    display: "block",
-                    fontSize: "0.75rem",
-                    fontWeight: 600,
-                    color: "var(--neutral-600)",
-                    marginBottom: "0.25rem",
-                  }}
-                >
+          <section className={styles.card}>
+            <div className={styles.cardHeader}>
+              <h2 className={styles.cardTitle}>Delivery Rates (NPR)</h2>
+              <p className={styles.cardSubtitle}>
+                Standard delivery charges applied during checkout across Nepal.
+              </p>
+            </div>
+
+            <div className={styles.gridThree}>
+              <div className={styles.fieldGroup}>
+                <label className={styles.label} htmlFor="inside-valley-input">
                   Inside Valley (रु)
                 </label>
                 <input
+                  className={styles.input}
                   id="inside-valley-input"
                   onChange={(e) =>
                     handleChange("insideValleyDeliveryNpr", Number(e.target.value) || 0)
                   }
-                  style={{
-                    width: "100%",
-                    padding: "0.5rem",
-                    border: "1px solid var(--neutral-300)",
-                    borderRadius: "var(--radius-xs)",
-                    fontSize: "0.8125rem",
-                  }}
                   type="number"
                   value={formState.insideValleyDeliveryNpr}
                 />
               </div>
 
-              <div>
-                <label
-                  htmlFor="outside-valley-input"
-                  style={{
-                    display: "block",
-                    fontSize: "0.75rem",
-                    fontWeight: 600,
-                    color: "var(--neutral-600)",
-                    marginBottom: "0.25rem",
-                  }}
-                >
+              <div className={styles.fieldGroup}>
+                <label className={styles.label} htmlFor="outside-valley-input">
                   Outside Valley (रु)
                 </label>
                 <input
+                  className={styles.input}
                   id="outside-valley-input"
                   onChange={(e) =>
                     handleChange("outsideValleyDeliveryNpr", Number(e.target.value) || 0)
                   }
-                  style={{
-                    width: "100%",
-                    padding: "0.5rem",
-                    border: "1px solid var(--neutral-300)",
-                    borderRadius: "var(--radius-xs)",
-                    fontSize: "0.8125rem",
-                  }}
                   type="number"
                   value={formState.outsideValleyDeliveryNpr}
                 />
               </div>
 
-              <div>
-                <label
-                  htmlFor="free-delivery-input"
-                  style={{
-                    display: "block",
-                    fontSize: "0.75rem",
-                    fontWeight: 600,
-                    color: "var(--neutral-600)",
-                    marginBottom: "0.25rem",
-                  }}
-                >
+              <div className={styles.fieldGroup}>
+                <label className={styles.label} htmlFor="free-delivery-input">
                   Free Shipping Over (रु)
                 </label>
                 <input
+                  className={styles.input}
                   id="free-delivery-input"
                   onChange={(e) =>
                     handleChange("freeDeliveryThresholdNpr", Number(e.target.value) || 0)
                   }
-                  style={{
-                    width: "100%",
-                    padding: "0.5rem",
-                    border: "1px solid var(--neutral-300)",
-                    borderRadius: "var(--radius-xs)",
-                    fontSize: "0.8125rem",
-                  }}
                   type="number"
                   value={formState.freeDeliveryThresholdNpr}
                 />
               </div>
             </div>
-          </div>
+          </section>
 
           {/* Action Row */}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div className={styles.actionsBar}>
             <button
-              className={styles.actionBtn}
+              className={styles.resetBtn}
               onClick={() => {
                 if (window.confirm("Reset all admin state to default sample data?")) {
                   resetToDefaults();
                 }
               }}
-              style={{ color: "#a33333" }}
               type="button"
             >
               Reset to Default Data
             </button>
 
-            <button className={styles.primaryActionBtn} type="submit">
+            <button className={styles.saveBtn} type="submit">
               Save Configuration
             </button>
           </div>

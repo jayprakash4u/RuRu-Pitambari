@@ -15,9 +15,9 @@ export function ProductModal({ product, onClose, onSave }: ProductModalProps) {
 
   const [name, setName] = useState(product?.name ?? "");
   const [shortName, setShortName] = useState(product?.shortName ?? "");
-  const [category, setCategory] = useState<"Metal care" | "Kitchen care" | "Floor care">(
-    product?.category ?? "Metal care",
-  );
+  const [category, setCategory] = useState<
+    "Metal care" | "Pooja care" | "Kitchen care" | "Floor care"
+  >(product?.category ?? "Metal care");
   const [description, setDescription] = useState(product?.description ?? "");
   const [variants, setVariants] = useState(
     product?.variants ?? [
@@ -127,11 +127,14 @@ export function ProductModal({ product, onClose, onSave }: ProductModalProps) {
                   className={styles.select}
                   id="prod-cat"
                   onChange={(e) =>
-                    setCategory(e.target.value as "Metal care" | "Kitchen care" | "Floor care")
+                    setCategory(
+                      e.target.value as "Metal care" | "Pooja care" | "Kitchen care" | "Floor care",
+                    )
                   }
                   value={category}
                 >
                   <option value="Metal care">Metal care</option>
+                  <option value="Pooja care">Pooja care</option>
                   <option value="Kitchen care">Kitchen care</option>
                   <option value="Floor care">Floor care</option>
                 </select>

@@ -90,16 +90,20 @@ export default function AdminDealersPage() {
           </div>
 
           <div className={styles.tabsGroup}>
-            {filterTabs.map((tab) => (
-              <button
-                className={`${styles.tabBtn} ${statusFilter === tab ? styles.tabBtnActive : ""}`}
-                key={tab}
-                onClick={() => setStatusFilter(tab)}
-                type="button"
-              >
-                {tab}
-              </button>
-            ))}
+            {filterTabs.map((tab) => {
+              const count =
+                tab === "All" ? dealers.length : dealers.filter((d) => d.status === tab).length;
+              return (
+                <button
+                  className={`${styles.tabBtn} ${statusFilter === tab ? styles.tabBtnActive : ""}`}
+                  key={tab}
+                  onClick={() => setStatusFilter(tab)}
+                  type="button"
+                >
+                  {tab} ({count})
+                </button>
+              );
+            })}
           </div>
         </div>
 

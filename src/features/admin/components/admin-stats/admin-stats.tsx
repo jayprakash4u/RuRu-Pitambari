@@ -33,7 +33,7 @@ export function AdminStatsGrid() {
       <div className={styles.statCard}>
         <div className={styles.statHeader}>
           <span className={styles.statLabel}>Total Sales Revenue</span>
-          <div className={`${styles.iconWrapper} ${styles.goldIcon}`}>
+          <div className={`${styles.iconWrapper} ${styles.crimsonIcon}`}>
             <svg
               fill="none"
               height="18"

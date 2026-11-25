@@ -97,16 +97,20 @@ export default function AdminOrdersPage() {
           </div>
 
           <div className={styles.tabsGroup}>
-            {filterTabs.map((tab) => (
-              <button
-                className={`${styles.tabBtn} ${statusFilter === tab ? styles.tabBtnActive : ""}`}
-                key={tab}
-                onClick={() => setStatusFilter(tab)}
-                type="button"
-              >
-                {tab}
-              </button>
-            ))}
+            {filterTabs.map((tab) => {
+              const count =
+                tab === "All" ? orders.length : orders.filter((o) => o.status === tab).length;
+              return (
+                <button
+                  className={`${styles.tabBtn} ${statusFilter === tab ? styles.tabBtnActive : ""}`}
+                  key={tab}
+                  onClick={() => setStatusFilter(tab)}
+                  type="button"
+                >
+                  {tab} ({count})
+                </button>
+              );
+            })}
           </div>
         </div>
 

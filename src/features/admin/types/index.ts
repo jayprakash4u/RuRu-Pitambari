@@ -46,7 +46,7 @@ export type AdminProduct = {
   id: string;
   name: string;
   shortName: string;
-  category: "Metal care" | "Kitchen care" | "Floor care";
+  category: "Metal care" | "Pooja care" | "Kitchen care" | "Floor care";
   description: string;
   variants: ProductVariantItem[];
   active: boolean;

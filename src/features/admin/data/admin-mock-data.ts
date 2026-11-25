@@ -330,6 +330,64 @@ export const initialProducts: AdminProduct[] = [
       },
     ],
   },
+  {
+    id: "ruru-pooja-camphor",
+    name: "Ruru Bhimseni Camphor",
+    shortName: "Pure natural puja kapoor",
+    category: "Pooja care",
+    description:
+      "100% pure Bhimseni camphor with authentic sacred aroma for daily aarti and festive rituals.",
+    active: true,
+    featured: true,
+    updatedAt: "2026-11-23T11:00:00Z",
+    variants: [
+      {
+        id: "var-rc-50",
+        label: "50 g",
+        priceNpr: 120,
+        stock: 75,
+        sku: "RP-POO-50G",
+        lowStockThreshold: 20,
+      },
+      {
+        id: "var-rc-100",
+        label: "100 g",
+        priceNpr: 220,
+        stock: 40,
+        sku: "RP-POO-100G",
+        lowStockThreshold: 15,
+      },
+    ],
+  },
+  {
+    id: "ruru-pooja-diya-oil",
+    name: "Ruru Sacred Diya Oil",
+    shortName: "Pure festive lamp oil",
+    category: "Pooja care",
+    description:
+      "Specially formulated clean-burning sesame and pancha-deepa diya oil for steady prayer lights.",
+    active: true,
+    featured: false,
+    updatedAt: "2026-11-23T11:30:00Z",
+    variants: [
+      {
+        id: "var-rdo-500",
+        label: "500 ml",
+        priceNpr: 190,
+        stock: 60,
+        sku: "RP-POO-500ML",
+        lowStockThreshold: 25,
+      },
+      {
+        id: "var-rdo-1000",
+        label: "1 L",
+        priceNpr: 360,
+        stock: 28,
+        sku: "RP-POO-1L",
+        lowStockThreshold: 15,
+      },
+    ],
+  },
 ];
 
 export const initialDealers: AdminDealer[] = [

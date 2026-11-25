@@ -28,7 +28,7 @@ export default function AdminProductsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState<string>("All");
 
-  const categories = ["All", "Metal care", "Kitchen care", "Floor care"];
+  const categories = ["All", "Metal care", "Pooja care", "Kitchen care", "Floor care"];
 
   const filteredProducts = products.filter((prod) => {
     const matchesCat = categoryFilter === "All" ? true : prod.category === categoryFilter;
@@ -89,16 +89,20 @@ export default function AdminProductsPage() {
           </div>
 
           <div className={styles.tabsGroup}>
-            {categories.map((cat) => (
-              <button
-                className={`${styles.tabBtn} ${categoryFilter === cat ? styles.tabBtnActive : ""}`}
-                key={cat}
-                onClick={() => setCategoryFilter(cat)}
-                type="button"
-              >
-                {cat}
-              </button>
-            ))}
+            {categories.map((cat) => {
+              const count =
+                cat === "All" ? products.length : products.filter((p) => p.category === cat).length;
+              return (
+                <button
+                  className={`${styles.tabBtn} ${categoryFilter === cat ? styles.tabBtnActive : ""}`}
+                  key={cat}
+                  onClick={() => setCategoryFilter(cat)}
+                  type="button"
+                >
+                  {cat} ({count})
+                </button>
+              );
+            })}
           </div>
 
           <button

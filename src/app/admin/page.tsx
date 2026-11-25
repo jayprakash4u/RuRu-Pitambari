@@ -44,7 +44,7 @@ export default function AdminDashboardPage() {
       {/* Main Two-Column Layout */}
       <div className={styles.dashboardGrid}>
         {/* Left Primary Column: Action Needed */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+        <div className={styles.primaryColumn}>
           {/* Section 1: Orders Requiring Action */}
           <section aria-labelledby="pending-orders-title" className={styles.panel}>
             <div className={styles.panelHeader}>
@@ -84,9 +84,7 @@ export default function AdminDashboardPage() {
                         </td>
                         <td className={styles.td}>
                           <div>{order.customerName}</div>
-                          <span style={{ fontSize: "0.6875rem", color: "var(--neutral-500)" }}>
-                            {order.customerPhone}
-                          </span>
+                          <span className={styles.subtext}>{order.customerPhone}</span>
                         </td>
                         <td className={styles.td}>
                           {order.city}, {order.district}
@@ -154,15 +152,11 @@ export default function AdminDashboardPage() {
                       <tr className={styles.tr} key={dealer.id}>
                         <td className={styles.td}>
                           <strong>{dealer.businessName}</strong>
-                          <div style={{ fontSize: "0.6875rem", color: "var(--neutral-500)" }}>
-                            PAN/VAT: {dealer.panVat}
-                          </div>
+                          <div className={styles.subtext}>PAN/VAT: {dealer.panVat}</div>
                         </td>
                         <td className={styles.td}>
                           <div>{dealer.contactPerson}</div>
-                          <span style={{ fontSize: "0.6875rem", color: "var(--neutral-500)" }}>
-                            {dealer.phone}
-                          </span>
+                          <span className={styles.subtext}>{dealer.phone}</span>
                         </td>
                         <td className={styles.td}>
                           {dealer.city}, {dealer.district}
@@ -194,18 +188,31 @@ export default function AdminDashboardPage() {
               <h2 className={styles.panelTitle} id="category-share-title">
                 Product Category Demand
               </h2>
-              <span style={{ fontSize: "0.6875rem", color: "var(--neutral-500)" }}>Nepal FMCG</span>
+              <span className={styles.subtext}>Nepal FMCG</span>
             </div>
             <div className={styles.categoryList}>
               <div className={styles.categoryItem}>
                 <div className={styles.categoryHeader}>
-                  <span>Metal Care (Pitambari & Ratna)</span>
-                  <strong>62%</strong>
+                  <span>Metal Care (Pitambari &amp; Ratna)</span>
+                  <strong>52%</strong>
                 </div>
                 <div className={styles.progressBarTrack}>
                   <div
-                    className={`${styles.progressBarFill} ${styles.goldFill}`}
-                    style={{ width: "62%" }}
+                    className={`${styles.progressBarFill} ${styles.crimsonFill}`}
+                    style={{ width: "52%" }}
+                  />
+                </div>
+              </div>
+
+              <div className={styles.categoryItem}>
+                <div className={styles.categoryHeader}>
+                  <span>Pooja Care (Camphor &amp; Diya Oil)</span>
+                  <strong>25%</strong>
+                </div>
+                <div className={styles.progressBarTrack}>
+                  <div
+                    className={`${styles.progressBarFill} ${styles.amberFill}`}
+                    style={{ width: "25%" }}
                   />
                 </div>
               </div>
@@ -213,12 +220,12 @@ export default function AdminDashboardPage() {
               <div className={styles.categoryItem}>
                 <div className={styles.categoryHeader}>
                   <span>Kitchen Care (Ruru Ease spray)</span>
-                  <strong>24%</strong>
+                  <strong>14%</strong>
                 </div>
                 <div className={styles.progressBarTrack}>
                   <div
                     className={`${styles.progressBarFill} ${styles.sageFill}`}
-                    style={{ width: "24%" }}
+                    style={{ width: "14%" }}
                   />
                 </div>
               </div>
@@ -226,12 +233,12 @@ export default function AdminDashboardPage() {
               <div className={styles.categoryItem}>
                 <div className={styles.categoryHeader}>
                   <span>Floor Care (White Phenyle)</span>
-                  <strong>14%</strong>
+                  <strong>9%</strong>
                 </div>
                 <div className={styles.progressBarTrack}>
                   <div
                     className={`${styles.progressBarFill} ${styles.charcoalFill}`}
-                    style={{ width: "14%" }}
+                    style={{ width: "9%" }}
                   />
                 </div>
               </div>

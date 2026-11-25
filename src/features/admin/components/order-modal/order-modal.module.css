@@ -192,9 +192,9 @@
 }
 
 .statusBtnActive {
-  background-color: var(--neutral-800);
+  background-color: #8c1d24;
   color: #ffffff;
-  border-color: var(--neutral-800);
+  border-color: #8c1d24;
 }
 
 .modalFooter {
@@ -225,16 +225,17 @@
 }
 
 .doneBtn {
-  padding: 0.45rem 1rem;
+  padding: 0.45rem 1.25rem;
   font-size: 0.8125rem;
   font-weight: 600;
   color: #ffffff;
-  background-color: var(--neutral-900);
+  background-color: #8c1d24;
   border: none;
   border-radius: var(--radius-xs);
   cursor: pointer;
+  transition: background-color 0.15s ease;
 }
 
 .doneBtn:hover {
-  background-color: var(--neutral-700);
+  background-color: #6e141a;
 }

@@ -88,8 +88,8 @@
 .select:focus,
 .textarea:focus {
   outline: none;
-  border-color: var(--brand-gold-500);
-  box-shadow: 0 0 0 2px var(--brand-gold-100);
+  border-color: #8c1d24;
+  box-shadow: 0 0 0 2px rgba(140, 29, 36, 0.12);
 }
 
 .textarea {
@@ -152,12 +152,13 @@
   font-size: 0.8125rem;
   font-weight: 600;
   color: #ffffff;
-  background-color: var(--brand-gold-600);
+  background-color: #8c1d24;
   border: none;
   border-radius: var(--radius-xs);
   cursor: pointer;
+  transition: background-color 0.15s ease;
 }
 
 .saveBtn:hover {
-  background-color: var(--brand-gold-700);
+  background-color: #6e141a;
 }

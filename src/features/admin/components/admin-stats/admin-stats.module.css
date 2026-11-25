@@ -44,9 +44,9 @@
   justify-content: center;
 }
 
-.goldIcon {
-  background-color: var(--brand-gold-50);
-  color: var(--brand-gold-600);
+.crimsonIcon {
+  background-color: #fdf2f2;
+  color: #8c1d24;
 }
 
 .blueIcon {

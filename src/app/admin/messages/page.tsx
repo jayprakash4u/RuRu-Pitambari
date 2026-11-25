@@ -46,16 +46,20 @@ export default function AdminMessagesPage() {
         {/* Filter Bar */}
         <div className={styles.filterBar}>
           <div className={styles.tabsGroup}>
-            {filterTabs.map((tab) => (
-              <button
-                className={`${styles.tabBtn} ${statusFilter === tab ? styles.tabBtnActive : ""}`}
-                key={tab}
-                onClick={() => setStatusFilter(tab)}
-                type="button"
-              >
-                {tab}
-              </button>
-            ))}
+            {filterTabs.map((tab) => {
+              const count =
+                tab === "All" ? inquiries.length : inquiries.filter((i) => i.status === tab).length;
+              return (
+                <button
+                  className={`${styles.tabBtn} ${statusFilter === tab ? styles.tabBtnActive : ""}`}
+                  key={tab}
+                  onClick={() => setStatusFilter(tab)}
+                  type="button"
+                >
+                  {tab} ({count})
+                </button>
+              );
+            })}
           </div>
         </div>
 

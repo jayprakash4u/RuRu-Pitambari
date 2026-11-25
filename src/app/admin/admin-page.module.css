@@ -42,10 +42,21 @@
   margin: 0;
 }
 
+.primaryColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.subtext {
+  font-size: 0.6875rem;
+  color: var(--neutral-500);
+}
+
 .viewAllLink {
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--brand-gold-600);
+  color: #8c1d24;
   text-decoration: none;
 }
 
@@ -152,8 +163,12 @@
   border-radius: 9999px;
 }
 
-.goldFill {
-  background: linear-gradient(90deg, var(--brand-gold-400), var(--brand-gold-600));
+.crimsonFill {
+  background: linear-gradient(90deg, #8c1d24, #b92b34);
+}
+
+.amberFill {
+  background: linear-gradient(90deg, #d97706, #f59e0b);
 }
 
 .charcoalFill {
@@ -187,8 +202,8 @@
 
 .quickActionCard:hover {
   background-color: #ffffff;
-  border-color: var(--brand-gold-300);
-  box-shadow: var(--shadow-xs);
+  border-color: #8c1d24;
+  box-shadow: 0 2px 6px rgba(140, 29, 36, 0.08);
 }
 
 .quickActionIcon {
@@ -200,7 +215,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--brand-gold-600);
+  color: #8c1d24;
 }
 
 .quickActionTitle {
