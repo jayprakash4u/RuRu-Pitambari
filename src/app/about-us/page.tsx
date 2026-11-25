@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 
-import communityImage from "@/assets/gallery/facebook-08.jpg";
+import heroStoryImage from "@/assets/gallery/dealer-meet-01.jpg";
 import { BrandPurpose } from "@/features/about/brand-purpose/brand-purpose";
 
 import styles from "./about-page.module.css";
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main className={styles.page}>
-      {/* Top Heritage Red Banner (Matching Product Page & Other Pages) */}
+      {/* Top Heritage Red Banner */}
       <section aria-labelledby="about-banner-heading" className={styles.banner}>
         <div className={styles.bannerInner}>
           <h1 className={styles.bannerTitle} id="about-banner-heading">
@@ -24,51 +24,68 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Built Through Trust - Introduction Section */}
+      {/* Built On Trust - Introduction Section */}
       <section aria-labelledby="about-heading" className={styles.introduction}>
         <div className={styles.imageWrap}>
           <Image
-            alt="Ruru Pitambari team member visiting a trusted local retail partner"
+            alt="Ruru Pitambari team and community partners at Dealer Meet"
             className={styles.image}
             placeholder="blur"
             priority
             sizes="(max-width: 48rem) 100vw, 46vw"
-            src={communityImage}
+            src={heroStoryImage}
           />
+          <div className={styles.imageBadge}>
+            <span className={styles.imageBadgeDot} />
+            <span>Serving Nepal Since 2009</span>
+          </div>
         </div>
 
         <div className={styles.content}>
-          <p>About Ruru Pitambari</p>
-          <h2 id="about-heading">Built through trust.</h2>
-          <span>Home-care products from P Three Products · Lalitpur, Nepal</span>
+          <div className={styles.tagWrap}>
+            <span className={styles.tag}>P Three Products · Lalitpur</span>
+          </div>
+
+          <h2 className={styles.heading} id="about-heading">
+            Built on Trust, Crafted for Nepali Homes
+          </h2>
+
+          <p className={styles.lead}>
+            Rooted in tradition and refined for modern living, Ruru Pitambari makes everyday home
+            and metal care effortless, dependable, and gentle.
+          </p>
 
           <div className={styles.copy}>
             <p>
-              Established in 2009, Ruru Pitambari began with a simple purpose: to make dependable
-              metal care easier for Nepali households. Our products are shaped around familiar
-              routines, practical needs and the things people value at home.
+              Founded in 2009 in Lalitpur, Nepal, our journey began with a simple belief: the
+              utensils and sacred vessels that families cherish deserve care that restores their
+              timeless brilliance without harshness or compromise.
             </p>
             <p>
-              We have grown through the support of customers, retailers and communities across
-              Nepal. That relationship continues to guide us as we build a thoughtful range of
-              everyday cleaning and care products.
+              Through long-standing partnerships with local retailers, trusted dealers, and
+              thousands of households across the nation, Ruru Pitambari has grown from a humble
+              local workshop into a household staple known for genuine quality and authentic Nepali
+              care.
             </p>
           </div>
 
-          <dl className={styles.facts}>
-            <div>
-              <dt>Established</dt>
-              <dd>2009</dd>
+          <div className={styles.statsGrid}>
+            <div className={styles.statCard}>
+              <span className={styles.statValue}>2009</span>
+              <span className={styles.statLabel}>Established</span>
+              <span className={styles.statSub}>Lalitpur, Nepal</span>
             </div>
-            <div>
-              <dt>Home</dt>
-              <dd>Lalitpur, Nepal</dd>
+            <div className={styles.statCard}>
+              <span className={styles.statValue}>15+</span>
+              <span className={styles.statLabel}>Years of Trust</span>
+              <span className={styles.statSub}>Across Communities</span>
             </div>
-            <div>
-              <dt>Focus</dt>
-              <dd>Everyday home care</dd>
+            <div className={styles.statCard}>
+              <span className={styles.statValue}>100%</span>
+              <span className={styles.statLabel}>Authentic Care</span>
+              <span className={styles.statSub}>Made in Nepal</span>
             </div>
-          </dl>
+          </div>
         </div>
       </section>
 
