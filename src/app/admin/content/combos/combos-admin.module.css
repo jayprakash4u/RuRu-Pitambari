@@ -1,0 +1,523 @@
+/* ==========================================================================
+   Admin Combo Offers Page - Add Form Above, Table List History Below
+   ========================================================================== */
+
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Notification Toast */
+.toast {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  background-color: #f0f7f3;
+  color: #1e4d3a;
+  border: 1px solid #b7dfc8;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+/* Top Action Header */
+.topActionsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.headingArea {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.headingTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1c1214;
+  margin: 0;
+}
+
+.headingSubtitle {
+  font-size: 0.8125rem;
+  color: #706c63;
+  margin: 0;
+}
+
+.addOfferBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.25rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #8c1d24;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(140, 29, 36, 0.25);
+  transition: all 0.15s ease;
+}
+
+.addOfferBtn:hover {
+  background-color: #741419;
+  transform: translateY(-1px);
+}
+
+/* Expandable / Top Add Offer Form Card */
+.formCard {
+  background-color: #ffffff;
+  border: 1px solid #ede8df;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(28, 18, 20, 0.04);
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.formHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #f0ebe4;
+  padding-bottom: 0.875rem;
+  margin-bottom: 1.25rem;
+}
+
+.formTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1c1214;
+  margin: 0;
+}
+
+.closeFormBtn {
+  background: none;
+  border: none;
+  font-size: 1.125rem;
+  color: #706c63;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.closeFormBtn:hover {
+  background-color: #f7f5f0;
+  color: #1c1214;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 767px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #3b3934;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.input,
+.select {
+  padding: 0.55rem 0.875rem;
+  font-size: 0.8125rem;
+  color: #171612;
+  background-color: #ffffff;
+  border: 1px solid #ede8df;
+  border-radius: 6px;
+  outline: none;
+  font-family: inherit;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.input:focus,
+.select:focus {
+  border-color: #8c1d24;
+  box-shadow: 0 0 0 3px rgba(140, 29, 36, 0.1);
+}
+
+.calculatedSavings {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: #fdfaf5;
+  border: 1px dashed #e8dcc4;
+  border-radius: 6px;
+  padding: 0.65rem 1rem;
+  font-size: 0.8125rem;
+  color: #5c4308;
+  font-weight: 500;
+}
+
+.formActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f0ebe4;
+}
+
+.secondaryBtn {
+  padding: 0.55rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #3b3934;
+  background-color: #ffffff;
+  border: 1px solid #ede8df;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.secondaryBtn:hover {
+  background-color: #f7f5f0;
+}
+
+.submitBtn {
+  padding: 0.55rem 1.25rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #8c1d24;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.submitBtn:hover {
+  background-color: #741419;
+}
+
+/* History / Table Section */
+.historySection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.tablePanel {
+  background-color: #ffffff;
+  border: 1px solid #ede8df;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(28, 18, 20, 0.02);
+}
+
+.filterBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.875rem 1.25rem;
+  border-bottom: 1px solid #f0ebe4;
+  flex-wrap: wrap;
+}
+
+.searchBox {
+  min-width: 240px;
+  max-width: 360px;
+  flex: 1;
+}
+
+.categoryTabs {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  overflow-x: auto;
+}
+
+.tabBtn {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  background-color: transparent;
+  color: #706c63;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.tabBtn:hover {
+  background-color: #f7f5f0;
+  color: #1c1214;
+}
+
+.tabBtnActive {
+  background-color: #8c1d24;
+  color: #ffffff;
+}
+
+.tabBtnActive:hover {
+  background-color: #741419;
+  color: #ffffff;
+}
+
+/* Table */
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.8125rem;
+}
+
+.th {
+  padding: 0.75rem 1rem;
+  background-color: #fbf9f4;
+  color: #706c63;
+  font-weight: 700;
+  border-bottom: 1px solid #ede8df;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid #f0ebe4;
+  color: #171612;
+  vertical-align: middle;
+}
+
+.tr:last-child .td {
+  border-bottom: none;
+}
+
+.tr:hover {
+  background-color: #fcfbfa;
+}
+
+.offerIndex {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 4px;
+  background-color: #fbf9f4;
+  border: 1px solid #ede8df;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #8c1d24;
+}
+
+.offerInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.offerThumb {
+  width: 3.25rem;
+  height: 2.5rem;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid #ede8df;
+  background-color: #fbf9f4;
+  flex-shrink: 0;
+}
+
+.offerThumbPlaceholder {
+  width: 3.25rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  border: 1px solid #ede8df;
+  background-color: #fdf8ed;
+  color: #b47802;
+  font-weight: 700;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.offerTitle {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #1c1214;
+  margin-bottom: 0.15rem;
+}
+
+.offerSubtitle {
+  font-size: 0.75rem;
+  color: #706c63;
+}
+
+.categoryBadge {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  background-color: #fbf9f4;
+  color: #3b3934;
+  border: 1px solid #ede8df;
+  white-space: nowrap;
+}
+
+.regularPrice {
+  color: #706c63;
+  text-decoration: line-through;
+  font-size: 0.75rem;
+}
+
+.offerPrice {
+  color: #8c1d24;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+.savingsTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #2b614d;
+  background-color: #f0f7f3;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  border: 1px solid #cce8dc;
+  white-space: nowrap;
+}
+
+.statusActive {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #2b614d;
+  background-color: #f0f7f3;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #cce8dc;
+}
+
+.statusInactive {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #706c63;
+  background-color: #f7f5f0;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ede8df;
+}
+
+.bestsellerBadge {
+  display: inline-block;
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: #b47802;
+  background-color: #fffdf0;
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  border: 1px solid #fef08a;
+  margin-top: 0.2rem;
+  text-transform: uppercase;
+}
+
+.actionBtn {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  border: 1px solid #ede8df;
+  background-color: #ffffff;
+  color: #3b3934;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.actionBtn:hover {
+  background-color: #f7f5f0;
+  border-color: #8c1d24;
+  color: #8c1d24;
+}
+
+.actionDelete {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #dc2626;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.actionDelete:hover {
+  background-color: #fef2f2;
+}
+
+.emptyState {
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: #706c63;
+  font-size: 0.875rem;
+}
+
+/* Page Banner Config Section at Bottom */
+.pageSettingsCard {
+  background-color: #ffffff;
+  border: 1px solid #ede8df;
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+}
+
+.settingsTitle {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #1c1214;
+  margin: 0 0 0.25rem 0;
+}
+
+.settingsSubtitle {
+  font-size: 0.8125rem;
+  color: #706c63;
+  margin: 0 0 1rem 0;
+}

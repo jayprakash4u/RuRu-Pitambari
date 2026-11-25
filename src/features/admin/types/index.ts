@@ -156,10 +156,27 @@ export type GalleryPageContent = {
   photos: GalleryPhoto[];
 };
 
+export type AdminComboOffer = {
+  id: string;
+  name: string;
+  packSubtitle: string;
+  category: "Metal care" | "Pooja care" | "Kitchen care" | "Floor care";
+  regularPriceNpr: number;
+  comboPriceNpr: number;
+  savingsNpr: number;
+  discountPercent: number;
+  itemCount: number;
+  imageUrl?: string;
+  isBestseller?: boolean;
+  active: boolean;
+  createdAt: string;
+};
+
 export type CombosPageContent = {
   pageTitle: string;
   pageSubtitle: string;
   bannerNotice: string;
+  offers: AdminComboOffer[];
 };
 
 export type ContactPageContent = {
