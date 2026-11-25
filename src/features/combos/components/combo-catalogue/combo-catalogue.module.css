@@ -162,24 +162,32 @@
   transform: scale(1.04);
 }
 
-/* Circular Red Discount Sticker (Top Right - Matching reference screenshot) */
-.discountBadge {
+/* Badge Group (Top Left) */
+.badgeGroup {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
+  top: 0.65rem;
+  left: 0.65rem;
   z-index: 2;
-  width: 2.35rem;
-  height: 2.35rem;
-  border-radius: 50%;
-  background: #d71920;
-  color: #ffffff;
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+}
+
+.discountBadge {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-weight: 800;
+  padding: 0.22rem 0.55rem;
+  background: #8c1d24;
+  color: #ffffff;
   font-size: 0.6875rem;
-  letter-spacing: -0.02em;
-  box-shadow: 0 2px 6px rgba(215, 25, 32, 0.3);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(140, 29, 36, 0.25);
+  line-height: 1.2;
 }
 
 /* Hover Action Buttons */
@@ -285,16 +293,33 @@
 
 .strikePrice {
   font-size: 0.8125rem;
-  color: #9ca3af;
+  color: #878787;
   text-decoration: line-through;
 }
 
 .offerPrice {
   margin: 0;
-  color: #d71920;
-  font-size: 1.0625rem;
+  color: #171612;
+  font-size: 1.125rem;
   font-weight: 800;
   line-height: 1;
+}
+
+.discountPill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.15rem 0.45rem;
+  background: #eef9f2;
+  color: #1b7340;
+  border: 1px solid #b7e4c7;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .taxNotice {

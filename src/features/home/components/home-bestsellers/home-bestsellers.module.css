@@ -42,19 +42,49 @@
   background: var(--neutral-50);
 }
 
-.badge {
+/* Badge Group (Top Left) */
+.badgeGroup {
   position: absolute;
-  z-index: 1;
-  top: var(--space-3);
-  left: var(--space-3);
-  padding: var(--space-1) var(--space-2);
-  border-radius: var(--radius-pill);
-  background: var(--accent-burgundy-600);
-  color: var(--neutral-0);
-  font-size: var(--text-xs);
-  font-weight: var(--weight-bold);
+  top: 0.65rem;
+  left: 0.65rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+}
+
+.bestsellerBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem 0.55rem;
+  background: #fdf2d8;
+  border: 1px solid #f5be18;
+  color: #7a5802;
+  font-size: 0.625rem;
+  font-weight: 800;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  line-height: 1.2;
+}
+
+.discountBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.22rem 0.55rem;
+  background: #8c1d24;
+  color: #ffffff;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(140, 29, 36, 0.25);
+  line-height: 1.2;
 }
 
 .productImage,
@@ -101,26 +131,56 @@
 }
 
 .purchaseRow {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: var(--space-3);
   margin-bottom: var(--space-4);
 }
 
-.purchaseRow div {
+.priceCol {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: 0.25rem;
 }
 
-.purchaseRow span {
+.variantLabel {
   color: var(--color-text-muted);
   font-size: var(--text-xs);
 }
 
-.purchaseRow strong {
-  font-size: var(--text-base);
+.pricing {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.offerPrice {
+  margin: 0;
+  color: #171612;
+  font-size: 1.125rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.strikePrice {
+  font-size: 0.8125rem;
+  color: #878787;
+  text-decoration: line-through;
+}
+
+.discountPill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.15rem 0.45rem;
+  background: #eef9f2;
+  color: #1b7340;
+  border: 1px solid #b7e4c7;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .actionBtn {

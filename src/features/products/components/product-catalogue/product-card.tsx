@@ -51,7 +51,12 @@ export function ProductCard({ product }: ProductCardProps) {
     <article className={styles.card}>
       {/* Product Image Stage with Badges & Rating Pill */}
       <div className={styles.imageWrap}>
-        {product.isBestseller ? <span className={styles.bestsellerBadge}>Bestseller</span> : null}
+        <div className={styles.badgeGroup}>
+          {product.isBestseller ? <span className={styles.bestsellerBadge}>Bestseller</span> : null}
+          {discountPercent ? (
+            <span className={styles.discountBadge}>{discountPercent}% OFF</span>
+          ) : null}
+        </div>
 
         {/* Wishlist Heart Icon */}
         <button
@@ -131,7 +136,7 @@ export function ProductCard({ product }: ProductCardProps) {
           ))}
         </div>
 
-        {/* Pricing (Flipkart Style: [Price] [MRP] [XX% off]) */}
+        {/* Pricing (Flipkart Style: [Price] [MRP] [XX% OFF]) */}
         <div className={styles.pricing}>
           <strong aria-live="polite" className={styles.offerPrice}>
             {nprFormatter.format(selectedVariant.priceNpr)}
@@ -142,7 +147,7 @@ export function ProductCard({ product }: ProductCardProps) {
             </span>
           ) : null}
           {discountPercent ? (
-            <span className={styles.discountText}>{discountPercent}% off</span>
+            <span className={styles.discountPill}>{discountPercent}% OFF</span>
           ) : null}
         </div>
 

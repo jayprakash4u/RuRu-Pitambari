@@ -20,6 +20,9 @@ function BestsellerCard({ product }: { product: Product }) {
   const [added, setAdded] = useState(false);
   const { addItem } = useCart();
   const variant = product.variants[0];
+  const discountPercent = variant.mrpNpr
+    ? Math.round(((variant.mrpNpr - variant.priceNpr) / variant.mrpNpr) * 100)
+    : null;
 
   function addToCart() {
     addItem(product.id, 0);
@@ -30,7 +33,12 @@ function BestsellerCard({ product }: { product: Product }) {
   return (
     <article className={styles.card}>
       <Link aria-label={`View ${product.name}`} className={styles.imageWrap} href={product.href}>
-        <span className={styles.badge}>Bestseller</span>
+        <div className={styles.badgeGroup}>
+          <span className={styles.bestsellerBadge}>Bestseller</span>
+          {discountPercent ? (
+            <span className={styles.discountBadge}>{discountPercent}% OFF</span>
+          ) : null}
+        </div>
         <Image
           alt={`${product.name} product packaging`}
           className={product.imageFit === "contain" ? styles.containImage : styles.productImage}
@@ -46,9 +54,17 @@ function BestsellerCard({ product }: { product: Product }) {
           <Link href={product.href}>{product.name}</Link>
         </h3>
         <div className={styles.purchaseRow}>
-          <div>
-            <span>{variant.label}</span>
-            <strong>{nprFormatter.format(variant.priceNpr)}</strong>
+          <div className={styles.priceCol}>
+            <span className={styles.variantLabel}>{variant.label}</span>
+            <div className={styles.pricing}>
+              <strong className={styles.offerPrice}>{nprFormatter.format(variant.priceNpr)}</strong>
+              {variant.mrpNpr ? (
+                <span className={styles.strikePrice}>{nprFormatter.format(variant.mrpNpr)}</span>
+              ) : null}
+              {discountPercent ? (
+                <span className={styles.discountPill}>{discountPercent}% OFF</span>
+              ) : null}
+            </div>
           </div>
         </div>
 

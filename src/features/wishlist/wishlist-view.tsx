@@ -116,12 +116,19 @@ export function WishlistView() {
         {wishlistedProducts.map((product) => {
           const firstVariant = product.variants[0];
           const price = firstVariant ? firstVariant.priceNpr : 0;
+          const mrp = firstVariant?.mrpNpr;
+          const discountPercent = mrp ? Math.round(((mrp - price) / mrp) * 100) : null;
           const weightLabel = firstVariant?.label ?? "";
 
           return (
             <article className={styles.card} key={product.id}>
               {/* Product Image Stage */}
               <div className={styles.imageWrap}>
+                <div className={styles.badgeGroup}>
+                  {discountPercent ? (
+                    <span className={styles.discountBadge}>{discountPercent}% OFF</span>
+                  ) : null}
+                </div>
                 <Image
                   alt={`${product.name} packaging`}
                   className={styles.image}
@@ -171,6 +178,12 @@ export function WishlistView() {
 
                 <div className={styles.priceRow}>
                   <strong className={styles.price}>{nprFormatter.format(price)}</strong>
+                  {mrp ? (
+                    <span className={styles.strikePrice}>{nprFormatter.format(mrp)}</span>
+                  ) : null}
+                  {discountPercent ? (
+                    <span className={styles.discountPill}>{discountPercent}% OFF</span>
+                  ) : null}
                   <span className={styles.taxNotice}>Inclusive of all taxes</span>
                 </div>
 

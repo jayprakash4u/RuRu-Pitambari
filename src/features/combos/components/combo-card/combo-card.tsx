@@ -40,11 +40,13 @@ export function ComboCard({ combo }: ComboCardProps) {
 
   return (
     <article className={styles.card}>
-      {/* Product Image Stage with Red Circular Discount Sticker */}
+      {/* Product Image Stage with Discount Badge */}
       <div className={styles.imageWrap}>
-        <span aria-label={`${combo.discountPercent}% off`} className={styles.discountBadge}>
-          -{combo.discountPercent}%
-        </span>
+        <div className={styles.badgeGroup}>
+          <span aria-label={`${combo.discountPercent}% off`} className={styles.discountBadge}>
+            {combo.discountPercent}% OFF
+          </span>
+        </div>
 
         {/* Hover Action Buttons (Wishlist Heart & Quick View) */}
         <div className={styles.imageActionButtons}>
@@ -96,6 +98,7 @@ export function ComboCard({ combo }: ComboCardProps) {
           <strong aria-live="polite" className={styles.offerPrice}>
             {nprFormatter.format(combo.comboPriceNpr)}
           </strong>
+          <span className={styles.discountPill}>{combo.discountPercent}% OFF</span>
           <span className={styles.taxNotice}>Inclusive of all taxes</span>
         </div>
 
