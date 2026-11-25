@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
-import { Select } from "@/components/ui";
 import { galleryImages } from "@/features/gallery/data/gallery-images";
 
 import styles from "./gallery-grid.module.css";
@@ -29,21 +28,29 @@ export function GalleryGrid() {
   return (
     <>
       <div className={styles.toolbar}>
-        <label>
-          <span>Show</span>
-          <Select
-            aria-label="Images per page"
+        <span className={styles.resultCount}>
+          Showing <strong>{galleryImages.length ? startIndex + 1 : 0}</strong>–
+          <strong>{endIndex}</strong> of <strong>{galleryImages.length}</strong> photos
+        </span>
+
+        <div className={styles.sortWrap}>
+          <label className={styles.sortLabel} htmlFor="gallery-page-size-select">
+            Show:
+          </label>
+          <select
+            aria-label="Photos per page"
+            className={styles.sortSelect}
+            id="gallery-page-size-select"
             onChange={(event) => changePageSize(event.target.value)}
             value={pageSize}
           >
             {pageSizes.map((size) => (
               <option key={size} value={size}>
-                {size}
+                {size} entries
               </option>
             ))}
-          </Select>
-          <span>entries</span>
-        </label>
+          </select>
+        </div>
       </div>
 
       <div className={styles.grid}>
@@ -64,13 +71,18 @@ export function GalleryGrid() {
       <div className={styles.tableFooter}>
         <p>
           Showing <strong>{galleryImages.length ? startIndex + 1 : 0}</strong> to{" "}
-          <strong>{endIndex}</strong> of <strong>{galleryImages.length}</strong> entries
+          <strong>{endIndex}</strong> of <strong>{galleryImages.length}</strong> photos
         </p>
 
         <nav aria-label="Gallery pagination" className={styles.pagination}>
           <button
             disabled={page === 1}
-            onClick={() => setPage((current) => current - 1)}
+            onClick={() => {
+              setPage((current) => current - 1);
+              if (typeof window !== "undefined") {
+                window.scrollTo({ behavior: "smooth", top: 200 });
+              }
+            }}
             type="button"
           >
             Previous
@@ -82,7 +94,12 @@ export function GalleryGrid() {
                 aria-current={pageNumber === page ? "page" : undefined}
                 aria-label={`Page ${pageNumber}`}
                 key={pageNumber}
-                onClick={() => setPage(pageNumber)}
+                onClick={() => {
+                  setPage(pageNumber);
+                  if (typeof window !== "undefined") {
+                    window.scrollTo({ behavior: "smooth", top: 200 });
+                  }
+                }}
                 type="button"
               >
                 {pageNumber}
@@ -92,7 +109,12 @@ export function GalleryGrid() {
 
           <button
             disabled={page === pageCount}
-            onClick={() => setPage((current) => current + 1)}
+            onClick={() => {
+              setPage((current) => current + 1);
+              if (typeof window !== "undefined") {
+                window.scrollTo({ behavior: "smooth", top: 200 });
+              }
+            }}
             type="button"
           >
             Next
