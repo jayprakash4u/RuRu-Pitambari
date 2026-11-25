@@ -1,80 +1,35 @@
 .section {
-  background: #faf8f5;
-  border-top: 1px solid #ede7db;
-  border-bottom: 1px solid #ede7db;
-  padding-block: clamp(3.5rem, 6vw, 6rem);
+  background: #ffffff;
+  padding-block: clamp(3rem, 5vw, 5rem);
 }
 
 .container {
-  width: min(100% - (2 * var(--page-gutter)), 86rem);
+  width: min(100% - (2 * var(--page-gutter)), 80rem);
   margin-inline: auto;
   display: flex;
   flex-direction: column;
-  gap: clamp(3rem, 5vw, 5rem);
+  gap: clamp(4rem, 6vw, 6rem);
 }
 
-/* Header */
-.sectionHeader {
-  text-align: center;
-  max-width: 42rem;
-  margin-inline: auto;
-}
-
-.eyebrow {
-  display: inline-block;
-  margin-bottom: var(--space-2);
-  color: #8c1d24;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.title {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 3.2vw, 2.75rem);
-  font-weight: 700;
-  color: #171612;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-}
-
-.subtitle {
-  margin: var(--space-3) 0 0;
-  font-size: clamp(0.95rem, 1.4vw, 1.05rem);
-  color: #5e5a52;
-  line-height: 1.6;
-}
-
-/* Row Blocks */
+/* Rows */
 .row {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  gap: clamp(2rem, 5vw, 4.5rem);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: clamp(2.5rem, 5vw, 5rem);
   align-items: center;
 }
 
 .rowReverse {
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
 }
 
 /* Image Card */
 .imageCard {
-  position: relative;
-  border-radius: 16px;
+  border-radius: 12px;
   overflow: hidden;
   background: #ffffff;
-  border: 1px solid #e8e2d8;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.imageCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  border: 1px solid #ede7db;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
 }
 
 .image {
@@ -84,105 +39,77 @@
   object-fit: cover;
 }
 
-/* Content Card */
+/* Text Block */
 .contentCard {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 0.5rem 0;
+  justify-content: center;
+}
+
+/* Decorative Line + Pill Header */
+.lineHeader {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+  width: 100%;
+}
+
+.line {
+  flex: 1;
+  height: 2px;
+  background: #e5dfd5;
 }
 
 .badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.85rem;
-  border-radius: 9999px;
   background: #8c1d24;
   color: #ffffff;
-  font-size: 0.75rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+  padding: 0.55rem 1.4rem;
+  border-radius: 8px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(140, 29, 36, 0.18);
 }
 
 .badgeGold {
   background: #b47802;
+  box-shadow: 0 2px 8px rgba(180, 120, 2, 0.18);
 }
 
-.cardHeading {
+/* Body Text */
+.description {
   margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2.2vw, 2rem);
-  font-weight: 700;
-  color: #171612;
-  line-height: 1.25;
-  letter-spacing: -0.015em;
+  font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+  color: #4a463e;
+  line-height: 1.85;
+  letter-spacing: 0.005em;
 }
 
-.cardDescription {
-  margin: 1rem 0 0;
-  font-size: 0.95rem;
-  color: #555047;
-  line-height: 1.65;
-}
-
-/* Features List */
-.featuresList {
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-  margin-top: 1.35rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid #e8e2d8;
-  width: 100%;
-}
-
-.featureItem {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #2b2823;
-}
-
-.featureIcon {
-  width: 1.25rem;
-  height: 1.25rem;
-  border-radius: 50%;
-  background: rgba(140, 29, 36, 0.1);
-  color: #8c1d24;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-size: 0.75rem;
-}
-
-.featureIconGold {
-  background: rgba(180, 120, 2, 0.12);
-  color: #b47802;
-}
-
-/* Responsive adjustments */
+/* Responsive */
 @media (max-width: 52rem) {
   .row,
   .rowReverse {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 2rem;
   }
 
   .orderFirstOnMobile {
     order: -1;
   }
 
-  .contentCard {
-    padding: 0;
+  .lineHeader {
+    margin-bottom: 1.25rem;
   }
 
-  .cardHeading {
-    font-size: 1.35rem;
+  .badge {
+    font-size: 0.85rem;
+    padding: 0.45rem 1.15rem;
+  }
+
+  .description {
+    font-size: 0.925rem;
+    line-height: 1.75;
   }
 }
