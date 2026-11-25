@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 import communityImage from "@/assets/gallery/facebook-08.jpg";
+import { BrandPurpose } from "@/features/about/brand-purpose/brand-purpose";
 
 import styles from "./about-page.module.css";
 
@@ -70,6 +71,9 @@ export default function AboutPage() {
           </dl>
         </div>
       </section>
+
+      {/* Guiding Purpose & Vision Section */}
+      <BrandPurpose />
     </main>
   );
 }
