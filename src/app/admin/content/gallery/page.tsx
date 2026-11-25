@@ -3,147 +3,98 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
-import { AdminShell, MediaUploader, useAdmin, type GalleryAlbum } from "@/features/admin";
+import { AdminShell, MediaUploader, useAdmin, type GalleryPhoto } from "@/features/admin";
 
 import styles from "./gallery-admin.module.css";
 
 export default function AdminGalleryPageContent() {
   const { siteContent, updateSiteContent } = useAdmin();
-  const [activeSubTab, setActiveSubTab] = useState<"Albums" | "All Photos">("Albums");
   const [searchQuery, setSearchQuery] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("All");
 
   // Modals state
-  const [isNewAlbumModalOpen, setIsNewAlbumModalOpen] = useState(false);
-  const [isAddImagesModalOpen, setIsAddImagesModalOpen] = useState(false);
-  const [openedAlbum, setOpenedAlbum] = useState<GalleryAlbum | null>(null);
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const [previewPhoto, setPreviewPhoto] = useState<GalleryPhoto | null>(null);
 
-  // Form states for modals
-  const [newAlbumTitle, setNewAlbumTitle] = useState("");
-  const [newAlbumCover, setNewAlbumCover] = useState("");
+  // New photo form state
+  const [newTitle, setNewTitle] = useState("");
+  const [newCategory, setNewCategory] = useState<GalleryPhoto["category"]>("Events");
+  const [newImage, setNewImage] = useState("");
+  const [newCaption, setNewCaption] = useState("");
 
-  const [targetAlbumId, setTargetAlbumId] = useState<string>(
-    siteContent.gallery.albums[0]?.id || "",
-  );
-  const [uploadedImage, setUploadedImage] = useState("");
-  const [imageCaption, setImageCaption] = useState("");
+  const photos = siteContent.gallery.photos;
 
-  const albums = siteContent.gallery.albums;
+  const filteredPhotos = useMemo(() => {
+    return photos.filter((p) => {
+      const matchesCategory = categoryFilter === "All" ? true : p.category === categoryFilter;
+      const q = searchQuery.toLowerCase().trim();
+      const matchesSearch =
+        !q ||
+        p.title.toLowerCase().includes(q) ||
+        (p.caption && p.caption.toLowerCase().includes(q)) ||
+        p.category.toLowerCase().includes(q);
 
-  const filteredAlbums = useMemo(() => {
-    const q = searchQuery.toLowerCase().trim();
-    if (!q) return albums;
-    return albums.filter((a) => a.title.toLowerCase().includes(q));
-  }, [albums, searchQuery]);
+      return matchesCategory && matchesSearch;
+    });
+  }, [photos, categoryFilter, searchQuery]);
 
-  // All photos flat list
-  const allPhotos = useMemo(() => {
-    return albums.flatMap((album) =>
-      album.images.map((img) => ({
-        ...img,
-        albumTitle: album.title,
-        albumId: album.id,
-      })),
-    );
-  }, [albums]);
-
-  function handleCreateAlbum(e: React.FormEvent) {
+  function handleUploadPhoto(e: React.FormEvent) {
     e.preventDefault();
-    if (!newAlbumTitle.trim() || !newAlbumCover) return;
+    if (!newTitle.trim() || !newImage) return;
 
-    const newAlbum: GalleryAlbum = {
-      id: `alb-${Date.now()}`,
-      title: newAlbumTitle.trim(),
-      coverImage: newAlbumCover,
-      images: [
-        {
-          id: `img-${Date.now()}`,
-          url: newAlbumCover,
-          caption: "Cover photo",
-        },
-      ],
+    const newPhoto: GalleryPhoto = {
+      id: `pho-${Date.now()}`,
+      title: newTitle.trim(),
+      imageUrl: newImage,
+      category: newCategory,
+      caption: newCaption.trim() || undefined,
+      uploadedAt: new Date().toISOString(),
     };
 
     updateSiteContent("gallery", {
       ...siteContent.gallery,
-      albums: [newAlbum, ...albums],
+      photos: [newPhoto, ...photos],
     });
 
-    setNewAlbumTitle("");
-    setNewAlbumCover("");
-    setIsNewAlbumModalOpen(false);
+    setNewTitle("");
+    setNewImage("");
+    setNewCaption("");
+    setIsUploadModalOpen(false);
   }
 
-  function handleAddImageToAlbum(e: React.FormEvent) {
-    e.preventDefault();
-    if (!targetAlbumId || !uploadedImage) return;
-
-    const updatedAlbums = albums.map((alb) => {
-      if (alb.id !== targetAlbumId) return alb;
-      return {
-        ...alb,
-        images: [
-          ...alb.images,
-          {
-            id: `img-${Date.now()}`,
-            url: uploadedImage,
-            caption: imageCaption.trim() || undefined,
-          },
-        ],
-      };
-    });
-
+  function handleDeletePhoto(id: string) {
+    if (!confirm("Are you sure you want to delete this photo from the gallery?")) return;
+    const updated = photos.filter((p) => p.id !== id);
     updateSiteContent("gallery", {
       ...siteContent.gallery,
-      albums: updatedAlbums,
+      photos: updated,
     });
-
-    setUploadedImage("");
-    setImageCaption("");
-    setIsAddImagesModalOpen(false);
+    if (previewPhoto?.id === id) setPreviewPhoto(null);
   }
 
-  function handleDeleteAlbum(id: string) {
-    if (!confirm("Are you sure you want to delete this album?")) return;
-    const updatedAlbums = albums.filter((a) => a.id !== id);
-    updateSiteContent("gallery", {
-      ...siteContent.gallery,
-      albums: updatedAlbums,
-    });
-    if (openedAlbum?.id === id) setOpenedAlbum(null);
-  }
-
-  function handleDeletePhotoFromAlbum(albumId: string, photoId: string) {
-    const updatedAlbums = albums.map((alb) => {
-      if (alb.id !== albumId) return alb;
-      return {
-        ...alb,
-        images: alb.images.filter((img) => img.id !== photoId),
-      };
-    });
-
-    updateSiteContent("gallery", {
-      ...siteContent.gallery,
-      albums: updatedAlbums,
-    });
-
-    if (openedAlbum && openedAlbum.id === albumId) {
-      setOpenedAlbum({
-        ...openedAlbum,
-        images: openedAlbum.images.filter((img) => img.id !== photoId),
+  function formatDate(iso: string) {
+    try {
+      const d = new Date(iso);
+      return d.toLocaleDateString("en-GB", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
       });
+    } catch {
+      return iso;
     }
   }
 
   return (
     <AdminShell
-      subtitle="Manage albums, upload photos from device, and organise media."
-      title="Gallery"
+      subtitle="Upload and manage all brand, factory, and community photos shown on the website."
+      title="Gallery Photos"
     >
       <div className={styles.pageContainer}>
-        {/* Top Action Buttons (Matching Reference) */}
+        {/* Top Action Buttons */}
         <div className={styles.topActionsRow}>
           <Link className={styles.viewGalleryBtn} href="/gallery" target="_blank">
-            <span>View gallery</span>
+            <span>View live gallery</span>
             <svg
               fill="none"
               height="14"
@@ -159,303 +110,181 @@ export default function AdminGalleryPageContent() {
           </Link>
 
           <button
-            className={styles.secondaryActionBtn}
-            onClick={() => setIsNewAlbumModalOpen(true)}
-            type="button"
-          >
-            + New album
-          </button>
-
-          <button
             className={styles.primaryActionBtn}
-            onClick={() => {
-              setTargetAlbumId(albums[0]?.id || "");
-              setIsAddImagesModalOpen(true);
-            }}
+            onClick={() => setIsUploadModalOpen(true)}
             type="button"
           >
-            + Add images
+            + Upload new photo
           </button>
         </div>
 
-        {/* Sub Navigation Tabs */}
-        <div className={styles.tabNavRow}>
-          <button
-            className={`${styles.tabTextBtn} ${activeSubTab === "Albums" ? styles.tabTextBtnActive : ""}`}
-            onClick={() => setActiveSubTab("Albums")}
-            type="button"
+        {/* Filter and Search Bar */}
+        <div className={styles.filterRow}>
+          <div className={styles.searchBox}>
+            <input
+              className={styles.searchInput}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search photos by title, category, or caption..."
+              type="search"
+              value={searchQuery}
+            />
+          </div>
+
+          <select
+            className={styles.categorySelect}
+            onChange={(e) => setCategoryFilter(e.target.value)}
+            value={categoryFilter}
           >
-            Albums
-          </button>
-          <button
-            className={`${styles.tabTextBtn} ${activeSubTab === "All Photos" ? styles.tabTextBtnActive : ""}`}
-            onClick={() => setActiveSubTab("All Photos")}
-            type="button"
-          >
-            All Photos ({allPhotos.length})
-          </button>
+            <option value="All">All Categories</option>
+            <option value="Events">Events</option>
+            <option value="Factory & Workshop">Factory & Workshop</option>
+            <option value="Products & Demos">Products & Demos</option>
+            <option value="Festivals & Heritage">Festivals & Heritage</option>
+          </select>
         </div>
 
-        {/* ALBUMS VIEW */}
-        {activeSubTab === "Albums" ? (
-          <>
-            {/* Search Albums Input */}
-            <div className={styles.searchBox}>
-              <input
-                className={styles.searchInput}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search albums..."
-                type="search"
-                value={searchQuery}
-              />
-            </div>
+        {/* Results Count */}
+        <div className={styles.resultsCount}>
+          Showing 1-{filteredPhotos.length} of {filteredPhotos.length} photos
+        </div>
 
-            {/* List of Albums (Pixel-aligned with Reference UI) */}
-            <div className={styles.albumListCard}>
-              {filteredAlbums.length === 0 ? (
-                <div className={styles.emptyState}>No albums found matching your search.</div>
-              ) : (
-                filteredAlbums.map((album) => (
-                  <div className={styles.albumRow} key={album.id}>
-                    <div className={styles.albumLeft}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img alt={album.title} className={styles.albumThumb} src={album.coverImage} />
-                      <div className={styles.albumInfo}>
-                        <div className={styles.albumTitle}>{album.title}</div>
-                        <div className={styles.albumCount}>
-                          {album.images.length} image{album.images.length === 1 ? "" : "s"}
-                        </div>
-                      </div>
-                    </div>
+        {/* Clean Photos List (Row-by-Row, Not Cards) */}
+        <div className={styles.photoListCard}>
+          {filteredPhotos.length === 0 ? (
+            <div className={styles.emptyState}>No photos match the selected search or filter.</div>
+          ) : (
+            filteredPhotos.map((photo) => (
+              <div className={styles.photoRow} key={photo.id}>
+                <div className={styles.photoLeft}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    alt={photo.title}
+                    className={styles.photoThumb}
+                    onClick={() => setPreviewPhoto(photo)}
+                    src={photo.imageUrl}
+                  />
 
-                    <div className={styles.albumActions}>
-                      <button
-                        className={styles.actionOpen}
-                        onClick={() => setOpenedAlbum(album)}
-                        type="button"
-                      >
-                        Open
-                      </button>
-                      <button
-                        className={styles.actionAddImages}
-                        onClick={() => {
-                          setTargetAlbumId(album.id);
-                          setIsAddImagesModalOpen(true);
-                        }}
-                        type="button"
-                      >
-                        Add images
-                      </button>
-                      <button
-                        className={styles.actionDelete}
-                        onClick={() => handleDeleteAlbum(album.id)}
-                        type="button"
-                      >
-                        Delete
-                      </button>
+                  <div className={styles.photoInfo}>
+                    <div className={styles.photoTitle}>{photo.title}</div>
+                    <div className={styles.photoSubRow}>
+                      <span className={styles.categoryBadge}>{photo.category}</span>
+                      <span className={styles.photoCaption}>
+                        {photo.caption || "No caption provided"}
+                      </span>
                     </div>
                   </div>
-                ))
-              )}
-            </div>
-          </>
-        ) : (
-          /* ALL PHOTOS VIEW */
-          <div className={styles.photosGrid}>
-            {allPhotos.map((photo) => (
-              <div className={styles.photoCard} key={photo.id}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  alt={photo.caption || "Gallery Photo"}
-                  className={styles.gridImg}
-                  src={photo.url}
-                />
-                <div className={styles.photoMeta}>
-                  <strong style={{ color: "#171612" }}>{photo.albumTitle}</strong>
-                  <span style={{ color: "#706c63" }}>{photo.caption || "No caption"}</span>
+                </div>
+
+                <div className={styles.photoRight}>
+                  <span className={styles.dateTimestamp}>{formatDate(photo.uploadedAt)}</span>
+
                   <button
-                    onClick={() => handleDeletePhotoFromAlbum(photo.albumId, photo.id)}
-                    style={{
-                      color: "#a33333",
-                      background: "none",
-                      border: "none",
-                      cursor: "pointer",
-                      fontSize: "0.75rem",
-                      padding: "0.25rem 0",
-                      textAlign: "left",
-                      marginTop: "0.25rem",
-                    }}
+                    className={styles.actionPreview}
+                    onClick={() => setPreviewPhoto(photo)}
                     type="button"
                   >
-                    Delete image
+                    Preview
+                  </button>
+
+                  <button
+                    className={styles.actionDelete}
+                    onClick={() => handleDeletePhoto(photo.id)}
+                    type="button"
+                  >
+                    Delete
                   </button>
                 </div>
               </div>
-            ))}
-          </div>
-        )}
+            ))
+          )}
+        </div>
 
-        {/* MODAL: + New Album */}
-        {isNewAlbumModalOpen ? (
-          <div className={styles.modalBackdrop} onClick={() => setIsNewAlbumModalOpen(false)}>
+        {/* MODAL: + Upload New Photo */}
+        {isUploadModalOpen ? (
+          <div className={styles.modalBackdrop} onClick={() => setIsUploadModalOpen(false)}>
             <div className={styles.modalWindow} onClick={(e) => e.stopPropagation()}>
               <div className={styles.modalHeader}>
-                <h2 className={styles.modalTitle}>Create New Album</h2>
+                <h2 className={styles.modalTitle}>Upload Photo to Gallery</h2>
                 <button
                   aria-label="Close dialog"
                   className={styles.closeBtn}
-                  onClick={() => setIsNewAlbumModalOpen(false)}
+                  onClick={() => setIsUploadModalOpen(false)}
                   type="button"
                 >
                   ✕
                 </button>
               </div>
 
-              <form onSubmit={handleCreateAlbum}>
+              <form onSubmit={handleUploadPhoto}>
                 <div className={styles.modalBody}>
-                  <div>
-                    <label
-                      htmlFor="album-title-input"
-                      style={{
-                        display: "block",
-                        fontSize: "0.75rem",
-                        fontWeight: 700,
-                        color: "#3b3934",
-                        marginBottom: "0.35rem",
-                      }}
-                    >
-                      Album Title
+                  <MediaUploader
+                    accept="image"
+                    helperText="Upload JPG, PNG, or WebP picture from your device"
+                    label="Choose Photo from Device"
+                    onChange={(img) => setNewImage(img)}
+                    value={newImage}
+                  />
+
+                  <div className={styles.field}>
+                    <label className={styles.label} htmlFor="photo-title-input">
+                      Photo Title
                     </label>
                     <input
                       className={styles.searchInput}
-                      id="album-title-input"
-                      onChange={(e) => setNewAlbumTitle(e.target.value)}
-                      placeholder="e.g. Retailer Partnership Meet 2026"
+                      id="photo-title-input"
+                      onChange={(e) => setNewTitle(e.target.value)}
+                      placeholder="e.g. Annual Dealer Partnership Meet"
                       required
-                      value={newAlbumTitle}
+                      value={newTitle}
                     />
                   </div>
 
-                  <MediaUploader
-                    accept="image"
-                    helperText="Upload album cover photo from computer or phone"
-                    label="Album Cover Photo (Upload from device)"
-                    onChange={(cover) => setNewAlbumCover(cover)}
-                    value={newAlbumCover}
-                  />
-                </div>
-
-                <div className={styles.modalFooter}>
-                  <button
-                    className={styles.secondaryActionBtn}
-                    onClick={() => setIsNewAlbumModalOpen(false)}
-                    type="button"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    className={styles.primaryActionBtn}
-                    disabled={!newAlbumTitle.trim() || !newAlbumCover}
-                    type="submit"
-                  >
-                    Create Album
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        ) : null}
-
-        {/* MODAL: + Add Images */}
-        {isAddImagesModalOpen ? (
-          <div className={styles.modalBackdrop} onClick={() => setIsAddImagesModalOpen(false)}>
-            <div className={styles.modalWindow} onClick={(e) => e.stopPropagation()}>
-              <div className={styles.modalHeader}>
-                <h2 className={styles.modalTitle}>Add Images to Album</h2>
-                <button
-                  aria-label="Close dialog"
-                  className={styles.closeBtn}
-                  onClick={() => setIsAddImagesModalOpen(false)}
-                  type="button"
-                >
-                  ✕
-                </button>
-              </div>
-
-              <form onSubmit={handleAddImageToAlbum}>
-                <div className={styles.modalBody}>
-                  <div>
-                    <label
-                      htmlFor="target-album-select"
-                      style={{
-                        display: "block",
-                        fontSize: "0.75rem",
-                        fontWeight: 700,
-                        color: "#3b3934",
-                        marginBottom: "0.35rem",
-                      }}
-                    >
-                      Select Destination Album
+                  <div className={styles.field}>
+                    <label className={styles.label} htmlFor="photo-cat-select">
+                      Category Tag
                     </label>
                     <select
                       className={styles.searchInput}
-                      id="target-album-select"
-                      onChange={(e) => setTargetAlbumId(e.target.value)}
-                      value={targetAlbumId}
+                      id="photo-cat-select"
+                      onChange={(e) => setNewCategory(e.target.value as GalleryPhoto["category"])}
+                      value={newCategory}
                     >
-                      {albums.map((a) => (
-                        <option key={a.id} value={a.id}>
-                          {a.title} ({a.images.length} images)
-                        </option>
-                      ))}
+                      <option value="Events">Events</option>
+                      <option value="Factory & Workshop">Factory & Workshop</option>
+                      <option value="Products & Demos">Products & Demos</option>
+                      <option value="Festivals & Heritage">Festivals & Heritage</option>
                     </select>
                   </div>
 
-                  <MediaUploader
-                    accept="image"
-                    helperText="Upload image file directly from device"
-                    label="Choose Image from Device"
-                    onChange={(img) => setUploadedImage(img)}
-                    value={uploadedImage}
-                  />
-
-                  <div>
-                    <label
-                      htmlFor="img-caption-input"
-                      style={{
-                        display: "block",
-                        fontSize: "0.75rem",
-                        fontWeight: 700,
-                        color: "#3b3934",
-                        marginBottom: "0.35rem",
-                      }}
-                    >
-                      Image Caption (Optional)
+                  <div className={styles.field}>
+                    <label className={styles.label} htmlFor="photo-caption-input">
+                      Caption / Context (Optional)
                     </label>
-                    <input
+                    <textarea
                       className={styles.searchInput}
-                      id="img-caption-input"
-                      onChange={(e) => setImageCaption(e.target.value)}
-                      placeholder="e.g. Traditional copper gagri after single application"
-                      value={imageCaption}
+                      id="photo-caption-input"
+                      onChange={(e) => setNewCaption(e.target.value)}
+                      placeholder="Add brief details about the event, location, or products shown..."
+                      rows={3}
+                      value={newCaption}
                     />
                   </div>
                 </div>
 
                 <div className={styles.modalFooter}>
                   <button
-                    className={styles.secondaryActionBtn}
-                    onClick={() => setIsAddImagesModalOpen(false)}
+                    className={styles.secondaryBtn}
+                    onClick={() => setIsUploadModalOpen(false)}
                     type="button"
                   >
                     Cancel
                   </button>
                   <button
                     className={styles.primaryActionBtn}
-                    disabled={!uploadedImage}
+                    disabled={!newTitle.trim() || !newImage}
                     type="submit"
                   >
-                    Add to Album
+                    Upload & Publish Photo
                   </button>
                 </div>
               </form>
@@ -463,25 +292,28 @@ export default function AdminGalleryPageContent() {
           </div>
         ) : null}
 
-        {/* MODAL: Open Album Viewer */}
-        {openedAlbum ? (
-          <div className={styles.modalBackdrop} onClick={() => setOpenedAlbum(null)}>
+        {/* MODAL: Large Preview */}
+        {previewPhoto ? (
+          <div className={styles.modalBackdrop} onClick={() => setPreviewPhoto(null)}>
             <div
               className={styles.modalWindow}
               onClick={(e) => e.stopPropagation()}
-              style={{ maxWidth: "700px" }}
+              style={{ maxWidth: "640px" }}
             >
               <div className={styles.modalHeader}>
                 <div>
-                  <h2 className={styles.modalTitle}>{openedAlbum.title}</h2>
-                  <span style={{ fontSize: "0.75rem", color: "#706c63" }}>
-                    {openedAlbum.images.length} photos in this album
+                  <h2 className={styles.modalTitle}>{previewPhoto.title}</h2>
+                  <span
+                    className={styles.categoryBadge}
+                    style={{ marginTop: "0.25rem", display: "inline-block" }}
+                  >
+                    {previewPhoto.category}
                   </span>
                 </div>
                 <button
                   aria-label="Close dialog"
                   className={styles.closeBtn}
-                  onClick={() => setOpenedAlbum(null)}
+                  onClick={() => setPreviewPhoto(null)}
                   type="button"
                 >
                   ✕
@@ -489,55 +321,32 @@ export default function AdminGalleryPageContent() {
               </div>
 
               <div className={styles.modalBody}>
-                <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                  <button
-                    className={styles.primaryActionBtn}
-                    onClick={() => {
-                      setTargetAlbumId(openedAlbum.id);
-                      setIsAddImagesModalOpen(true);
-                    }}
-                    type="button"
-                  >
-                    + Add images to this album
-                  </button>
-                </div>
-
-                <div className={styles.photosGrid}>
-                  {openedAlbum.images.map((img) => (
-                    <div className={styles.photoCard} key={img.id}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        alt={img.caption || "Album photo"}
-                        className={styles.gridImg}
-                        src={img.url}
-                      />
-                      <div className={styles.photoMeta}>
-                        <span>{img.caption || "No caption"}</span>
-                        <button
-                          onClick={() => handleDeletePhotoFromAlbum(openedAlbum.id, img.id)}
-                          style={{
-                            color: "#a33333",
-                            background: "none",
-                            border: "none",
-                            cursor: "pointer",
-                            fontSize: "0.75rem",
-                            padding: "0.25rem 0",
-                            textAlign: "left",
-                          }}
-                          type="button"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                  ))}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  alt={previewPhoto.title}
+                  className={styles.previewImageLarge}
+                  src={previewPhoto.imageUrl}
+                />
+                <p style={{ margin: 0, fontSize: "0.875rem", color: "#3b3934" }}>
+                  {previewPhoto.caption || "No caption provided"}
+                </p>
+                <div style={{ fontSize: "0.75rem", color: "#706c63" }}>
+                  Uploaded on {formatDate(previewPhoto.uploadedAt)}
                 </div>
               </div>
 
               <div className={styles.modalFooter}>
                 <button
-                  className={styles.secondaryActionBtn}
-                  onClick={() => setOpenedAlbum(null)}
+                  className={styles.actionDelete}
+                  onClick={() => handleDeletePhoto(previewPhoto.id)}
+                  style={{ marginRight: "auto" }}
+                  type="button"
+                >
+                  Delete this photo
+                </button>
+                <button
+                  className={styles.secondaryBtn}
+                  onClick={() => setPreviewPhoto(null)}
                   type="button"
                 >
                   Close

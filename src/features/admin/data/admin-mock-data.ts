@@ -581,92 +581,59 @@ export const initialSiteContent: SiteContent = {
     pageTitle: "Gallery",
     pageSubtitle:
       "A glimpse into our heritage, manufacturing quality, dealer network, and community events.",
-    albums: [
+    photos: [
       {
-        id: "alb-1",
-        title: "Annual Retailers & Dealers Meet",
-        coverImage: "/assets/gallery/dealer-meet-01.jpg",
-        images: [
-          {
-            id: "img-1",
-            url: "/assets/gallery/dealer-meet-01.jpg",
-            caption: "Meeting Lalitpur retailers",
-          },
-          { id: "img-2", url: "/assets/gallery/dealer-meet-02.jpg", caption: "Presenting awards" },
-          { id: "img-3", url: "/assets/gallery/dealer-meet-01.jpg", caption: "Annual celebration" },
-        ],
+        id: "pho-1",
+        title: "Annual Retailers Meet - Lalitpur",
+        imageUrl: "/assets/gallery/dealer-meet-01.jpg",
+        category: "Events",
+        caption:
+          "Celebrating 15 years of partnership with local shopkeepers and neighbourhood stores.",
+        uploadedAt: "2026-11-20T10:30:00Z",
       },
       {
-        id: "alb-2",
-        title: "Factory Production & Quality Blending",
-        coverImage: "/assets/gallery/production-01.jpg",
-        images: [
-          { id: "img-4", url: "/assets/gallery/production-01.jpg", caption: "Batch formulation" },
-          { id: "img-5", url: "/assets/gallery/production-01.jpg", caption: "Sealing inspection" },
-        ],
+        id: "pho-2",
+        title: "Dealer Appreciation & Gift Presentation",
+        imageUrl: "/assets/gallery/dealer-meet-02.jpg",
+        category: "Events",
+        caption: "Presenting commemorative wall clock to trusted partner in Lalitpur.",
+        uploadedAt: "2026-11-20T11:45:00Z",
       },
       {
-        id: "alb-3",
-        title: "Traditional Metal Care & Temple Rituals",
-        coverImage: "/assets/gallery/metal-care-demo.jpg",
-        images: [
-          {
-            id: "img-6",
-            url: "/assets/gallery/metal-care-demo.jpg",
-            caption: "Brass kalash restored",
-          },
-          { id: "img-7", url: "/assets/gallery/metal-care-demo.jpg", caption: "Puja diya shine" },
-          { id: "img-8", url: "/assets/gallery/metal-care-demo.jpg", caption: "Copper gagri test" },
-          {
-            id: "img-9",
-            url: "/assets/gallery/metal-care-demo.jpg",
-            caption: "Temple bell polishing",
-          },
-        ],
+        id: "pho-3",
+        title: "Factory Batch Blending & Quality Consistency",
+        imageUrl: "/assets/gallery/production-01.jpg",
+        category: "Factory & Workshop",
+        caption:
+          "Precision batch formulation and non-acidic safety checks at our Lalitpur facility.",
+        uploadedAt: "2026-11-21T09:15:00Z",
       },
       {
-        id: "alb-4",
-        title: "Packaging & Dispatch Logistics",
-        coverImage: "/assets/gallery/dealer-meet-02.jpg",
-        images: [
-          { id: "img-10", url: "/assets/gallery/dealer-meet-02.jpg", caption: "Carton packing" },
-          {
-            id: "img-11",
-            url: "/assets/gallery/dealer-meet-02.jpg",
-            caption: "District freight dispatch",
-          },
-        ],
+        id: "pho-4",
+        title: "Traditional Brass Kalash & Gagri Polishing",
+        imageUrl: "/assets/gallery/metal-care-demo.jpg",
+        category: "Products & Demos",
+        caption:
+          "Natural warm shine restored on heirloom puja brass without scratching delicate engravings.",
+        uploadedAt: "2026-11-22T14:20:00Z",
       },
       {
-        id: "alb-5",
-        title: "Dashain & Tihar Puja Care Demonstrations",
-        coverImage: "/assets/gallery/metal-care-demo.jpg",
-        images: [
-          {
-            id: "img-12",
-            url: "/assets/gallery/metal-care-demo.jpg",
-            caption: "Festival thali restoration",
-          },
-          { id: "img-13", url: "/assets/gallery/metal-care-demo.jpg", caption: "Idols cleaning" },
-          { id: "img-14", url: "/assets/gallery/metal-care-demo.jpg", caption: "Deepawali lamps" },
-        ],
+        id: "pho-5",
+        title: "Dashain & Tihar Puja Thali Care",
+        imageUrl: "/assets/gallery/metal-care-demo.jpg",
+        category: "Festivals & Heritage",
+        caption:
+          "Effortless cleaning for sacred diya lamps, incense holders, and festive prayer vessels.",
+        uploadedAt: "2026-11-23T16:00:00Z",
       },
       {
-        id: "alb-6",
-        title: "Community & Retail Partners Across Nepal",
-        coverImage: "/assets/gallery/dealer-meet-01.jpg",
-        images: [
-          {
-            id: "img-15",
-            url: "/assets/gallery/dealer-meet-01.jpg",
-            caption: "Kathmandu Valley retailers",
-          },
-          {
-            id: "img-16",
-            url: "/assets/gallery/dealer-meet-02.jpg",
-            caption: "Pokhara distribution depot",
-          },
-        ],
+        id: "pho-6",
+        title: "Packaging & Nationwide Logistics Dispatch",
+        imageUrl: "/assets/gallery/dealer-meet-02.jpg",
+        category: "Factory & Workshop",
+        caption:
+          "Carefully sealed cartons dispatched to regional wholesalers across 45+ districts.",
+        uploadedAt: "2026-11-24T08:30:00Z",
       },
     ],
   },

@@ -142,21 +142,19 @@ export type OurStoryContent = {
   quoteAuthor: string;
 };
 
-export type GalleryAlbum = {
+export type GalleryPhoto = {
   id: string;
   title: string;
-  coverImage: string;
-  images: Array<{
-    id: string;
-    url: string;
-    caption?: string;
-  }>;
+  imageUrl: string;
+  category: "Events" | "Factory & Workshop" | "Products & Demos" | "Festivals & Heritage";
+  caption?: string;
+  uploadedAt: string;
 };
 
 export type GalleryPageContent = {
   pageTitle: string;
   pageSubtitle: string;
-  albums: GalleryAlbum[];
+  photos: GalleryPhoto[];
 };
 
 export type CombosPageContent = {
