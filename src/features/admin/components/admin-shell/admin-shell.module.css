@@ -63,20 +63,25 @@
   color: inherit;
 }
 
-.brandEmblem {
-  width: 2.25rem;
-  height: 2.25rem;
+.logoWrap {
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 9999px;
-  background-color: #8c1d24;
-  border: 1.5px solid #e9d5be;
-  color: #ffffff;
+  background-color: #fdfbf7;
+  border: 1px solid #ede8df;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  font-size: 0.8125rem;
-  letter-spacing: 0.04em;
-  box-shadow: 0 1px 3px rgba(140, 29, 36, 0.2);
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.brandLogo {
+  width: 1.85rem;
+  height: 1.85rem;
+  object-fit: contain;
+  display: block;
 }
 
 .brandName {

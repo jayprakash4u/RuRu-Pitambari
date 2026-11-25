@@ -1,8 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, type ReactNode } from "react";
+
+import logoSource from "@/assets/brand/logo-transparent.png";
 
 import { useAdmin } from "../../context/admin-store";
 import styles from "./admin-shell.module.css";
@@ -123,7 +126,16 @@ export function AdminShell({
       <aside className={`${styles.sidebar} ${sidebarOpen ? styles.sidebarOpen : ""}`}>
         <div className={styles.brandHeader}>
           <Link className={styles.brandTitleGroup} href="/admin">
-            <div className={styles.brandEmblem}>RP</div>
+            <div className={styles.logoWrap}>
+              <Image
+                alt="Ruru Pitambari"
+                className={styles.brandLogo}
+                height={36}
+                priority
+                src={logoSource}
+                width={36}
+              />
+            </div>
             <div>
               <div className={styles.brandName}>Ruru Pitambari</div>
               <div className={styles.brandBadge}>Admin Portal</div>
