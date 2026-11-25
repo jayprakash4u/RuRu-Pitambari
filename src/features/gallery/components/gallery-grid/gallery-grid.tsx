@@ -8,7 +8,7 @@ import { galleryImages } from "@/features/gallery/data/gallery-images";
 
 import styles from "./gallery-grid.module.css";
 
-const pageSizes = [10, 15, 20] as const;
+const pageSizes = [12, 24, 36] as const;
 
 export function GalleryGrid() {
   const [page, setPage] = useState(1);
