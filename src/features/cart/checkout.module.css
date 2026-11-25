@@ -827,10 +827,13 @@
 
 /* Print Styles */
 @media print {
-  .receiptActions,
-  header,
-  footer,
-  nav {
+  .receiptActions {
+    display: none !important;
+  }
+
+  :global(header),
+  :global(footer),
+  :global(nav) {
     display: none !important;
   }
 
