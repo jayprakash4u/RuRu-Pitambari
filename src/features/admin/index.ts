@@ -8,3 +8,4 @@ export * from "./components/order-modal";
 export * from "./components/product-modal";
 export * from "./components/dealer-modal";
 export * from "./components/media-uploader";
+export * from "./components/media-uploader";

@@ -578,30 +578,95 @@ export const initialSiteContent: SiteContent = {
     quoteAuthor: "The P Three Products Family, Lalitpur, Nepal",
   },
   gallery: {
-    pageTitle: "Brand & Factory Gallery",
+    pageTitle: "Gallery",
     pageSubtitle:
       "A glimpse into our heritage, manufacturing quality, dealer network, and community events.",
-    items: [
+    albums: [
       {
-        id: "gal-1",
-        title: "Annual Retailers Meet - Lalitpur",
-        category: "Events",
-        imageUrl: "/assets/gallery/dealer-meet-01.jpg",
-        caption: "Celebrating 15 years of partnership with local shopkeepers and distributors.",
+        id: "alb-1",
+        title: "Annual Retailers & Dealers Meet",
+        coverImage: "/assets/gallery/dealer-meet-01.jpg",
+        images: [
+          {
+            id: "img-1",
+            url: "/assets/gallery/dealer-meet-01.jpg",
+            caption: "Meeting Lalitpur retailers",
+          },
+          { id: "img-2", url: "/assets/gallery/dealer-meet-02.jpg", caption: "Presenting awards" },
+          { id: "img-3", url: "/assets/gallery/dealer-meet-01.jpg", caption: "Annual celebration" },
+        ],
       },
       {
-        id: "gal-2",
-        title: "Batch Blending & Quality Inspection",
-        category: "Factory & Workshop",
-        imageUrl: "/assets/gallery/production-01.jpg",
-        caption: "Strict micro-filtration and batch consistency checks at our Lalitpur facility.",
+        id: "alb-2",
+        title: "Factory Production & Quality Blending",
+        coverImage: "/assets/gallery/production-01.jpg",
+        images: [
+          { id: "img-4", url: "/assets/gallery/production-01.jpg", caption: "Batch formulation" },
+          { id: "img-5", url: "/assets/gallery/production-01.jpg", caption: "Sealing inspection" },
+        ],
       },
       {
-        id: "gal-3",
-        title: "Traditional Puja Utensils Restored",
-        category: "Products",
-        imageUrl: "/assets/gallery/metal-care-demo.jpg",
-        caption: "Pure natural shine restored on vintage copper gagri and brass kalash.",
+        id: "alb-3",
+        title: "Traditional Metal Care & Temple Rituals",
+        coverImage: "/assets/gallery/metal-care-demo.jpg",
+        images: [
+          {
+            id: "img-6",
+            url: "/assets/gallery/metal-care-demo.jpg",
+            caption: "Brass kalash restored",
+          },
+          { id: "img-7", url: "/assets/gallery/metal-care-demo.jpg", caption: "Puja diya shine" },
+          { id: "img-8", url: "/assets/gallery/metal-care-demo.jpg", caption: "Copper gagri test" },
+          {
+            id: "img-9",
+            url: "/assets/gallery/metal-care-demo.jpg",
+            caption: "Temple bell polishing",
+          },
+        ],
+      },
+      {
+        id: "alb-4",
+        title: "Packaging & Dispatch Logistics",
+        coverImage: "/assets/gallery/dealer-meet-02.jpg",
+        images: [
+          { id: "img-10", url: "/assets/gallery/dealer-meet-02.jpg", caption: "Carton packing" },
+          {
+            id: "img-11",
+            url: "/assets/gallery/dealer-meet-02.jpg",
+            caption: "District freight dispatch",
+          },
+        ],
+      },
+      {
+        id: "alb-5",
+        title: "Dashain & Tihar Puja Care Demonstrations",
+        coverImage: "/assets/gallery/metal-care-demo.jpg",
+        images: [
+          {
+            id: "img-12",
+            url: "/assets/gallery/metal-care-demo.jpg",
+            caption: "Festival thali restoration",
+          },
+          { id: "img-13", url: "/assets/gallery/metal-care-demo.jpg", caption: "Idols cleaning" },
+          { id: "img-14", url: "/assets/gallery/metal-care-demo.jpg", caption: "Deepawali lamps" },
+        ],
+      },
+      {
+        id: "alb-6",
+        title: "Community & Retail Partners Across Nepal",
+        coverImage: "/assets/gallery/dealer-meet-01.jpg",
+        images: [
+          {
+            id: "img-15",
+            url: "/assets/gallery/dealer-meet-01.jpg",
+            caption: "Kathmandu Valley retailers",
+          },
+          {
+            id: "img-16",
+            url: "/assets/gallery/dealer-meet-02.jpg",
+            caption: "Pokhara distribution depot",
+          },
+        ],
       },
     ],
   },
