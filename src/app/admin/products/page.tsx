@@ -51,6 +51,7 @@ export default function AdminProductsPage() {
         shortName: data.shortName ?? "",
         category: data.category ?? "Metal care",
         description: data.description ?? "",
+        imageUrl: data.imageUrl,
         variants: data.variants ?? [],
         active: true,
         featured: false,
@@ -152,19 +153,57 @@ export default function AdminProductsPage() {
 
                     return (
                       <tr className={styles.tr} key={product.id}>
-                        <td className={styles.td} style={{ maxWidth: "260px" }}>
-                          <div>
-                            <strong>{product.name}</strong>
-                            {hasLowStock ? (
-                              <span style={{ marginLeft: "0.5rem" }}>
-                                <AdminBadge size="sm" variant="warning">
-                                  Low Stock
-                                </AdminBadge>
-                              </span>
-                            ) : null}
-                          </div>
-                          <div style={{ fontSize: "0.75rem", color: "var(--neutral-500)" }}>
-                            {product.shortName}
+                        <td className={styles.td} style={{ maxWidth: "300px" }}>
+                          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                            {product.imageUrl ? (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img
+                                alt={product.name}
+                                src={product.imageUrl}
+                                style={{
+                                  width: "2.75rem",
+                                  height: "2.75rem",
+                                  objectFit: "cover",
+                                  borderRadius: "6px",
+                                  border: "1px solid #ede8df",
+                                  flexShrink: 0,
+                                }}
+                              />
+                            ) : (
+                              <div
+                                style={{
+                                  width: "2.75rem",
+                                  height: "2.75rem",
+                                  borderRadius: "6px",
+                                  border: "1px solid #ede8df",
+                                  backgroundColor: "#fbf9f4",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  fontSize: "0.75rem",
+                                  color: "#8c1d24",
+                                  fontWeight: 700,
+                                  flexShrink: 0,
+                                }}
+                              >
+                                RP
+                              </div>
+                            )}
+                            <div>
+                              <div>
+                                <strong>{product.name}</strong>
+                                {hasLowStock ? (
+                                  <span style={{ marginLeft: "0.5rem" }}>
+                                    <AdminBadge size="sm" variant="warning">
+                                      Low Stock
+                                    </AdminBadge>
+                                  </span>
+                                ) : null}
+                              </div>
+                              <div style={{ fontSize: "0.75rem", color: "var(--neutral-500)" }}>
+                                {product.shortName}
+                              </div>
+                            </div>
                           </div>
                         </td>
                         <td className={styles.td}>

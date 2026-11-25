@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { MediaUploader } from "../media-uploader";
 import type { AdminProduct } from "../../types";
 import styles from "./product-modal.module.css";
 
@@ -18,6 +19,7 @@ export function ProductModal({ product, onClose, onSave }: ProductModalProps) {
   const [category, setCategory] = useState<
     "Metal care" | "Pooja care" | "Kitchen care" | "Floor care"
   >(product?.category ?? "Metal care");
+  const [imageUrl, setImageUrl] = useState(product?.imageUrl ?? "");
   const [description, setDescription] = useState(product?.description ?? "");
   const [variants, setVariants] = useState(
     product?.variants ?? [
@@ -57,6 +59,7 @@ export function ProductModal({ product, onClose, onSave }: ProductModalProps) {
       shortName,
       category,
       description,
+      imageUrl: imageUrl || undefined,
       variants,
     });
     onClose();
@@ -139,6 +142,16 @@ export function ProductModal({ product, onClose, onSave }: ProductModalProps) {
                   <option value="Floor care">Floor care</option>
                 </select>
               </div>
+            </div>
+
+            <div className={styles.fieldGroup}>
+              <MediaUploader
+                accept="image"
+                helperText="Upload JPG, PNG, or WebP picture from device for the product card"
+                label="Product Image (For Product Card)"
+                onChange={(img) => setImageUrl(img)}
+                value={imageUrl}
+              />
             </div>
 
             <div className={styles.fieldGroup}>
