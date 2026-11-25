@@ -38,7 +38,7 @@
 }
 
 .inner {
-  width: min(100% - (2 * var(--page-gutter)), 90rem);
+  width: min(100% - (2 * var(--page-gutter)), 68rem);
   margin-inline: auto;
   padding-top: var(--space-6);
 }

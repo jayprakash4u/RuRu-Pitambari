@@ -42,13 +42,13 @@ export function CartView() {
             aria-hidden="true"
             className={styles.emptyIcon}
             fill="none"
-            height="56"
+            height="48"
             stroke="currentColor"
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="1.5"
             viewBox="0 0 24 24"
-            width="56"
+            width="48"
           >
             <circle cx="8" cy="21" r="1" />
             <circle cx="19" cy="21" r="1" />
@@ -57,8 +57,8 @@ export function CartView() {
         </div>
         <h2 className={styles.emptyTitle}>Your cart is empty</h2>
         <p className={styles.emptyText}>
-          Looks like you haven&apos;t added any items to your shopping cart yet. Browse our
-          bestsellers, metal care, and puja essentials!
+          Discover authentic metal care, puja essentials, and household cleaning products made for
+          Nepali homes.
         </p>
         <Link className={styles.exploreBtn} href="/products">
           Start Shopping
@@ -69,110 +69,141 @@ export function CartView() {
 
   return (
     <div className={styles.cartRoot}>
-      {/* Top summary bar */}
-      <div className={styles.toolbar}>
-        <div className={styles.countText}>
-          You have <strong>{totalItemsCount}</strong> {totalItemsCount === 1 ? "item" : "items"} in
-          your cart
-        </div>
-        <Link className={styles.continueLink} href="/products">
-          ← Continue shopping
-        </Link>
-      </div>
-
       <div className={styles.layout}>
-        {/* Left Column: Items Table / List */}
-        <div className={styles.itemsList}>
-          {detailedItems.map(({ product, quantity, variant, variantIndex }) => (
-            <article className={styles.item} key={`${product.id}-${variantIndex}`}>
-              <div className={styles.imageWrap}>
-                <Image
-                  alt={`${product.name} product packaging`}
-                  className={styles.image}
-                  placeholder="blur"
-                  sizes="6rem"
-                  src={product.image}
-                />
-              </div>
+        {/* Left Column: Cart Items Table */}
+        <section aria-label="Shopping cart items" className={styles.itemsSection}>
+          {/* Desktop Table Header */}
+          <div aria-hidden="true" className={styles.tableHeader}>
+            <span className={styles.colProduct}>Product</span>
+            <span className={styles.colPrice}>Price</span>
+            <span className={styles.colQuantity}>Quantity</span>
+            <span className={styles.colTotal}>Total</span>
+          </div>
 
-              <div className={styles.details}>
-                <span className={styles.categoryBadge}>{product.category}</span>
-                <h2 className={styles.productName}>
-                  <Link href={`/products?q=${encodeURIComponent(product.name)}`}>
-                    {product.name}
-                  </Link>
-                </h2>
-                <span className={styles.variantLabel}>{variant.label}</span>
-                <div className={styles.mobilePrice}>{nprFormatter.format(variant.priceNpr)}</div>
-              </div>
+          {/* Item Rows */}
+          <div className={styles.itemsList}>
+            {detailedItems.map(({ product, quantity, variant, variantIndex }) => (
+              <article className={styles.itemRow} key={`${product.id}-${variantIndex}`}>
+                {/* Product Image & Info */}
+                <div className={styles.productCell}>
+                  <div className={styles.imageWrap}>
+                    <Image
+                      alt={`${product.name} packaging`}
+                      className={styles.productImage}
+                      placeholder="blur"
+                      sizes="5rem"
+                      src={product.image}
+                    />
+                  </div>
 
-              {/* Quantity Selector */}
-              <div className={styles.quantityCol}>
-                <div className={styles.qtyBox}>
-                  <button
-                    aria-label={`Decrease ${product.name} quantity`}
-                    className={styles.qtyBtn}
-                    disabled={quantity === 1}
-                    onClick={() => updateQuantity(product.id, variantIndex, quantity - 1)}
-                    type="button"
-                  >
-                    −
-                  </button>
-                  <strong aria-live="polite" className={styles.qtyCount}>
-                    {quantity}
-                  </strong>
-                  <button
-                    aria-label={`Increase ${product.name} quantity`}
-                    className={styles.qtyBtn}
-                    onClick={() => updateQuantity(product.id, variantIndex, quantity + 1)}
-                    type="button"
-                  >
-                    +
-                  </button>
+                  <div className={styles.productInfo}>
+                    <span className={styles.categoryBadge}>{product.category}</span>
+                    <h2 className={styles.productName}>
+                      <Link href={`/products?q=${encodeURIComponent(product.name)}`}>
+                        {product.name}
+                      </Link>
+                    </h2>
+                    <span className={styles.variantLabel}>{variant.label}</span>
+
+                    {/* Mobile Unit Price */}
+                    <span className={styles.mobileUnitPrice}>
+                      {nprFormatter.format(variant.priceNpr)} each
+                    </span>
+
+                    {/* Mobile Remove Button */}
+                    <button
+                      aria-label={`Remove ${product.name} from cart`}
+                      className={styles.mobileRemoveBtn}
+                      onClick={() => removeItem(product.id, variantIndex)}
+                      type="button"
+                    >
+                      Remove
+                    </button>
+                  </div>
                 </div>
 
-                <button
-                  aria-label={`Remove ${product.name} from cart`}
-                  className={styles.removeBtn}
-                  onClick={() => removeItem(product.id, variantIndex)}
-                  type="button"
-                >
-                  <svg
-                    aria-hidden="true"
-                    fill="none"
-                    height="14"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    width="14"
-                  >
-                    <polyline points="3 6 5 6 21 6" />
-                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-                  </svg>
-                  <span>Remove</span>
-                </button>
-              </div>
+                {/* Unit Price (Desktop) */}
+                <div className={styles.priceCell}>
+                  <span className={styles.unitPrice}>{nprFormatter.format(variant.priceNpr)}</span>
+                </div>
 
-              {/* Line Price */}
-              <div className={styles.priceCol}>
-                <strong className={styles.linePrice}>
-                  {nprFormatter.format(variant.priceNpr * quantity)}
-                </strong>
-                <span className={styles.taxNotice}>Inclusive of all taxes</span>
-              </div>
-            </article>
-          ))}
-        </div>
+                {/* Quantity Stepper */}
+                <div className={styles.quantityCell}>
+                  <div className={styles.qtyBox}>
+                    <button
+                      aria-label={`Decrease ${product.name} quantity`}
+                      className={styles.qtyBtn}
+                      disabled={quantity === 1}
+                      onClick={() => updateQuantity(product.id, variantIndex, quantity - 1)}
+                      type="button"
+                    >
+                      −
+                    </button>
+                    <span aria-live="polite" className={styles.qtyCount}>
+                      {quantity}
+                    </span>
+                    <button
+                      aria-label={`Increase ${product.name} quantity`}
+                      className={styles.qtyBtn}
+                      onClick={() => updateQuantity(product.id, variantIndex, quantity + 1)}
+                      type="button"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+
+                {/* Line Total & Desktop Remove Button */}
+                <div className={styles.totalCell}>
+                  <strong className={styles.linePrice}>
+                    {nprFormatter.format(variant.priceNpr * quantity)}
+                  </strong>
+                  <button
+                    aria-label={`Remove ${product.name} from cart`}
+                    className={styles.removeIconBtn}
+                    onClick={() => removeItem(product.id, variantIndex)}
+                    title="Remove item"
+                    type="button"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      fill="none"
+                      height="16"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      width="16"
+                    >
+                      <line x1="18" x2="6" y1="6" y2="18" />
+                      <line x1="6" x2="18" y1="6" y2="18" />
+                    </svg>
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {/* Under-table Footer Actions */}
+          <div className={styles.tableFooter}>
+            <Link className={styles.continueShoppingLink} href="/products">
+              ← Continue Shopping
+            </Link>
+          </div>
+        </section>
 
         {/* Right Column: Order Summary */}
-        <aside className={styles.summaryCard}>
-          <h2 className={styles.summaryTitle}>Order Summary</h2>
+        <aside aria-labelledby="summary-heading" className={styles.summaryCard}>
+          <h2 className={styles.summaryTitle} id="summary-heading">
+            Order Summary
+          </h2>
 
           <div className={styles.summaryRow}>
-            <span>Subtotal ({totalItemsCount} items)</span>
-            <strong className={styles.subtotalValue}>{nprFormatter.format(subtotal)}</strong>
+            <span>
+              Subtotal ({totalItemsCount} {totalItemsCount === 1 ? "item" : "items"})
+            </span>
+            <span className={styles.summaryValue}>{nprFormatter.format(subtotal)}</span>
           </div>
 
           <div className={styles.summaryRow}>
@@ -180,36 +211,34 @@ export function CartView() {
             <span className={styles.deliveryNote}>Calculated at checkout</span>
           </div>
 
-          <div className={styles.divider} />
+          <div className={styles.summaryDivider} />
 
           <div className={styles.totalRow}>
             <span>Estimated Total</span>
-            <strong className={styles.totalValue}>{nprFormatter.format(subtotal)}</strong>
+            <strong className={styles.totalPrice}>{nprFormatter.format(subtotal)}</strong>
           </div>
-
-          <p className={styles.deliveryNotice}>
-            🚚 Fast delivery across Kathmandu Valley and nationwide Nepal.
-          </p>
+          <span className={styles.taxNote}>Inclusive of all applicable taxes</span>
 
           <Link className={styles.checkoutBtn} href="/checkout">
             Proceed to Checkout →
           </Link>
 
-          <Link className={styles.continueBtn} href="/products">
-            Continue Shopping
-          </Link>
-
-          {/* Trust Guarantees */}
-          <div className={styles.trustBadges}>
-            <div className={styles.trustItem}>
-              <span>✓</span> 100% Genuine Ruru Pitambari
-            </div>
-            <div className={styles.trustItem}>
-              <span>✓</span> Cash on Delivery Available
-            </div>
-            <div className={styles.trustItem}>
-              <span>✓</span> Direct Manufacturer Quality
-            </div>
+          <div className={styles.securityNote}>
+            <svg
+              aria-hidden="true"
+              fill="none"
+              height="14"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              width="14"
+            >
+              <rect height="11" rx="2" ry="2" width="18" x="3" y="11" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+            <span>Secure Checkout · Cash on Delivery Available</span>
           </div>
         </aside>
       </div>

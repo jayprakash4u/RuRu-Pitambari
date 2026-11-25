@@ -2,85 +2,85 @@
   width: 100%;
 }
 
-/* Toolbar */
-.toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 1.25rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid var(--color-border);
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.countText {
-  font-size: var(--text-base);
-  color: var(--color-text-muted);
-}
-
-.countText strong {
-  color: var(--color-text);
-  font-weight: 700;
-}
-
-.continueLink {
-  color: #8c1d24;
-  font-size: var(--text-sm);
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.continueLink:hover {
-  text-decoration: underline;
-}
-
 /* Layout */
 .layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(20rem, 24rem);
-  gap: 2rem;
+  grid-template-columns: minmax(0, 1.6fr) minmax(18rem, 22rem);
+  gap: 2.5rem;
   align-items: start;
 }
 
-@media (max-width: 58rem) {
+@media (max-width: 60rem) {
   .layout {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
+}
+
+/* Items Section */
+.itemsSection {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Desktop Table Header */
+.tableHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 5.5rem 7.5rem 6.5rem;
+  align-items: center;
+  padding: 0 0.5rem 0.85rem;
+  border-bottom: 1.5px solid #e8e2d8;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #706c63;
+}
+
+.colPrice {
+  text-align: right;
+  padding-right: 0.75rem;
+}
+
+.colQuantity {
+  text-align: center;
+}
+
+.colTotal {
+  text-align: right;
+  padding-right: 0.5rem;
 }
 
 /* Items List */
 .itemsList {
   display: flex;
   flex-direction: column;
-  background: #ffffff;
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
-  overflow: hidden;
 }
 
-.item {
+/* Item Row */
+.itemRow {
   display: grid;
-  grid-template-columns: 5.5rem minmax(0, 1fr) auto auto;
+  grid-template-columns: minmax(0, 1fr) 5.5rem 7.5rem 6.5rem;
   align-items: center;
-  gap: 1.25rem;
-  padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid var(--color-border);
-  transition: background 0.15s ease;
+  padding: 1.35rem 0.5rem;
+  border-bottom: 1px solid #f0ebe1;
+  transition: background-color 0.15s ease;
 }
 
-.item:last-child {
-  border-bottom: none;
+.itemRow:last-child {
+  border-bottom: 1px solid #e8e2d8;
 }
 
-.item:hover {
-  background: #fdfcf9;
+/* Product Cell */
+.productCell {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
 }
 
-/* Image Wrap */
 .imageWrap {
-  width: 5.5rem;
-  height: 5.5rem;
+  width: 4.75rem;
+  height: 4.75rem;
   aspect-ratio: 1;
   background: #ffffff;
   border: 1px solid #ede8df;
@@ -89,39 +89,40 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.35rem;
+  padding: 0.25rem;
+  flex-shrink: 0;
 }
 
-.image {
+.productImage {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-/* Details */
-.details {
+.productInfo {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.15rem;
+  min-width: 0;
 }
 
 .categoryBadge {
   font-size: 0.6875rem;
   font-weight: 700;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
   color: #8c1d24;
 }
 
 .productName {
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.9375rem;
   font-weight: 600;
   line-height: 1.35;
 }
 
 .productName a {
-  color: var(--color-text);
+  color: #171612;
   text-decoration: none;
   transition: color 0.15s ease;
 }
@@ -132,174 +133,201 @@
 
 .variantLabel {
   font-size: 0.8125rem;
-  color: var(--color-text-muted);
+  color: #706c63;
 }
 
-.mobilePrice {
+.mobileUnitPrice {
   display: none;
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: #8c1d24;
-  margin-top: 0.25rem;
 }
 
-/* Quantity */
-.quantityCol {
+.mobileRemoveBtn {
+  display: none;
+}
+
+/* Price Cell */
+.priceCell {
+  text-align: right;
+  padding-right: 0.75rem;
+}
+
+.unitPrice {
+  font-size: 0.875rem;
+  color: #56534d;
+}
+
+/* Quantity Cell */
+.quantityCell {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
 }
 
 .qtyBox {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  border: 1px solid #d1d5db;
+  border: 1px solid #dcd6cb;
   border-radius: 6px;
   background: #ffffff;
   overflow: hidden;
+  height: 2rem;
 }
 
 .qtyBtn {
-  width: 2rem;
-  height: 2rem;
+  width: 1.85rem;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   background: transparent;
   border: none;
-  color: var(--color-text);
-  font-size: 1rem;
+  color: #171612;
+  font-size: 0.9375rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .qtyBtn:hover:not(:disabled) {
-  background: #f3f4f6;
+  background: #f5f1e8;
   color: #8c1d24;
 }
 
 .qtyBtn:disabled {
-  opacity: 0.3;
+  opacity: 0.25;
   cursor: not-allowed;
 }
 
 .qtyCount {
-  min-width: 2rem;
+  min-width: 1.75rem;
   text-align: center;
   font-size: 0.875rem;
   font-weight: 700;
-  color: var(--color-text);
+  color: #171612;
 }
 
-.removeBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  background: none;
-  border: none;
-  color: #9ca3af;
-  font-size: 0.75rem;
-  cursor: pointer;
-  padding: 0;
-  transition: color 0.15s ease;
-}
-
-.removeBtn:hover {
-  color: #dc2626;
-}
-
-/* Price Column */
-.priceCol {
+/* Total Cell */
+.totalCell {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  min-width: 6.5rem;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-right: 0.25rem;
 }
 
 .linePrice {
-  font-size: 1.125rem;
-  font-weight: 800;
-  color: #8c1d24;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #171612;
 }
 
-.taxNotice {
-  font-size: 0.6875rem;
-  color: #9ca3af;
+.removeIconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 4px;
+  background: transparent;
+  border: none;
+  color: #9e978c;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.removeIconBtn:hover {
+  color: #dc2626;
+  background: #fdf5f5;
+}
+
+/* Table Footer Actions */
+.tableFooter {
+  padding-top: 1.5rem;
+}
+
+.continueShoppingLink {
+  display: inline-flex;
+  align-items: center;
+  color: #8c1d24;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.continueShoppingLink:hover {
+  text-decoration: underline;
 }
 
 /* Order Summary */
 .summaryCard {
   background: #ffffff;
-  border: 1px solid var(--color-border);
+  border: 1px solid #ede8df;
   border-radius: 12px;
   padding: 1.75rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
 }
 
 .summaryTitle {
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 600;
   margin: 0 0 1.25rem;
-  color: var(--color-text);
+  color: #171612;
 }
 
 .summaryRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 0.9375rem;
-  color: var(--color-text-muted);
-  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  color: #56534d;
+  margin-bottom: 0.85rem;
 }
 
-.subtotalValue {
-  color: var(--color-text);
-  font-weight: 700;
+.summaryValue {
+  color: #171612;
+  font-weight: 600;
 }
 
 .deliveryNote {
   font-size: 0.8125rem;
-  color: #059669;
-  font-weight: 600;
+  color: #706c63;
 }
 
-.divider {
+.summaryDivider {
   height: 1px;
-  background: var(--color-border);
-  margin-block: 1rem 1.15rem;
+  background: #ede8df;
+  margin-block: 1rem;
 }
 
 .totalRow {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: 0.35rem;
 }
 
 .totalRow span {
-  font-size: 1.0625rem;
+  font-size: 1rem;
   font-weight: 700;
-  color: var(--color-text);
+  color: #171612;
 }
 
-.totalValue {
-  font-size: 1.5rem;
+.totalPrice {
+  font-size: 1.35rem;
   font-weight: 800;
   color: #8c1d24;
 }
 
-.deliveryNotice {
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
-  line-height: 1.5;
-  margin: 0 0 1.25rem;
-  background: #fdfbf7;
-  padding: 0.6rem 0.75rem;
-  border-radius: 6px;
-  border-left: 3px solid #8c1d24;
+.taxNote {
+  display: block;
+  font-size: 0.6875rem;
+  color: #9e978c;
+  margin-bottom: 1.35rem;
 }
 
 .checkoutBtn {
@@ -312,57 +340,30 @@
   color: #ffffff;
   font-weight: 700;
   font-size: 0.9375rem;
-  border-radius: 6px;
+  border-radius: 8px;
   text-decoration: none;
-  box-shadow: 0 3px 10px rgba(140, 29, 36, 0.25);
+  box-shadow: 0 2px 8px rgba(140, 29, 36, 0.2);
   transition: all 0.15s ease;
 }
 
 .checkoutBtn:hover {
-  background: #6e141a;
+  background: #73151b;
   transform: translateY(-1px);
 }
 
-.continueBtn {
+.securityNote {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  margin-top: 0.75rem;
-  padding: 0.65rem 1rem;
-  background: transparent;
-  color: #4b5563;
-  font-weight: 600;
-  font-size: var(--text-sm);
-  text-decoration: none;
-  transition: color 0.15s ease;
-}
-
-.continueBtn:hover {
-  color: #8c1d24;
-}
-
-/* Trust Badges */
-.trustBadges {
-  margin-top: 1.5rem;
-  padding-top: 1.25rem;
-  border-top: 1px dashed var(--color-border);
-  display: flex;
-  flex-direction: column;
   gap: 0.45rem;
-}
-
-.trustItem {
+  margin-top: 1.15rem;
   font-size: 0.75rem;
-  color: #6b7280;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  color: #706c63;
 }
 
-.trustItem span {
+.securityNote svg {
   color: #059669;
-  font-weight: 800;
+  flex-shrink: 0;
 }
 
 /* Empty State */
@@ -374,94 +375,125 @@
   text-align: center;
   padding: 4.5rem 1.5rem;
   background: #ffffff;
-  border: 1px solid var(--color-border);
+  border: 1px solid #ede8df;
   border-radius: 12px;
-  max-width: 36rem;
+  max-width: 34rem;
   margin-inline: auto;
 }
 
 .emptyIconWrap {
-  width: 5rem;
-  height: 5rem;
+  width: 4.5rem;
+  height: 4.5rem;
   border-radius: 50%;
   background: #fdf5f5;
   color: #8c1d24;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .emptyTitle {
   font-family: var(--font-display);
-  font-size: 1.75rem;
+  font-size: 1.65rem;
   font-weight: 600;
-  margin: 0 0 0.75rem;
-  color: var(--color-text);
+  margin: 0 0 0.65rem;
+  color: #171612;
 }
 
 .emptyText {
-  color: var(--color-text-muted);
-  font-size: var(--text-base);
+  color: #706c63;
+  font-size: 0.9375rem;
   line-height: 1.6;
-  max-width: 28rem;
-  margin: 0 0 2rem;
+  max-width: 26rem;
+  margin: 0 0 1.75rem;
 }
 
 .exploreBtn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.85rem 2rem;
+  padding: 0.75rem 1.85rem;
   background: #8c1d24;
   color: #ffffff;
   font-weight: 700;
-  font-size: var(--text-sm);
+  font-size: 0.875rem;
   border-radius: 6px;
   text-decoration: none;
-  box-shadow: 0 2px 8px rgba(140, 29, 36, 0.25);
+  box-shadow: 0 2px 8px rgba(140, 29, 36, 0.2);
   transition: all 0.15s ease;
 }
 
 .exploreBtn:hover {
-  background: #6e141a;
+  background: #73151b;
   transform: translateY(-1px);
 }
 
 /* Mobile responsive */
-@media (max-width: 40rem) {
-  .item {
-    grid-template-columns: 4.75rem minmax(0, 1fr);
+@media (max-width: 48rem) {
+  .tableHeader {
+    display: none;
+  }
+
+  .itemRow {
+    grid-template-columns: 4.25rem minmax(0, 1fr) auto;
     grid-template-areas:
-      "img details"
-      "qty price";
-    gap: 0.85rem;
-    padding: 1rem;
+      "img info total"
+      "img qty qty";
+    gap: 0.75rem 1rem;
+    padding: 1.15rem 0.25rem;
+  }
+
+  .productCell {
+    grid-area: info;
+    gap: 0;
   }
 
   .imageWrap {
     grid-area: img;
-    width: 4.75rem;
-    height: 4.75rem;
+    width: 4.25rem;
+    height: 4.25rem;
   }
 
-  .details {
-    grid-area: details;
-  }
-
-  .mobilePrice {
+  .mobileUnitPrice {
     display: block;
+    font-size: 0.75rem;
+    color: #706c63;
+    margin-top: 0.2rem;
   }
 
-  .quantityCol {
+  .mobileRemoveBtn {
+    display: inline-block;
+    background: none;
+    border: none;
+    padding: 0;
+    margin-top: 0.35rem;
+    font-size: 0.75rem;
+    color: #9e978c;
+    text-decoration: underline;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .mobileRemoveBtn:hover {
+    color: #dc2626;
+  }
+
+  .priceCell {
+    display: none;
+  }
+
+  .quantityCell {
     grid-area: qty;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.75rem;
+    justify-content: flex-start;
   }
 
-  .priceCol {
-    grid-area: price;
+  .totalCell {
+    grid-area: total;
+    align-self: start;
+  }
+
+  .removeIconBtn {
     display: none;
   }
 }
