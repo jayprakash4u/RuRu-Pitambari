@@ -6,93 +6,6 @@ import styles from "./site-footer.module.css";
 
 const currentYear = new Date().getFullYear();
 
-const trustPillars = [
-  {
-    icon: (
-      <svg
-        aria-hidden="true"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path d="M9 12l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-    title: "100% Nepali Brand",
-    description: "Formulated & crafted in Lalitpur, Nepal since 2009",
-  },
-  {
-    icon: (
-      <svg
-        aria-hidden="true"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6.4-4.8-6.4 4.8 2.4-7.2-6-4.8h7.6z"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-    title: "Authentic Utensil Shine",
-    description: "Gentle & proven care for brass, copper & sacred vessels",
-  },
-  {
-    icon: (
-      <svg
-        aria-hidden="true"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        viewBox="0 0 24 24"
-      >
-        <rect
-          height="13"
-          rx="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          width="16"
-          x="1"
-          y="3"
-        />
-        <path d="M16 8h4l3 3v5h-7V8z" strokeLinecap="round" strokeLinejoin="round" />
-        <circle cx="5.5" cy="18.5" r="2.5" />
-        <circle cx="18.5" cy="18.5" r="2.5" />
-      </svg>
-    ),
-    title: "Nationwide Availability",
-    description: "Supplied across retail, grocery & puja stores across Nepal",
-  },
-  {
-    icon: (
-      <svg
-        aria-hidden="true"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-    title: "Direct Support & Enquiries",
-    description: "+977 985-1037659 · info@rurupitambari.com",
-  },
-] as const;
-
 const shopLinks = [
   { href: "/products", label: "All Products" },
   { href: "/products?category=metal-care", label: "Metal Care" },
@@ -113,23 +26,6 @@ const companyLinks = [
 export function SiteFooter() {
   return (
     <footer className={styles.footer}>
-      {/* Top Trust & Value Pillars */}
-      <section aria-label="Brand Guarantees" className={styles.trustSection}>
-        <div className={styles.trustGrid}>
-          {trustPillars.map((item) => (
-            <div className={styles.trustItem} key={item.title}>
-              <div aria-hidden="true" className={styles.trustIconWrap}>
-                {item.icon}
-              </div>
-              <div className={styles.trustContent}>
-                <h3 className={styles.trustTitle}>{item.title}</h3>
-                <p className={styles.trustDesc}>{item.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* Main Footer Content */}
       <div className={styles.main}>
         {/* Brand & Contact Column */}
