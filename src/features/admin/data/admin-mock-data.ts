@@ -585,48 +585,31 @@ export const initialSiteContent: SiteContent = {
       {
         id: "pho-1",
         imageUrl: "/assets/gallery/dealer-meet-01.jpg",
-        category: "Events",
-        caption:
-          "Celebrating 15 years of partnership with local shopkeepers and neighbourhood stores.",
         uploadedAt: "2026-11-20T10:30:00Z",
       },
       {
         id: "pho-2",
         imageUrl: "/assets/gallery/dealer-meet-02.jpg",
-        category: "Events",
-        caption: "Presenting commemorative wall clock to trusted partner in Lalitpur.",
         uploadedAt: "2026-11-20T11:45:00Z",
       },
       {
         id: "pho-3",
-        imageUrl: "/assets/gallery/production-01.jpg",
-        category: "Factory & Workshop",
-        caption:
-          "Precision batch formulation and non-acidic safety checks at our Lalitpur facility.",
+        imageUrl: "/assets/gallery/dealer-meet-03.jpg",
         uploadedAt: "2026-11-21T09:15:00Z",
       },
       {
         id: "pho-4",
-        imageUrl: "/assets/gallery/metal-care-demo.jpg",
-        category: "Products & Demos",
-        caption:
-          "Natural warm shine restored on heirloom puja brass without scratching delicate engravings.",
+        imageUrl: "/assets/gallery/dealer-meet-04.jpg",
         uploadedAt: "2026-11-22T14:20:00Z",
       },
       {
         id: "pho-5",
-        imageUrl: "/assets/gallery/metal-care-demo.jpg",
-        category: "Festivals & Heritage",
-        caption:
-          "Effortless cleaning for sacred diya lamps, incense holders, and festive prayer vessels.",
+        imageUrl: "/assets/gallery/dealer-meet-05.jpg",
         uploadedAt: "2026-11-23T16:00:00Z",
       },
       {
         id: "pho-6",
-        imageUrl: "/assets/gallery/dealer-meet-02.jpg",
-        category: "Factory & Workshop",
-        caption:
-          "Carefully sealed cartons dispatched to regional wholesalers across 45+ districts.",
+        imageUrl: "/assets/gallery/dealer-meet-06.jpg",
         uploadedAt: "2026-11-24T08:30:00Z",
       },
     ],

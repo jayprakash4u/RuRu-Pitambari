@@ -12,12 +12,14 @@ type AdminShellProps = {
   children: ReactNode;
   title?: string;
   subtitle?: string;
+  actions?: ReactNode;
 };
 
 export function AdminShell({
   children,
   title = "Overview",
   subtitle = "Review store orders, inventory, and dealer messages. Times shown in Nepal time.",
+  actions,
 }: AdminShellProps) {
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -352,24 +354,27 @@ export function AdminShell({
               <h1 className={styles.pageTitle}>{title}</h1>
               <p className={styles.pageSubtitle}>{subtitle}</p>
             </div>
-            <button
-              className={styles.refreshBtn}
-              onClick={() => window.location.reload()}
-              type="button"
-            >
-              <svg
-                fill="none"
-                height="14"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                width="14"
+            <div className={styles.headerActions}>
+              {actions}
+              <button
+                className={styles.refreshBtn}
+                onClick={() => window.location.reload()}
+                type="button"
               >
-                <path d="M23 4v6h-6" />
-                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
-              </svg>
-              <span>Refresh</span>
-            </button>
+                <svg
+                  fill="none"
+                  height="14"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  width="14"
+                >
+                  <path d="M23 4v6h-6" />
+                  <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+                </svg>
+                <span>Refresh</span>
+              </button>
+            </div>
           </div>
 
           {children}

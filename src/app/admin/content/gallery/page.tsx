@@ -80,12 +80,8 @@ export default function AdminGalleryPageContent() {
 
   return (
     <AdminShell
-      subtitle="Upload and manage website gallery photos. Indexed number-wise for admin reference."
-      title="Gallery Photos"
-    >
-      <div className={styles.pageContainer}>
-        {/* Top Action Buttons */}
-        <div className={styles.topActionsRow}>
+      actions={
+        <>
           <Link className={styles.viewGalleryBtn} href="/gallery" target="_blank">
             <span>View live gallery</span>
             <svg
@@ -109,8 +105,12 @@ export default function AdminGalleryPageContent() {
           >
             + Add photo
           </button>
-        </div>
-
+        </>
+      }
+      subtitle="Upload and manage website gallery photos. Indexed number-wise for admin reference."
+      title="Gallery Photos"
+    >
+      <div className={styles.pageContainer}>
         {/* Filter and Search Bar */}
         <div className={styles.filterRow}>
           <div className={styles.searchBox}>

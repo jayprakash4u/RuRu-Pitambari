@@ -8,24 +8,6 @@
   gap: 1.25rem;
 }
 
-/* Custom Page Top Header */
-.topActionsRow {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.75rem;
-  margin-top: -3.5rem;
-  margin-bottom: 1.5rem;
-}
-
-@media (max-width: 767px) {
-  .topActionsRow {
-    margin-top: 0;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-  }
-}
-
 .viewGalleryBtn {
   display: inline-flex;
   align-items: center;
