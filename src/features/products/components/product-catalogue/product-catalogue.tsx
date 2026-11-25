@@ -32,6 +32,8 @@ const categoryVisuals = [
   { id: "Household care" as const, label: "Household Care", image: householdCareThumb },
 ];
 
+const productPageSizes = [8, 16, 24] as const;
+
 export function ProductCatalogue({
   initialCategory = "All",
   initialQuery = "",
@@ -43,7 +45,7 @@ export function ProductCatalogue({
   const [sortBy, setSortBy] = useState<SortOption>("featured");
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [page, setPage] = useState(1);
-  const pageSize = 8;
+  const [pageSize, setPageSize] = useState<number>(productPageSizes[0]);
 
   // Calculate category counts
   const categoryCounts = useMemo(() => {
@@ -386,6 +388,29 @@ export function ProductCatalogue({
                 {hasActiveFilters ? <span className={styles.activeDot} /> : null}
               </button>
 
+              {/* Page Size Selector */}
+              <div className={styles.sortWrap}>
+                <label className={styles.sortLabel} htmlFor="product-page-size-select">
+                  Show:
+                </label>
+                <select
+                  aria-label="Products per page"
+                  className={styles.sortSelect}
+                  id="product-page-size-select"
+                  onChange={(e) => {
+                    setPageSize(Number(e.target.value));
+                    setPage(1);
+                  }}
+                  value={pageSize}
+                >
+                  {productPageSizes.map((size) => (
+                    <option key={size} value={size}>
+                      {size} per page
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               {/* Sort By Dropdown */}
               <div className={styles.sortWrap}>
                 <label className={styles.sortLabel} htmlFor="product-sort-select">
@@ -426,63 +451,61 @@ export function ProductCatalogue({
                 ))}
               </div>
 
-              {pageCount > 1 ? (
-                <div className={styles.tableFooter}>
-                  <p>
-                    Showing <strong>{startIndex + 1}</strong> to <strong>{endIndex}</strong> of{" "}
-                    <strong>{visibleProducts.length}</strong> products
-                  </p>
+              <div className={styles.tableFooter}>
+                <p>
+                  Showing <strong>{visibleProducts.length ? startIndex + 1 : 0}</strong> to{" "}
+                  <strong>{endIndex}</strong> of <strong>{visibleProducts.length}</strong> products
+                </p>
 
-                  <nav aria-label="Product pagination" className={styles.pagination}>
-                    <button
-                      disabled={page === 1}
-                      onClick={() => {
-                        setPage((c) => c - 1);
-                        if (typeof window !== "undefined") {
-                          window.scrollTo({ behavior: "smooth", top: 280 });
-                        }
-                      }}
-                      type="button"
-                    >
-                      Previous
-                    </button>
+                <nav aria-label="Product pagination" className={styles.pagination}>
+                  <button
+                    disabled={page === 1}
+                    onClick={() => {
+                      setPage((c) => c - 1);
+                      if (typeof window !== "undefined") {
+                        window.scrollTo({ behavior: "smooth", top: 280 });
+                      }
+                    }}
+                    type="button"
+                  >
+                    Previous
+                  </button>
 
-                    <div>
-                      {Array.from({ length: pageCount }, (_, index) => index + 1).map(
-                        (pageNumber) => (
-                          <button
-                            aria-current={pageNumber === page ? "page" : undefined}
-                            aria-label={`Page ${pageNumber}`}
-                            key={pageNumber}
-                            onClick={() => {
-                              setPage(pageNumber);
-                              if (typeof window !== "undefined") {
-                                window.scrollTo({ behavior: "smooth", top: 280 });
-                              }
-                            }}
-                            type="button"
-                          >
-                            {pageNumber}
-                          </button>
-                        ),
-                      )}
-                    </div>
+                  <div>
+                    {Array.from({ length: pageCount }, (_, index) => index + 1).map(
+                      (pageNumber) => (
+                        <button
+                          aria-current={pageNumber === page ? "page" : undefined}
+                          aria-label={`Page ${pageNumber}`}
+                          key={pageNumber}
+                          onClick={() => {
+                            setPage(pageNumber);
+                            if (typeof window !== "undefined") {
+                              window.scrollTo({ behavior: "smooth", top: 280 });
+                            }
+                          }}
+                          type="button"
+                        >
+                          {pageNumber}
+                        </button>
+                      ),
+                    )}
+                  </div>
 
-                    <button
-                      disabled={page === pageCount}
-                      onClick={() => {
-                        setPage((c) => c + 1);
-                        if (typeof window !== "undefined") {
-                          window.scrollTo({ behavior: "smooth", top: 280 });
-                        }
-                      }}
-                      type="button"
-                    >
-                      Next
-                    </button>
-                  </nav>
-                </div>
-              ) : null}
+                  <button
+                    disabled={page === pageCount}
+                    onClick={() => {
+                      setPage((c) => c + 1);
+                      if (typeof window !== "undefined") {
+                        window.scrollTo({ behavior: "smooth", top: 280 });
+                      }
+                    }}
+                    type="button"
+                  >
+                    Next
+                  </button>
+                </nav>
+              </div>
             </>
           ) : (
             <div className={styles.empty}>

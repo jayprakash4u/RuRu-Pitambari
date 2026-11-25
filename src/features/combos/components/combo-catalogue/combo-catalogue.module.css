@@ -62,6 +62,19 @@
   gap: 1rem;
 }
 
+.sortWrap {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.sortLabel {
+  font-size: 0.8125rem;
+  color: #6b7280;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
 .resultCount {
   font-size: 0.8125rem;
   color: #6b7280;
